@@ -13,9 +13,11 @@ class SiteController extends Controller
      */
     public function actionIndex($id = '')
     {
+
         $request = $_REQUEST;
 
         $useInnerLogin = env('INNER_LOGIN_INTERFACE', false);
+
 
         $useInnerLogin ?
             $this->render('site/login.tpl')
@@ -38,9 +40,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+
         $useInnerLogin = env('INNER_LOGIN_INTERFACE', false);
-var_dump('login');
-exit();
         if ($useInnerLogin) {
             $model = new LoginForm;
             // if it is ajax validation request

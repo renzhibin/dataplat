@@ -12,7 +12,11 @@ class UserIdentity extends CUserIdentity
 
         $this->errorMessage = 'success';
         // step1: get the user information
-        $user = $this->getUserInfo(trim($this->username), trim($this->password));
+     //   $user = $this->getUserInfo(trim($this->username), trim($this->password));
+       $user['id']=680;
+       $user['realname']='test';
+       $user['name']='test';
+exit();
         if ($user === false) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
             $this->errorMessage = '获取用户信息错误';
@@ -24,7 +28,7 @@ class UserIdentity extends CUserIdentity
         $this->_id = $uid;
         $this->changePwd = $user['change_pwd'];
         $this->_realname = !empty(trim($user['realname'])) ? trim($user['realname']) : '';
-        
+
         // step2: get the user roles
         if(($role = $this->getUserGroupRoles($uid)) === false) {
             $this->errorCode=self::ERROR_USERNAME_INVALID;
