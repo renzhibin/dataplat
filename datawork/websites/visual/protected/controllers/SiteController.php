@@ -39,6 +39,8 @@ class SiteController extends Controller
     public function actionLogin()
     {
         $useInnerLogin = env('INNER_LOGIN_INTERFACE', false);
+var_dump('login');
+exit();
         if ($useInnerLogin) {
             $model = new LoginForm;
             // if it is ajax validation request
