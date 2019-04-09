@@ -1,0 +1,98 @@
+/* 及时过滤 */
+
+#breadcrumbs-one span:last-child a{
+    color:#000;
+}
+.add-item {
+    height:30px;
+    line-height: 16px;
+    margin-top: 15px;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.view-item, .edit-item {
+    margin-right: 10px;
+}
+
+/* byy 2017-11-9 */
+.container-filter{
+    margin-left:199px;
+    padding:15px;
+    padding-top:0px;
+}
+.find-filter-wrap{
+    padding:2px 15px 0 0;
+}
+.find-filter-wrap {
+   color:#878787;
+    font-size: 14px;
+    font-weight: 700;
+}
+.find-filter-wrap #find-filter-data{
+    width:230px;
+    height:26px;
+}
+
+.container-filter  .table-list .table{
+    border:1px solid #ccc;
+}
+.container-filter .table-list thead th{
+    border-bottom: none;
+    height:30px;
+    line-height: 30px;
+    padding:0;
+    padding-left:5px;
+    background-color:#929292 ;
+    color:#fff;
+    border-top:1px solid #ccc;
+    border-right:1px dotted #ccc;
+}
+.container-filter .table-list tbody td{
+    height:35px;
+    line-height: 35px;
+    padding:0;
+    padding-left:5px;
+    border-top:1px dotted #ccc;
+    border-right:1px dotted #ccc;
+}
+.container-filter .table-list tbody td:last-child ,.container-filter .table-list thead th:last-child{
+    border-right:none;
+}
+
+.container-filter .table-list tbody .btn{
+    border-radius: 0;
+    height:24px;
+    line-height: 12px;
+    margin-left:12px;
+}
+
+.container-filter .pagination-wrap{
+    text-align: right;
+}
+
+.container-filter .pagination-wrap .page-size-wrap{
+    height:34px;
+    margin-top: 20px;
+    text-align: left;
+    line-height: 34px;
+}
+
+ .pagination-wrap li a{
+    color:#000;
+    background-color: #fff;
+     cursor: pointer;
+}
+
+.pagination-wrap li a#current-page-selected {
+     background-color: #428BCA;
+     border:1px solid #428BCA;
+     color:#fff;
+ }
+.pagination-wrap .btn-not-allowed, .pagination-wrap .btn-not-allowed:hover{
+    cursor: not-allowed;
+    color:#BEBEBE;
+}
+

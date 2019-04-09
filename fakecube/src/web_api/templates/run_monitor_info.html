@@ -1,0 +1,26 @@
+$def with (log_list)
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td width="10%">log_id</td>
+            <td>项目名称</td>
+            <td>模块名称</td>
+            <td>耗时时长(s)</td>
+            <td>结果大小</td>
+        </tr>
+        $for i in log_list:
+        <tr>
+            <td>$i[0]</td>
+            <td class="appname autocut">$i[1]</td>
+            <td>$i[2]</td>
+            <td>$i[3]</td>
+            <td>$i[4]</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,35 @@
+pipeline {
+  agent {
+    label 'dev'
+  }
+  environment {
+    MODULE_NAME = 'bi.analysis'
+  }
+  stages {
+    stage('Show Tag ') {
+      steps {
+        echo "Tag is :${Tag}"
+        echo "Hosts is :${Hosts}"
+      }
+    }
+
+    stage('Deploy to Hosts') {
+      steps {
+        input(message: '确定部署?', ok: 'OK')
+        wrap([$class: 'BuildUser']) {
+          sh ''' 
+            ansible-playbook /home/apple/op/ansible_script/pipeline/site.yml  --tags=pull-online,push-other  -e "module_name=${MODULE_NAME}  release_version=${Tag} group=${Hosts} " 
+           
+          '''
+        }
+      }
+    }
+
+    stage('END OK') {
+      steps {
+        sh 'echo END'
+      }
+    }
+  }
+}
+

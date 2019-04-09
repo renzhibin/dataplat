@@ -1,0 +1,14 @@
+# start fakecube
+*/30 * * * * . /home/inf/.bash_profile;cd /home/inf/fakecube/src/mms/bin; python insert_task.py >>/home/inf/logs/fakecube.log 2>&1
+*/1 * * * * . /home/inf/.bash_profile;cd /home/inf/fakecube/src/mms/bin; python run_task_batch.py >>/home/inf/logs/fakecube.log 2>&1
+*/1 * * * * . /home/inf/.bash_profile; cd /home/inf/datameiliwork/websites/visual/protected/script;php gitversion.php  >>/home/inf/logs/gitverson.log 2>&1
+*/5 * * * * . /home/inf/.bash_profile;cd /home/inf/fakecube/src/mms/bin; python run_task_batch.py  -t check >>/home/inf/logs/fakecube.log  2>&1
+*/5 * * * * . /home/inf/.bash_profile; cd /home/inf/fakecube/app; python src/autoappcommit.py >>~/logs/autorun_commit.log 2>&1
+*/10 * * * * cd  /home/inf/datameiliwork/websites/visual/protected/; /home/service/php/bin/php crons.php mail  >>~/logs/mail.log  2>&1 
+00 04 * * * cd  /home/inf/datameiliwork/websites/visual/protected/; /home/service/php/bin/php crons.php mailreset  >>~/logs/mail.log  2>&1 
+00 10 * * * cd  /home/inf/datameiliwork/websites/visual/protected/; /home/service/php/bin/php crons.php deletereport >> /home/inf/logs/30days.log 2>&1
+3 5-23/1 * * * . /home/inf/.bash_profile;cd /home/inf/fakecube/src/mms/bin; python task_monitor_alarm.py  >>~/logs/alarmmail.log 2>&1
+00 10 * * * . /home/inf/.bash_profile;cd /home/inf/fakecube/src/mms/bin; python auto_stop_task.py  >>/home/inf/logs/offtasks.log 2>&1
+50 04 * * * . /home/inf/.bash_profile;cd /home/inf/fakecube/src/mms/bin; python sys_kill_task.py  >>/home/inf/logs/syskilltask.log 2>&1
+00 09 * * * . /home/inf/.bash_profile;cd /home/inf/fakecube/src/mms/bin; python upgrade_mysql_weight.py  >>/home/inf/logs/upgrade_mysql_weight.log 2>&1
+# end fakecube 

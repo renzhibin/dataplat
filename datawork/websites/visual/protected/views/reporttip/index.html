@@ -1,0 +1,171 @@
+{/include file="layouts/header.tpl"/}
+{/include file="layouts/script.tpl"/}
+<link rel="stylesheet" type="text/css" href="/assets/css/index.css?version={/$version/}">
+
+
+<div>
+  {/include file="layouts/menu.tpl"/}
+  <div id='right'>
+    <div id="content" class="content-top" style='background-color:#fff;position:realtive;min-height:630px' >
+        <!--面包屑效果-->
+        <div id="breadcrumbs-one">
+            {/foreach from = $guider item= place key=key/}
+            {/if $guider[0] eq $place /}
+            <span><a href="{/$place.href/}">{/$place.content/}</a></span>
+            {/else/}
+            {/if $place.href eq '#'/}
+            <span></span><span>{/$place.content/}</span>
+            {/else/}
+            <span></span><span><a href="{/$place.href/}">{/$place.content/}</a></span>
+            {//if/}
+            {//if/}
+            {//foreach/}
+        </div>
+      <div style='height:10px'></div>
+     <table class="table table-bordered table-condensed">
+        <tr>
+          <td style='text-align:right'>
+            项目名称
+          </td>
+          <td>
+            <select name='project' style="width:200px">
+              <option value='filter_not'>--请选择--</option>
+              {/foreach from =$project item =item key=key/}
+                 <option value='{/$item.project/}'>{/$item.cn_name/}</option>
+              {//foreach/}
+            </select>
+            <span class='tipinfo'>(本功能所设置的内容 在该项目下所有的报表都生效)</span>
+          </td>
+        </tr>
+        <tr>
+          <td style='text-align:right'>维度或指标</td>
+          <td>
+            <select name='column' style="width:350px">
+              <option value='filter_not'>--请选择--</option>
+            </select>     
+          </td>
+        </tr>
+        <tr>
+            <td style='text-align:right'>是否替换原始值</td>
+            <td>
+            <input type="checkbox" name="isReplace" value="1">
+            </td>
+        </tr>
+        <tr>
+          <td style='text-align:right'>数据</td>
+          <td>
+              <textarea name='comment' style='width:600px; height:300px' placeholder="值:备注值"></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align:left">
+            <span style='padding-left:15%'></span>
+            <button class="btn btn-primary saveInfo btn-sm">保存</button>
+          </td>
+        </tr>
+     </table>
+
+    </div>
+  </div>
+{/include file="layouts/menujs.tpl"/}
+<script type="text/javascript">
+  function getData(){
+     var data ={};
+     data.project = $("#content").find('select[name=project]').val();
+     data.column = $("#content").find('select[name=column]').val();
+     data.comment = $("#content").find('textarea[name=comment]').val();
+     if($('#content').find('input[name=isReplace]').is(":checked")){
+         data.isReplace = '1';
+     }else{
+         data.isReplace = '2';
+     }
+     return data;
+  }
+  function checkData(data){
+     if(data.project =='filter_not'){
+        $.messager.alert('提示','请选项目','info');
+        return false;
+     }
+     if(data.column =='filter_not'){
+        $.messager.alert('提示','请选择项目指标或维度','info');
+        return false;
+     }
+
+      return true;
+  }
+
+  $(function(){
+    //联动效果
+    $('select').select2();
+    $('body').on('change','select[name=project]',function(){
+        var  data = getData();
+        $('body').mask('数据正在加载...');
+        $('textarea[name=comment]').val('');
+        if(data.project !='filter_not'){
+          $('select[name=column]').select2('val','filter_not');
+          $.post('/project/getall',{'project':data.project},function(re){
+              $('body').unmask();
+              if(re.status ==0){
+                 var html ="";
+                 html +="<option value='filter_not' selected=selected>--请选择--</option>";
+                 for( var i in re.data ){
+                     html +="<option value='"+re.data[i].name+"'>"+re.data[i].cn_name+"<option>";
+                 }
+
+                 $('select[name=column]').html(html);
+              }else{
+                 $.messager.alert('提示',re.msg,'info');
+              }
+          },'json');
+        }else{
+          $('body').unmask();
+          $.messager.alert('提示','请选项目名称','info');
+        }
+    });
+    $('body').on('change','select[name=column]',function(){
+        var  data = getData();
+        $('body').mask('数据正在加载...');
+        if(data.project !='filter_not' && data.column !='filter_not'){
+          $.post('/project/getcomments',{'project':data.project,'column':data.column},function(re){
+              $('body').unmask();
+              console.log(re);
+              if(re.status ==0){
+                 if(re.data !=''){
+                    $('textarea[name=comment]').val(re.data);
+                 }else{
+                    $('textarea[name=comment]').val('');
+                  }
+              }else{
+                 $.messager.alert('提示',re.msg,'info');
+              }
+          },'json');
+            $.post('/project/getcommentsisreplaced',{'project':data.project,'column':data.column},function(isReplace){
+                console.log(isReplace);
+                if(isReplace.data =='1'){
+                    $('input[name=isReplace]').prop('checked',true);
+                }else{
+                    $('input[name=isReplace]').prop('checked',false);
+                }
+            },'json');
+        }else{
+            $('body').unmask();
+             $.messager.alert('提示','项目或 维度或指标 不全','info');
+        }
+    });
+
+    $('.saveInfo').click(function(){
+        data = getData();
+        if(checkData(data)){
+        $.post('/project/savecomments',{'data':data},function(re){
+        if(re.status ==0){
+             $.messager.alert('提示',re.msg,'info');
+        }else{
+             $.messager.alert('提示',re.msg,'info');
+        }
+        },'json');
+
+        }
+    });
+
+  })
+</script>

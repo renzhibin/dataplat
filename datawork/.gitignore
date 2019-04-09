@@ -1,0 +1,11 @@
+*.DS_Store
+*.*~
+*runtime/
+version.txt
+.idea/*
+*mail_log.txt
+*user_notify.log
+*.rdb
+*.ini
+.htaccess
+.env

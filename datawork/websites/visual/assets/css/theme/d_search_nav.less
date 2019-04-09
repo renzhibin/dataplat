@@ -1,0 +1,155 @@
+//导航栏区块样式汇总
+@d_search_nav_wrapper_width: 0px; 
+@d_search_nav_wrapper_Tborder: 1px solid #EAEAEA;
+.d_search_nav_wrapper {
+	 margin: 0px !important;
+     border-width: @d_search_nav_wrapper_width;
+     border-top: @d_search_nav_wrapper_Tborder;
+
+} 
+#search .d_search_wrapper {
+	.glyphicon-save, .glyphicon-star, .glyphicon-user {
+		font-size: 13px;
+	}
+	.dropdown-toggle {
+		margin-right: 0px !important;
+	}
+	.collnet {
+		span {
+			font-size: 13px;
+		}
+	}
+	.d_search_nav_wrapper();
+}
+#search .navbar {
+	border-width: @d_search_nav_wrapper_width;
+}
+
+
+//开始&结束时间的input框
+@Input_background: #fff !important;
+@Input_border-radius: 3px;
+@Input_height: auto;
+@Input_line-height: 32px;
+@Input_padding: 0;
+@Input_text-align: left;
+@Input_padding-left: 10px;
+@Input_border: 1px solid #DCDDE4;
+@Input_width: 120px;
+.d_input_style () {
+	width: @Input_width;
+    background: @Input_background;
+    border-radius: @Input_border-radius;
+    border: @Input_border;
+    height: @Input_line-height;
+    line-height: @Input_line-height;
+    padding: @Input_padding;
+    text-align: @Input_text-align;
+    padding-left: @Input_padding-left;	
+}
+
+.timestyle input {
+	.d_input_style();
+}
+.tablelist .web-filter-content .divbox input {
+    border: 1px solid #DCDDE4;
+	.d_input_style();
+}
+
+.tablelist .web-filter-content .divbox {
+	span {
+		margin-right: 10px;
+	}
+	span.select2-arrow {
+		margin-right: 0px !important;
+	}
+}
+
+//"最近30天"样式
+.timestyle .btn-special {
+	padding: 0px !important;
+	color: #73C4FF;
+	font-size: 13px;
+
+}
+
+//icon图标操作样式
+.search-rightbox .glyphicon {
+	color: #BDBDBD;
+	margin-right: 6px;
+}
+.search-rightbox .caret {
+	color: #BDBDBD;
+	width: 10px;
+	height: 10px;
+	margin-left: 6px;
+}
+.search-rightbox span.downclick, .search-rightbox span.collclick, .search-rightbox a.collnet {
+	padding-right: 0px;
+	margin-right: 22px;
+}
+
+.scroll {
+	//background-size: 20px 20px;
+	background-position: 0 !important;
+	background-position: 0 !important;
+    background-image: url(../../img/d_visual-png/Group3.png);
+    transform: rotate(-35deg);
+}
+
+.btn-group.open .dropdown-toggle {
+     -webkit-box-shadow: none; 
+     box-shadow: none; 
+}
+.btn-group.open .dropdown-menu {
+	top: 95%;
+	left: -10px;
+	border-top-width: 0px;
+	padding: 0px;
+	background-color: #fff;
+	a {
+     	width: 66px;
+     	height: 30px;
+     	line-height: 30px;
+     	&:hover {
+     	  background-color: #E0E3E8 !important;
+     	}
+     }
+}
+.d_search_wrapper {
+	.glyphicon-save {
+	    width: 14px;
+	    height: 13px;
+	    background: url(../../img/d_visual-png/download.png) no-repeat center center;
+	    background-size: contain;
+	}
+	.glyphicon-save:before {
+	    content: "";
+	}
+
+    .glyphicon-star {
+    	width: 14px;
+    	height: 13px;
+    	background: url(../../img/d_visual-png/collect.png) no-repeat center center;
+    	background-size: contain;
+    }
+	.glyphicon-star:before {
+	    content: "";
+	}
+    .glyphicon-user {
+        width: 14px;
+    	height: 13px;
+    	background: url(../../img/d_visual-png/avator.png) no-repeat center center;
+    	background-size: contain;
+    }
+	.glyphicon-user:before {
+	    content: "";
+	}
+	.btn-group .caret {
+		border-width: 0px !important;
+		background: url(../../img/d_visual-png/more.png) no-repeat center center;
+		background-size: contain;
+		vertical-align: initial;
+	}
+}
+

@@ -1,0 +1,93 @@
+$def with (name)
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="static/jsoneditor/jsoneditor.min.css">
+    <script type="text/javascript" src="static/jsoneditor/jsoneditor.min.js"></script>
+     <script type="text/javascript" src="static/jsoneditor/asset/ace/ace.js"></script>
+    <script type="text/javascript" src="static/jsoneditor/asset/jsonlint/jsonlint.js"></script>
+</head>
+ <style type="text/css">
+    body {
+      font: 10.5pt arial;
+      color: #4d4d4d;
+      line-height: 150%;
+      width: 500px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+    }
+
+    #jsoneditor {
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+<body>
+<!--
+<p>
+    <button onclick="setJSON();">Set JSON</button>
+    <button onclick="getJSON();">Get JSON</button>
+</p>
+-->
+<form action="save_project" method="post">
+    <textarea type="text" name="project" id="project"  style="display:none"></textarea>
+    <input type="submit" name="submit" id="submit" onclick="getJSON();" value="提交" />
+
+
+</form>
+
+<form action="get_profile" method="post">
+    <textarea type="text" name="project" id="profile"  style="display:none"></textarea>
+    <input type="submit" name="submit"  onclick="getJSON();" value="获取hqlprofile" />
+
+
+</form>
+
+ <div  id="jsoneditor" style="width: 800px; height: 800px;"></div>
+
+
+<script type="text/javascript" >
+
+    // create the editor
+    function test(){
+
+        alert('hell alert')
+    }
+
+    var options = {
+
+  mode: 'tree',
+   // modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
+    error: function (err) {
+      alert(err.toString());
+    }
+
+    };
+    var container = document.getElementById("jsoneditor");
+    var editor = new JSONEditor(container,options);
+
+    // set json
+    function setJSON () {
+
+        var json =$:name;
+        editor.set(json);
+        editor.expandAll();
+    }
+
+    // get json
+    function getJSON() {
+        var json = editor.get();
+        document.getElementById('project').innerText=JSON.stringify(json, null, 2)
+        document.getElementById('profile').innerText=JSON.stringify(json, null, 2)
+        alert(JSON.stringify(json, null, 2));
+    }
+
+    setJSON();
+</script>
+</body>
+</html>
+
+
+

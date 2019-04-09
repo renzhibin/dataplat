@@ -1,0 +1,121 @@
+/*.saveBox{
+	width: 90px;
+	position: fixed;
+	top:530px;
+	right: 10px;
+	height: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 99999;
+  background: #fff;
+}*/
+.saveBox .panel-body{
+	padding: 10px;
+}
+.tip{color: #ff0000}
+
+.panel-heading{ cursor: pointer;}
+.configBox{ border: 1px dashed #ccc;
+ width: 100%;height: auto; padding: 2px 0px;
+ margin-bottom: 3px;
+ text-align: center;
+ position: relative;
+}
+.topPosition{ position: absolute; top: 0px; right: 90px; 	z-index: 500 }
+.btnPosition{ position: absolute; top: 0px; right: 0px; 	z-index: 500}
+.ptext{ text-align: left; margin:4px 0; padding: 1px 0 0 15px; font-size: 12px}
+
+.down-collect{ padding-right: 10px; font-size: 12px; cursor: pointer; display: inline-block;}
+
+.hand{cursor: pointer;}
+
+.dataShowBox .row ul li{ float: left; margin-left:2px;
+ padding: 2px; font-size: 12px; margin-bottom: 2px;
+}
+/*拖拽样式*/
+.dragbg{ background-color: #ff0000;}
+/*原来配置报表样式*/
+.content:{ border:1px solid #eee}
+.dataConfig{ width:100%; height:105px; padding:10px; font-size:16px; margin-bottom:5px}
+.panel_show{ cursor: pointer; border-top: 1px solid #ccc; border-left: 1px solid #ccc;border-right: 1px solid #ccc; position: relative;}
+.queryBox{ position: absolute;top:4px; right: 10px;}
+
+input[type="radio"], input[type="checkbox"]{
+   -webkit-box-shadow:1px 1px 3px #fff;
+}
+#search{display: none;}
+.expBtn{ margin-right: 10px;}
+.dimfilter{margin:0px;}
+#chartBox{ overflow: hidden;}
+.select2-container-multi .select2-choices .select2-search-field input{
+  padding: 0px;
+  height: 20px;
+}
+.addchartbox{ height: 343px;
+	border-top: 1px dashed #ccc;
+	border-left: 1px dashed #ccc;
+	background-color: #eee
+}
+.addChart{ position: absolute;top:50%; left: 50%}
+.chartlist{position: relative;}
+.chartedit,.chartclose{ z-index: 100}
+
+
+/**/
+
+/*.list-group-item{ padding: 5px; margin: 3px; width:160px; background-color: none; float: left;  }*/
+
+/* 2015-4-10 报表编辑 可选指标css 选中*/
+.metricUl{border-bottom: 1px solid #6EAFE4; padding-bottom: 15px; }
+.metricUl li {width: 100%; list-style: none; clear: both; }
+.metricUl li h5 { text-align: left; color: #337ab7; border-top: 1px solid #337ab7; line-height: 24px; text-indent: 12px; padding-top: 10px; font-weight: bold; }
+.metricUl li p {min-height: 24px; clear: both; display: block; }
+.metricUl li p span { line-height:14px; padding:5px ; color: #86B2D8; text-indent: 24px; }
+.metricUl li p label{ padding-left: 50px; }
+.metricUl li a.metriclist{ cursor: pointer; border-radius: none; }
+.metricUl li a.checked{ color: #fff; background: #337ab7;}
+.error{ color: red; display: none; }
+#tableid textarea { height: 99%; border: #ececec 1px solid; }
+#tableid td.reportexplain span,#groupid td.reportexplain span { float:left; width:100px;display: inline-block; height: 24px; overflow: hidden;text-overflow:ellipsis;-o-text-overflow:ellipsis; white-space: nowrap; }
+
+#tableid tr td { position: relative; }
+#tableid td.reportexplain .glyphicon ,#groupid td.reportexplain .glyphicon { top: 5px; }
+a.glyphicon:hover{ text-decoration: none; }
+.clipBtn {padding: 3px 8px; background:#fff; border: 1px solid #ccc; color: #428bca; }
+.clipBtn-active {  color: #fff; background: #337ab7; }
+.saveSource, .checksql { margin:15px; padding: 3px 10px;}
+.otherlink_report { position: relative; }
+.otherlink_report .otherlink { width:90%;  position: absolute; -moz-transition: all .2s linear; -webkit-transition: all .2s linear; transition: all .2s linear; }
+.otherlink_report .otherlink:focus{ width:180px; z-index: 9999; }
+
+.img_link_report { position: relative; }
+.img_link_report .img_link { width:90%;  position: absolute; -moz-transition: all .2s linear; -webkit-transition: all .2s linear; transition: all .2s linear; }
+.img_link_report .img_link:focus{ width:180px; z-index: 9999; }
+
+
+.expression_report{ position: relative; }
+.expression_report textarea{ width:90%;  position: absolute; -moz-transition: all .2s linear; -webkit-transition: all .2s linear; transition: all .2s linear; }
+.expression_report textarea:focus{ width:390px; z-index: 9999; }
+
+.width_report input.width { width: 55px; float: left; }
+
+
+.show-preset{margin-left: 10px;color:#428bca;cursor:pointer;}
+.preset-container{display: none;}
+
+.sort-container .sort-item{
+	float: left;
+	margin: 5px 10px;
+	padding: 3px;
+	list-style-type:none;
+	cursor:pointer;
+	background-color: #428bca;
+	color:white;
+}
+.sort-container .sort-item-move{
+	background-color: #83bdf0;
+}
+.selftablelist{
+	padding-left: 0px;
+}
+

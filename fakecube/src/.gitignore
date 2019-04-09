@@ -1,0 +1,14 @@
+# Python:
+mms/data/
+mms/logs/
+mms/lock/
+*.err
+*.pyc
+*.txt
+*.log
+.idea
+*log
+nohup.out
+*.png
+*.DS_Store
+*.*~

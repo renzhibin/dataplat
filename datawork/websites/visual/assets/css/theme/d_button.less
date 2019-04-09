@@ -1,0 +1,123 @@
+//按钮样式重写
+@d_button_btnGroup_width: 33px;
+@d_button_btnGroup_height:28px;
+@d_button_btnGroup_radius : 4px 0 0 4px;
+@d_button_btnGroup_border : 1px solid #E6E6E6;
+@d_button_btnGroup_background : #FFFFFF;
+.d_button_btnGroup () {
+	width: @d_button_btnGroup_width;
+	height: @d_button_btnGroup_height;
+	box-sizing: border-box;
+    border: @d_button_btnGroup_border;
+}
+
+.chartHeader .changeTime span{
+   .d_button_btnGroup();
+}
+.chartHeader .changeTime>span:first-child{
+    border-radius: @d_button_btnGroup_radius;
+} 
+.chartHeader .changeTime>span:nth-last-child(1){
+	border-radius: @d_button_btnGroup_radius;
+}
+// .chartHeader .timeBox span{
+// 	.d_button_btnGroup();
+// }
+.chartHeader .timeBox>span:first-child, .chartHeader .timeBox>span:nth-last-child(1){
+   border-radius: @d_button_btnGroup_radius
+}
+
+// @height: 32px;
+// @background: #1899C5;
+// @color: #FFFFFF;
+
+//提交按钮样式调整
+.d_button_submit (@width:60px, @height: 32px, @background: #1899C5, @color: #FFFFFF) {
+	width: @width;
+    height: @height;
+    border-radius: 4px;
+    background: @background;
+    color: @color;
+    font-size: 14px;
+    padding: 0px;
+}
+.chartHeader .sumTotal {
+	border: 1px solid #008FC0;
+	margin-right: 18px !important;
+	.d_button_submit(60px, 28px, #fff, #008FC0)
+}
+
+.my-tab-customkey .col-sm-12 .btnsavecustomkey, .my-tab-gradually .col-sm-12 .btnsavegradually {
+	border: 1px solid #008FC0;
+	margin-right: 18px !important;
+	vertical-align: baseline;
+	.d_button_submit(60px, 28px, #fff, #008FC0)
+}
+
+.dialog-button #download {
+	border-width: 0px;
+	.d_button_submit (60px, 28px, #008FC0, #FFFFFF);
+	span {
+		height: 28px;
+		line-height: 28px;
+	}
+}
+
+.dialog-button #cancel {
+	 border-width: 0px;
+	.d_button_submit (60px, 28px, #BDBDBD, #FFFFFF);
+	span {
+		height: 28px;
+		line-height: 28px;
+	}
+}
+.dialog-button a {
+	.l-btn-icon-left .l-btn-icon {
+		left: 5px;
+		top: 7px;
+	}
+	.d_button_submit(60px, 28px, #008FC0, #FFFFFF)
+}
+.dialog-button a:first-child {
+	.l-btn-icon-left .l-btn-icon {
+	    left: 5px;
+	    top: 7px;
+	}
+	.d_button_submit(60px, 28px, #008FC0, #FFFFFF)
+}
+.dialog-button a:last-child {
+	.d_button_submit(60px, 28px, #BDBDBD , #FFFFFF)
+}
+// div.dialog-button[class*="contrast-show"]{ 
+// 	a{
+// 	   .d_button_submit (30px, 15px, #0091C5, #FFFFFF);
+//     }
+// }
+
+div.window[class*="contrast-show"] {
+	#addCatalog {
+		border-width: 0px;
+		border-radius: 0px !important;
+		.compresCont {
+			border: 1px solid black;
+			border-top-width: 0;
+		}
+	}
+	.dialog-button {
+		padding-right: 5px !important;
+		height: 37px;
+		line-height: 37px;
+		border: 1px solid black;
+		border-top-width: 0px;
+		border-bottom-width: 0;
+		border-radius: 0 0 4px 4px !important;
+		a:first-child {
+			.d_button_submit (50px, 25px, #0091C5, #FFFFFF);
+		}
+		a:last-child {
+			.d_button_submit (50px, 25px, #BDBDBD, #FFFFFF);
+		}
+	}
+}
+
+

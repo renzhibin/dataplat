@@ -1,0 +1,118 @@
+body,html,#container{
+    height: 100%;
+    margin: 0px;
+    font:12px Arial;
+}
+
+.btn{
+  margin:5px auto;
+}
+
+/*超市信息展示面板*/
+.info-market{
+    left: 50%;
+    top: 10px;
+    margin-left: -340px;
+    width: 680px;
+    line-height: 40px;
+    text-align: center;
+}
+
+.panel-contrast{
+  height: 370px;
+  width: 150px;
+  right: 10px;
+  top: 50px;
+}
+
+.panel-legend{
+  display: none;
+  height: 110px;
+  width: 350px;
+  right: 10px;
+  top: 430px;
+}
+
+
+/*图例*/
+.contrast-tip{
+  display: inline-block;
+  line-height: 20px;
+  margin: 5px auto;
+}
+.market-tip{
+  display: inline-block;
+  line-height: 20px;
+  margin: 5px 8px;
+}
+.low-area{
+  background-color: rgba(255, 100, 100, 0.5);
+  color:white;
+  padding: 1px;
+  width: 270px;
+}
+.high-area{
+  background-color: rgba(255, 0, 0, 0.5);
+  color:white;
+  padding: 1px;
+  width: 270px;
+}
+.yg-market-icon{
+  background-color:#70f8ad;
+  color:white;
+  padding: 1px;
+}
+.gd-market-icon{
+  background-color: #955cf8;
+  color:white;
+  padding: 1px;
+}
+
+.bd-market-icon{
+  background-color: #66bffc;
+  color:white;
+  padding: 1px;
+}
+.legend-part{
+  float: left;
+}
+
+.panel-legend .slide-up-legend{
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+.panel-contrast .slide-up{
+    text-align: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.slide-down{
+    position: fixed;
+    right: 20px;
+    top: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.slide-down-legend{
+    position: fixed;
+    right: 85px;
+    top: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+.sales-name{
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+}
+.market-name{
+  width: 50px;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 20px;
+  background-color: rgba(252, 255, 255, 0.8);;
+}

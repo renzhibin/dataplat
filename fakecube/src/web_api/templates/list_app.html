@@ -1,0 +1,10 @@
+$def with (name)
+
+<ol>
+$for i in name:
+        <li><a href="get_project?project=$i">$i</a></li>
+</ol>
+
+
+<input  type="button"  value='add project'  onclick="window.location='get_project'"/> 修改此模板即可
+

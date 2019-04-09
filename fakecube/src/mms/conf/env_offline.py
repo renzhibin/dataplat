@@ -1,0 +1,127 @@
+#!/usr/bin/env python2.7
+#coding=utf-8
+# This script is used in directory: bin/
+
+import time
+import sys,os
+import logging
+
+#sys.argv[0]
+
+cur_abs_dir = os.path.dirname(os.path.abspath(__file__))
+
+# check
+cur_relat_dir = cur_abs_dir.strip("/").split("/")[-1]
+
+HOME_PATH = os.path.dirname(cur_abs_dir) 
+
+LOG_PATH = HOME_PATH + '/../../log/'
+OUTPUT_DIR = '/../../data/'
+OUTPUT_PATH = HOME_PATH + OUTPUT_DIR
+
+LOG_FORMAT = logging.Formatter("[%(levelname)s][%(asctime)s][%(module)s][%(funcName)s line:%(lineno)d]%(message)s")
+LOG_TABLE='mms_run_log_bak'
+
+CONF_PATH = HOME_PATH + '/../../app/'
+
+TMP_SQL_PATH = HOME_PATH + '/../../sql/'
+
+TMP_LOCK_PATH = HOME_PATH + '/../../lock/'
+
+LIB_PATH = HOME_PATH + '/lib/'
+sys.path.insert(0,LIB_PATH)
+
+BIN_PATH = HOME_PATH + '/bin/'
+sys.path.insert(0,BIN_PATH) 
+
+LOCK_PATH = HOME_PATH + '/lock/'
+
+#DATA_PATH = HOME_PATH + '/data/mob_app_metric/'
+#pint "datapath", DATA_PATH
+
+MULTI_PROCESS_NUM = 6
+MULTI_MODE = "process" # or "thread"
+
+RUN_INSTANCE_STAMP = time.strftime("%Y%m%d",time.localtime(time.time()))
+
+
+
+MYSQL_HOST = '172.16.10.35'
+MYSQL_PORT = 3306
+MYSQL_USER = 'zhanglitest'
+MYSQL_PASSWD = 'zhangli@mlS'
+MYSQL_DATABASE = 'metric'
+
+'''
+
+MYSQL_HOST = '192.168.128.18'
+MYSQL_PORT = 4306
+MYSQL_USER = 'dolphin'
+MYSQL_PASSWD = 'dolphin'
+MYSQL_DATABASE = 'metric'
+'''
+
+TUNNEL_HOST = '127.0.0.1'
+#TUNNEL_USER = 'dbreader'
+#TUNNEL_PASSWD = 'wearefashions'
+TUNNEL_USER = 'meiliwork'
+TUNNEL_PASSWD = 'Tqs2nHFn4pvgw'
+
+TUNNEL_WRITE_HOST= TUNNEL_HOST
+TUNNEL_WRITE_USER = 'meiliwork'
+TUNNEL_WRITE_PASSWD = 'Tqs2nHFn4pvgw'
+TUNNEL_SWITCH=1   #1 OPEN 2 CLOSED
+TUNNEL_PORT=51895
+#52279
+
+ENTRY_TABLE = "t_stat_entry_table"
+TABLE_PREFIX = "t_stat_dog_"
+
+TEST_ENTRY_TABLE = "t_test_entry_table"
+TEST_TABLE_PREFIX = "t_test_example_"
+
+#PRODUCT_ENTRY_TABLE = "t_test_enter_table"
+#PRODUCT_TABLE_PREFIX = "t_test_example_"
+
+PRODUCT_ENTRY_TABLE = "t_stat_entry_table"
+PRODUCT_TABLE_PREFIX = "t_stat_dog_"
+
+FAVORITES_TABLE = "t_favorites_table"
+
+HIVE_DEFAULT_SERVER = '10.6.0.85' #hd00
+HIVE_DEFAULT_SERVER_PORT = 20000
+MAX_ROW = 100000
+
+HIVE_ENV = {
+            #'work':('172.16.2.94', 20000),
+            'work':('10.6.0.85', 20000),
+            'dev':('172.16.2.94', 50000),
+            'test':('172.16.2.94', 55555),
+            'dev-tiny':('172.16.2.94', 50001),
+        }
+
+MAX_WAITING_TIMES = 6
+WAIT_PERIOD = 600 # s
+
+
+DATE_DEFAULT=time.strftime("%Y-%m-%d",time.localtime(time.time()+(-1)*86400))
+TODAY=time.strftime("%Y-%m-%d",time.localtime(time.time()))
+
+#hql重试次数
+RETRY_TIMES=3
+#限制同时运行的run.py的个数
+QUEUE_TABLE = 'mms_run_log'  #执行队列表
+RUN_lOOP_INTERVEL  = 300      #如果执行队列为空，等待300s后继续轮询队列
+MULTI_RUN_LIMIT = 50          #同时运行的hql个数不超过50
+LIMIT = 1000 #默认展示日志条数
+
+
+#run运行结果状态
+WAITING=1
+READY=2
+RUNNING=3
+HIVEEND=4  #hive执行完成
+SUCCESS=5
+FAILED=6
+WARNING=7
+OVERTIME=8

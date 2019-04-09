@@ -1,0 +1,12 @@
+<uwsgi id="webapi">
+  <socket>127.0.0.1:7625</socket>
+  <module>webapi</module>
+  <master />
+  <processes>48</processes>
+  <thread>4</thread>
+  <chdir>..</chdir>
+  <pidfile>../../../data/webapi.pid</pidfile>
+  <daemonize>../../../log/system_log/web_api/uwsgi_webapi.log</daemonize>
+  <buffer-size>65535</buffer-size>
+  <listen>1000</listen>
+</uwsgi>

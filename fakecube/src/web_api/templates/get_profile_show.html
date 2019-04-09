@@ -1,0 +1,91 @@
+
+<!DOCTYPE HTML>
+<html>
+
+ <style type="text/css">
+    body {
+      font: 10.5pt arial;
+      color: #4d4d4d;
+      line-height: 150%;
+      width: 500px;
+    }
+
+    code {
+      background-color: #f5f5f5;
+    }
+
+    #jsoneditor {
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+<body>
+
+<form action="get_profile?showtype='html'" method="post">
+    <textarea type="textarea" name="hql" rows="30" cols="50" >
+            SELECT
+            client_device,
+            client_version,
+            source,
+            GROUPING__ID,
+            count(distinct user_id) as order_uv,
+            count(distinct if(pay_time>order_create_time, user_id, null)) as paid_order_uv,
+            count(distinct order_id) as order_count,
+            count(distinct if(pay_time>order_create_time, order_id, null)) as paid_order_count,
+            sum(goods_money)  as raw_GMV,
+            sum(if(pay_time>order_create_time, goods_money,0))  as GMV,
+            sum(if(pay_time>order_create_time, goods_money-coupon_credit/100,0))  as net_GMV,
+            sum(purchase_num) as raw_purchase_num,
+            sum(if(pay_time>order_create_time, purchase_num, 0)) as purchase_num
+        FROM
+        (
+            SELECT
+                if(split(source_info, '-')[0]='1', 'android', 'iphone') as client_device,
+                split(source_info, '-')[1] as client_version,
+                CASE
+                    WHEN split(source_info, '-')[2]='1' THEN 'cart'
+                    WHEN split(source_info, '-')[2]='0' THEN 'single_twitter'
+                    WHEN split(source_info, '-')[2]='2' THEN 'dress'
+                    ELSE 'unknown'
+                END AS source,
+                user_id,
+                pay_time,
+                order_create_time,
+                order_id,
+                goods_money,
+                coupon_credit,
+                purchase_num
+            FROM
+                dm.dm_order_4analyst
+            WHERE
+
+                split(source_info,'-')[0] in ('1','2')
+                and plat='mob'
+                and order_create_dt='2014-11-11'
+        ) a
+GROUP BY
+            client_device,
+            client_version,
+            source
+        GROUPING SETS (
+            client_device,
+            client_version,
+            (client_device, client_version),
+            (),
+            source,
+            (client_device, source),
+            (client_version, source),
+            (client_device, client_version, source)
+        )
+    </textarea>
+    <input type="submit" name="submit" id="submit"  value="提交" />
+
+
+</form>
+
+
+</body>
+</html>
+
+
+

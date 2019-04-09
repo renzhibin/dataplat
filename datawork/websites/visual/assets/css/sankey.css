@@ -1,0 +1,78 @@
+html,body{
+  width: 100%;
+  height: 100%;
+}
+.panel-legend{
+  position:fixed;
+  top:10px;
+  left:10px;
+  width: 150px;
+  z-index:999;
+}
+.panel-legend .legend-item{
+  height: 30px;
+}
+.panel-legend .legend-color{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+.panel-legend .slide-up{
+  cursor: pointer;
+}
+.panel-search{
+  position:fixed;
+  top:10px;
+  left:300px;
+  width: 530px;
+  z-index:999;
+}
+.task-item{
+  font-weight: bold;
+}
+.panel-search .select-multiple{
+  width:220px;
+  height:34px;
+}
+.slide-down{
+  position: fixed;
+  top:10px;
+  left:10px;
+  z-index:999;
+}
+.modal-body div{
+  margin:5px 0;
+}
+.modal .run-date{
+  width: 150px;
+  display: inline;
+}
+.modal .run-type{
+  width: 100px;
+  display: inline;
+  margin-left: -4px;
+}
+
+/*图例颜色*/
+.legend-success{
+  background-color: #008000;
+}
+.legend-failed{
+  background-color: #ff0000;
+}
+.legend-doing{
+  background-color: #00ff00;
+}
+.legend-ready{
+  background-color: #ffba20;
+}
+.legend-waitting{
+  background-color: #636d7d;
+}
+.legend-other{
+  background-color: #774e34;
+}
+
+
+/*Alert 用到的WeUI样式*/
+.weui_mask{position:fixed;top:0;left:0;z-index:201;width:100%;height:100%;background:rgba(0,0,0,.6)}.ls-alert-dialog .weui_mask{z-index:10001}.ls-alert-dialog .weui_dialog{z-index:10013}.ls-alert-dialog .weui_dialog_ft{cursor:pointer}.weui_dialog{position:fixed;top:30%;left:50%;z-index:213;overflow:hidden;width:300px;border-radius:3px;background-color:#FAFAFC;text-align:center;-webkit-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.weui_dialog_hd{padding:1.2em 0 .5em}.weui_dialog_title{font-weight:400;font-size:17px}.weui_dialog_bd{padding:0 20px;color:#888;word-wrap:break-word;font-size:15px;word-break:break-all}.weui_dialog_ft{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-top:20px;font-size:17px;line-height:42px}.weui_dialog_ft a{display:block;color:#3CC51F;text-decoration:none;-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;-webkit-tap-highlight-color:transparent}.weui_dialog_ft a:active{background-color:#EEE}.weui_dialog_ft:after{position:absolute;top:0;left:0;width:100%;height:1px;border-top:1px solid #D5D5D6;color:#D5D5D6;content:" ";-webkit-transform:scaleY(.5);transform:scaleY(.5);-webkit-transform-origin:0 0;transform-origin:0 0}.weui_btn_dialog.primary{color:#0BB20C}

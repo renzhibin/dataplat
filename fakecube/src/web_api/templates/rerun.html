@@ -1,0 +1,72 @@
+$def with (app_list)
+<!DOCTYPE HTML>
+<html>
+    <head>
+          <meta charset="utf-8">
+          <title>run_app</title>
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+          <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+          <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+          <script type="text/javascript">
+          $$(function(){
+                  $$('#btn-submit').click(function(){
+                     var fieldset = $$('#form').find('fieldset')
+                     param={}
+                     $$.each(fieldset.serializeArray(),function(){
+                        param[this.name]=this.value
+                     });
+
+                     $$.ajax({
+                        type:"post",
+                        contentType:"application/json",
+                        url:'rerun',
+                        data:JSON.stringify(param),
+                        success:function (resp){
+                            alert(resp)
+                        }
+
+                     });
+                  });
+              });
+          </script>
+    </head>
+    <body>
+              <form action="rerun"  method="post">
+                  <fieldset id="run_info_param">
+                      <legend>参数</legend>
+                  <div class="control-group">
+                      <label class="control-lable" for="app_name">项目名称*:</label>
+                      <div class="controls">
+                          <select id="app_name" name="app_name">
+                              <option value="" selected="true"></option>
+                              $for app in app_list:
+                              <option value="$app[0]">$app[0]</option>
+                          </select>
+                      </div>
+                  </div>
+                      <div class="control-group">
+                          <label class="control-lable" for="only_sql">特定模块</label>
+                          <input type="text" id="only_sql" name="only_sql">
+                      </div>
+                  <div class="control-group">
+                      <label class="control-lable" for="start_date">开始时间*:</label>
+                      <input type="text" id="start_date" name="start_date" readonly="readonly">
+                  </div>
+                  <div class="control-group">
+                      <label class="control-lable" for="end_date">结束时间*：</label>
+                      <input type="text" id="end_date" name="end_date" readonly="readonly">
+                  </div>
+                  <script>
+                        $$('#start_date').datepicker({dateFormat:'yy-mm-dd'})
+                        $$('#end_date').datepicker({dateFormat:'yy-mm-dd'})
+                  </script>
+
+                  </fieldset>
+                   <!--<input type="submit">-->
+                  <div class="form-action">
+                      <button type="submit" value="rerun">确定</button>
+                      <!--<button id="btn-submit" type="button">确定</button>-->
+                  </div>
+              </form>
+    </body>
+</html>

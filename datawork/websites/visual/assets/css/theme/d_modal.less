@@ -1,0 +1,144 @@
+//弹出的模态框的样式调整
+.window-mask {
+	background: #000000;
+    opacity: 0.8;
+}
+.d_modal_font () {
+	font-family: PingFang-SC-Medium;
+	font-size: 14px;
+	color: #FFFFFF;
+	letter-spacing: 0.1px;
+}
+
+.d_modal (@d_modal_width: 264px, @d_modal_header_color:#0081AD) {
+   top: 330px !important;
+   margin: 0 !important;
+   padding: 0 !important;
+   border-width: 0px !important;
+   background-color: transparent;
+   width: @d_modal_width;
+   .panel-header {
+       width: 100%;
+       border-radius: 4px 4px 0 0;
+       height: 31px;
+       padding-top: 7px;
+       padding-left: 10px;
+       color: #fff;
+       background: @d_modal_header_color;
+       border-width: 0px;
+       .d_modal_font();
+       .panel-title {
+       	  font-size: 14px;
+       	  color: #fff;
+       }
+       .panel-tool {
+       	   margin-right: 10px;
+       	   height: 20px;
+	       .panel-tool-close {
+	       	  width: 20px;
+       	      height: 20px;
+	       	  background: url(../../img/d_visual-png/Group4.png) no-repeat 0 0 !important;
+	       }
+       }
+
+   }
+   #downtpl {
+   	   font-size: 14px;
+   	   border-width: 0px;
+   	   input[name="tablename0"] {
+   	   	  margin-right: 3px;
+   	   }
+   }
+   .dialog-button {
+   	   height: 40px;
+   	   border-radius: 0px 0px 4px 4px;
+   	   background: #F6F6F6 ;
+   	   padding: 5px 14px 0 0;
+   }
+}	
+
+div.window:not([class*="contrast-"]) {
+	.d_modal();
+}
+
+//对比框的弹出框样式
+// div[class*="contrast-"] {
+// 	// right: 35px !important;
+// 	// top:106px !important;
+// 	// .panel-title {
+// 	// 	width: 119px;
+// 	// }
+// 	// .contBoxCont {
+// 	// 	width: 150px !important;
+// 	// }
+// }
+.window {
+	padding: 4px;
+}
+.panel.contrast-flod {
+	width: 37px !important;
+}
+
+.contrast-flod {
+	height: 122px !important;
+	width: 37px !important;
+	color: #FFFFFF;
+	background: #1F2D33;
+	//padding-left: 9px !important;
+	padidng: 4px !important;
+	.iconfont, .icon-xiangzuozhankai {
+		display: inherit !important;
+	}
+	.panel-title {
+		margin-top: 15px;
+		font-size: 14px;
+		color: #FFFFFF;
+	}
+	.panel-tool {
+		width: 22px;
+		height: 20px;
+		top: 80% !important;
+		right: 2px !important;
+		.panel-tool-close {
+			// display: none;
+			width: 20px;
+			height: 20px;
+			background: url(../../img/d_visual-png/Group15.png) no-repeat 0 0 !important;
+		}
+	}
+}
+.window[class*="contrast-show"] {
+	background-color: #1F2D33;
+}
+.contrast-show {
+	width: 150px !important;
+	padding: 0px !important;
+	border-width: 0px;
+	color: #FFFFFF;
+	border-radius: 4px !important;
+	.contBoxCont {
+		width: 100% !important;
+		color: black;
+		text-align: center;
+	}
+	.panel-header {
+		padding-left: 10px !important;
+	}
+	.panel-title {
+		// width: 90px;
+		height: 37px;
+		line-height: 37px;
+		color: #FFFFFF;
+	}
+	.panel-tool {
+		width: 20px;
+		height: 20px;
+		.panel-tool-close {
+			display: none;
+			width: 20px;
+			height: 20px;
+			background: url(../../img/d_visual-png/Group15.png) no-repeat 0 0 !important;
+		}
+	}
+}
+

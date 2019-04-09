@@ -1,0 +1,250 @@
+$def with (app_list,log_list)
+<!--<!DOCTYPE html PUBLIC "－／／W3C//DTD XHTML 1.0 Transitional//EN”  "http://www.w3.ogr/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<html>
+    <head>
+        <title>run_log</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+        <style type="text/css">
+            table {
+                width:100%;
+                table-layout:fixed;
+            }
+            .autocut {
+                 overflow:hidden;
+                 white-space:nowrap;
+                 text-overflow:ellipsis;
+                 -o-text-overflow:ellipsis;
+                 -icab-text-overflow:ellipsis;
+                 -khtml-text-overflow:ellipsis;
+                 -moz-text-overflow:ellipsis;
+                 -webkit-text-overflow:ellipsis;
+            }
+            .autocut:hover {
+                overflow:visible;
+                white-space:normal;
+                word-wrap:break-word;
+
+            }
+        </style>
+        <script type="text/javascript">
+              function run(){
+                  var app_name = document.run_param.app_name.value
+                  var start_date = document.run_param.start_date.value
+                  var end_date = document.run_param.end_date.value
+                  var only_sql = document.run_param.only_sql.value
+                  var step = document.run_param.step.value
+                  var test = document.run_param.test.value
+
+                  if (app_name == null || app_name.trim().length == 0 || start_date == null || start_date.trim().length== 0  || end_date == null || end_date.trim().length == 0) {
+                    alert("param invalid,* is must given")
+                    return
+                  }
+
+                  param={}
+
+                  param={
+                     'app_name':app_name,
+                     'start_date':start_date,
+                     'end_date':end_date,
+                     'step':step,
+                     'test':test
+                  }
+
+                  if (only_sql != null && only_sql.trim().length > 0){
+                    param['only_sql'] = only_sql
+                  }
+
+                  $$.ajax({
+                      type:"POST",
+                      contentType:"application/json",
+                      url:'rerun',
+                      data:JSON.stringify(param),
+                      success:function(resp){
+                            alert(resp)
+                      }
+                  });
+              }
+
+              function display(){
+                  var target=document.getElementById('rerun_param')
+                  if(target.style.display == "none"){
+                      target.style.display = "";
+                  } else {
+                      target.style.display = "none";
+                  }
+              }
+
+              function getHql(){
+                   var app_name=document.run_param.app_name.value
+
+                   param={}
+                   param['app_name']=app_name
+
+                   var cat=document.run_param.cat
+                   cat.length=1
+
+                   $$.ajax({
+                       type:"POST",
+                       contentType:"application/json",
+                       url:'get_cat',
+                       data:JSON.stringify(param),
+                       success:function(resp){
+                            cat_list = resp.split(',')
+                            for(var i=0;i<cat_list.length;i++){
+                                cat[i+1]=new Option(cat_list[i],cat_list[i])
+                            }
+                       }
+                   })
+              }
+
+              function selectCat(){
+                   var val=document.run_param.only_sql.value
+
+                   var select_val=document.run_param.cat.value
+
+                   if(val == ""){
+                       document.run_param.only_sql.value= select_val
+                   } else {
+                       document.run_param.only_sql.value = val + ',' + select_val
+                   }
+              }
+        </script>
+    </head>
+    <body>
+        <fieldset>
+        <form name="log_param" action="get_run_log" method="post">
+                <label for="stat_date">stat_date</label>
+                <input type="text" id="stat_date" name="stat_date">
+
+                <lable for="app_name">app_name</lable>
+                <select id="app_name" name="app_name">
+                    <option value="" selected="true"></option>
+                    $for app in app_list:
+                       <option value="$app[0]">$app[0]</option>
+                </select>
+
+                <label for="ret_status">执行结果</label>
+                <select id="ret_status" name="ret_status">
+                    <option value="" selected="true"></option>
+                    <option value="1">WAITING</option>
+                    <option value="2">READY</option>
+                    <option value="3">RUNNING</option>
+                    <option value="4">HIVEEND</option>
+                    <option value="5">SUCCESS</option>
+                    <option value="6">FAILED</option>
+                    <option value="7">WARNING</option>
+                </select>
+
+                <input type="submit" value="查询" />
+                <input type="button" value="run" onclick="display()"/>
+        </form>
+        </fieldset>
+
+        <fieldset id="rerun_param" style="display:none">
+        <form name="run_param" >
+              <div class="control-group">
+                  <label class="control-lable" for="app_name">项目名称*:</label>
+                  <select id="app_name" name="app_name" onchange="getHql()">
+                      <option value="" selected="true"></option>
+                      $for app in app_list:
+                      <option value="$app[0]">$app[0]</option>
+                  </select>
+              </div>
+              <div class="control-group">
+                      <label class="control-lable" for="only_sql">特定模块 :</label>
+                      <input id="only_sql" type="text" multiple="multiple" name="only_sql" style="width:40%">
+                      <select id="cat" name="cat" onchange="selectCat()">
+                          <option value="" selected="true">请选择模块</option>
+                      </select>
+                      <!--<input type="text" id="only_sql" name="only_sql">-->
+              </div>
+              <div class="control-group">
+                  <label class="control-lable" for="step">执行步骤 :</label>
+                  <select id="step" name="step">
+                      <option value="all" selected="true">all</option>
+                      <option value="hive">hive</option>
+                      <option value="mysql">mysql</option>
+                  </select>
+              </div>
+              <div class="control-group">
+                  <label class="control-lable" for="test">测    试 :</label>
+                  <select id="test" name="test">
+                      <option value=false selected="true">False</option>
+                      <option value=true>True</option>
+                  </select>
+              </div>
+              <div class="control-group">
+                  <label class="control-lable" for="start_date">开始时间*:</label>
+                  <input type="text" id="start_date" name="start_date" readonly="readonly">
+              </div>
+              <div class="control-group">
+                  <label class="control-lable" for="end_date">结束时间*：</label>
+                  <input type="text" id="end_date" name="end_date" readonly="readonly">
+              </div>
+              <script>
+                    $$('#start_date').datepicker({dateFormat:'yy-mm-dd'})
+                    $$('#end_date').datepicker({dateFormat:'yy-mm-dd'})
+              </script>
+              <div class="form-action">
+                  <button type="button" value="rerun" onclick="run()">确定</button>
+              </div>
+        </form>
+        </fieldset>
+
+        <table border="1">
+            <tr>
+                <td>id</td>
+                <td width="10%">项目名称</td>
+                <td>模块</td>
+                <td>执行日期</td>
+                <td>执行结果</td>
+                <td>开始时间</td>
+                <td>结束时间</td>
+                <td>创建时间</td>
+                <td>导入行数</td>
+                <td>导入用时</td>
+                <td>优先级</td>
+                <td>日志</td>
+                <td>step</td>
+                <td>test</td>
+            </tr>
+            $for i in log_list:
+            <tr>
+                <td class="appname autocut">$i[0]</td>
+                <td class="appname autocut">$i[1]</td>
+                <td class="appname autocut">$i[2]</td>
+                <td>$i[3]</td>
+                $if i[4] == 1:
+                    <td>阻塞</td>
+                $elif i[4] == 2:
+                    <td>READY</td>
+                $elif i[4] == 3:
+                    <td>RUNNING</td>
+                $elif i[4] == 4:
+                    <td>HIVEEND</td>
+                $elif i[4] == 5:
+                    <td>SUCCESS</td>
+                $elif i[4] == 6:
+                    <td>FAILED</td>
+                $elif i[4] == 7:
+                    <td>WARNING</td>
+                $else:
+                    <td>$i[4]</td>
+                <td>$i[7]</td>
+                <td>$i[8]</td>
+                <td>$i[9]</td>
+                <td>$i[11]</td>
+                <td>$i[12]</td>
+                <td>$i[10]</td>
+                <td><a href="get_run_detail?serial=$i[0]&app_name=$i[1]&stat_date=$i[3]&module_name=$i[2]">日志详情</a></td>
+                <td>$i[5]</td>
+                <td>$i[6]</td>
+            </tr>
+        </table>
+        <script>
+            $$('#stat_date').datepicker({dateFormat:'yy-mm-dd'})
+        </script>
+    </body>
+</html>
