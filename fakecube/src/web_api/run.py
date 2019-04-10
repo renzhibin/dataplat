@@ -5,6 +5,9 @@ import web
 import os
 import sys
 sys.path.append('..')
+sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/conf')
+sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/lib')
+sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/lib/db')
 import  mms.conf.env  as conf
 
 from list_app import ListApp
