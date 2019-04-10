@@ -1444,7 +1444,7 @@ class  VisualManager extends Manager
 
     function sendMail($names,$html,$title,$Cc="",$isreply=false){
         $this->objComm=new CommonManager();
-        $from = "<data-dt@qudian.com>";
+        $from = "<data-dt@xiaozhu.com>";
         $this->objComm->sendMail($names,$html,$title,$from,'',true,$Cc);
     }
 

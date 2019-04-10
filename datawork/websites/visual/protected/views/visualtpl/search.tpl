@@ -124,7 +124,7 @@
                     </span>
                 {//if/}
                 {{ if ( it.basereport.author !=undefined ){  }}
-                    <a class='collnet pull-right showinfo' data-toggle="tooltip"  title='报表负责人' target='_blank'  style='color:#333;text-decoration:none'  href='http://www.qudian.com/?q={{=it.basereport.author}}' onclick="return false;">
+                    <a class='collnet pull-right showinfo' data-toggle="tooltip"  title='报表负责人' target='_blank'  style='color:#333;text-decoration:none'  href='http://www.xiaozhu.com/?q={{=it.basereport.author}}' onclick="return false;">
                         <i class='glyphicon glyphicon-user'></i>
                         <span>{{=it.basereport.author?it.basereport.author:'未知'}}</span>
                     </a> 

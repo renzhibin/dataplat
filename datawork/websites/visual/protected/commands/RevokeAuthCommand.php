@@ -24,12 +24,7 @@ Class RevokeAuthCommand extends Command
         $users = $this->objRoles->getUserList(['group' => 'normal']);
 
         $filterUser = [
-            'luomin@qudian.com', 'lvdong@qufenqi.com', 'kangleyang@qudian.com',
-            'carlyeung@qudian.com', 'zhoujing@qudian.com', 'liupeng@qudian.com',
-            'xuzhangjian@qudian.com', 'hehongjia@qudian.com', 'huchengwen@qufenqi.com',
-            'wangwenhui@qudian.com', 'chenjiaojiao@qufenqi.com', 'liuzhentao@qufenqi.com',
-            'loulili@qufenqi.com', 'gechuanjiang@qufenqi.com', 'xulong@qudian.com', 'chenaixia@qudian.com',
-            'machi@qudian.com', 'gaoyan@qudian.com', 'yudacheng@qudian.com', 'huangwenjie@qufenqi.com'
+
         ];
         foreach ($users['rows'] as $user) {
             $userId   = $user['id'];
@@ -129,8 +124,8 @@ Class RevokeAuthCommand extends Command
         $mailHtml   = "尊敬的" . $user['realname'] . "：<br>您好！您开通的报表:<br>{$reportHtml}已经超过{$days}天没有访问了！<br>平台已经收回权限，如需要重新开通，请提交直属部门VP审批，并详细说明未访问原因，谢谢!";
 
         $mailInfo = [
-            'di-inf@qudian.com',
-            str_ireplace('@qufenqi.com', '@qudian.com', $user['user_name']),
+            'di-inf@xiaozhu.com',
+            str_ireplace('@xiaozhu.com', '@xiaozhu.com', $user['user_name']),
         ];
 
         return [$mailInfo, $mailHtml]; 

@@ -7,7 +7,7 @@ class ProjectAPiController extends Controller
     private $objProject = null;
     private $objBehavior = null;
     private $curl = null;
-    private $diUrl = 'http://scheduler.qudian.com/';
+    private $diUrl = 'http://scheduler.xiaozhu.com/';
 
     function __construct()
     {
@@ -110,7 +110,7 @@ class ProjectAPiController extends Controller
         $params['unq_job_name'] = implode(',', $unqJobNames);
         $params['run_start_time'] = date('Y-m-d H:i:s', strtotime($start_time));
         $params['run_end_time'] = date('Y-m-d H:i:s', strtotime($end_time));
-        $params['creater'] = str_ireplace(['@qudian.com', '@qufenqi.com'], '', Yii::app()->user->username);
+        $params['creater'] = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
         $params['ext_json'] = json_encode(['step' => $step]);
         $strparams = http_build_query($params);
         $url = $this->diUrl . 'job/run_job';
@@ -281,7 +281,7 @@ class ProjectAPiController extends Controller
                 }
                 $url = $this->diUrl . 'job/kill_job_local';
                 $param['job_run_ids'] = $jobRunIds;
-                $param['creater'] = str_ireplace(['@qudian.com', '@qufenqi.com'], '', Yii::app()->user->username);
+                $param['creater'] = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
                 $strparams = http_build_query($param);
                 $res = $this->curl->post($url,$strparams,'', 60);
                 if ($res['http_code'] != 200) {
@@ -301,7 +301,7 @@ class ProjectAPiController extends Controller
                 }
                 $url = $this->diUrl . 'job/set_job_ready';
                 $param['job_run_ids'] = $jobRunIds;
-                $param['creater'] = str_ireplace(['@qudian.com', '@qufenqi.com'], '', Yii::app()->user->username);
+                $param['creater'] = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
                 $strparams = http_build_query($param);
                 $res = $this->curl->post($url,$strparams,'', 60);
                 if ($res['http_code'] != 200) {
@@ -624,7 +624,7 @@ class ProjectAPiController extends Controller
         }
         $url = $this->diUrl . 'job/kill_job_local';
         $param['job_run_ids'] = $data['serial'];
-        $param['creater'] = str_ireplace(['@qudian.com', '@qufenqi.com'], '', Yii::app()->user->username);
+        $param['creater'] = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
         $strparams = http_build_query($param);
         $res = $this->curl->post($url,$strparams,'', 60);
         if ($res['http_code'] != 200) {
@@ -652,7 +652,7 @@ class ProjectAPiController extends Controller
         }
         $url = $this->diUrl . 'job/set_job_ready';
         $param['job_run_ids'] = $data['serial'];
-        $param['creater'] = str_ireplace(['@qudian.com', '@qufenqi.com'], '', Yii::app()->user->username);
+        $param['creater'] = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
         $strparams = http_build_query($param);
         $res = $this->curl->post($url,$strparams,'', 60);
         if ($res['http_code'] != 200) {

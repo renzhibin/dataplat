@@ -31,7 +31,7 @@ class OpenApiCommand extends Command
         $result = $this->getTokenList();
         $data = [];
         $data['title'] = 'DT开放API检测';
-        $data['addressee'] = 'lvluole@qudian.com,yangyulong@qudian.com';
+        $data['addressee'] = 'lvluole@xiaozhu.com,yangyulong@xiaozhu.com';
         foreach ($result as $items) {
             $reportTable = [];
             $parameter['appToken'] = $items['token_val'];

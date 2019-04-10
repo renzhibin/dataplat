@@ -1,6 +1,6 @@
 <?php
  class ProjectManager extends Manager{
-     private $diUrl = 'http://scheduler.qudian.com/';
+     private $diUrl = 'http://scheduler.xiaozhu.com/';
      private $diStatus2DtStatus = [
          1 => '阻塞',
          2 => '就绪',
@@ -104,7 +104,7 @@
                  $one['download'] = WEB_API."/data/".$one['app_name'].'/'.$statDate.'.'.$one['app_name'].'.'.$one['run_module'];
              }
              $one['real_log'] = "http://116.62.213.137:8001/get_run_detail_real?serial=" . $one['id'] . "&app_name=" . $one['app_name'] . "&stat_date=" . date('Y-m-d', strtotime($one['stat_date'])) . "&stat_time=" . urlencode($one['stat_date']) . "&module_name=" . $one['run_module'];
-             $one['killtask'] = "serial=".$one['id']."&app_name=".$one['app_name']."&status=".$one['ori_status']."&stat_date=".$one['stat_date']."&module_name=".$one['run_module']."&username=".str_ireplace(['@qudian.com', '@qufenqi.com'], '', Yii::app()->user->username);
+             $one['killtask'] = "serial=".$one['id']."&app_name=".$one['app_name']."&status=".$one['ori_status']."&stat_date=".$one['stat_date']."&module_name=".$one['run_module']."&username=".str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
              array_push($data['list'], $one);
          }
          $returnData = ['totalCount' => $data['totalCount'], 'data' => []];
@@ -159,7 +159,7 @@
              //"get_run_detail?serial=$i[0]&app_name=$i[1]&stat_date=$i[3]&module_name=$i[2]
              $v['status']=$statusMap[$v['status']];
              $v['log']=WEB_API."/get_run_detail?serial=".$v['id']."&app_name=".$v['app_name']."&stat_date=".$v['stat_date']."&module_name=".$v['run_module'];
-             $v['killtask']="serial=".$v['id']."&app_name=".$v['app_name']."&stat_date=".$v['stat_date']."&module_name=".$v['run_module']."&username=".str_ireplace(['@qudian.com', '@qufenqi.com'], '', Yii::app()->user->username);
+             $v['killtask']="serial=".$v['id']."&app_name=".$v['app_name']."&stat_date=".$v['stat_date']."&module_name=".$v['run_module']."&username=".str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
              $v['download']=WEB_API."/data/".$v['app_name'].'/'.$v['stat_date'].'.'.$v['app_name'].'.'.$v['run_module'];
 
              $v['real_log'] = "http://116.62.213.137:8001/get_run_detail_real?serial=" . $v['id'] . "&app_name=" . $v['app_name'] . "&stat_date=" . date('Y-m-d', strtotime($v['stat_date'])) . "&stat_time=" . urlencode($v['stat_date']) . "&module_name=" . $v['run_module'];
@@ -640,7 +640,7 @@
          $result = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
          $result = $result[0];
          $sql = "insert into mms_conf_log(date_s,date_e,date_n,creater,appname,create_time,priority,`explain`,cn_name,storetype,editor,authtype,authuser,mysql_weight,update_weight_time,
-conf,weight_update_log,store_db) values('{$result['date_s']}','{$result['date_e']}','{$result['date_n']}','{$result['creater']}','{$result['appname']}','{$result['create_time']}','{$result['priority']}','{$result['explain']}','{$result['cn_name']}','{$result['storetype']}','di@qudian.com','{$result['authtype']}','{$result['authuser']}','{$result['mysql_weight']}','{$result['update_weight_time']}','$conf','{$result['weight_update_log']}','{$result['store_db']}')";
+conf,weight_update_log,store_db) values('{$result['date_s']}','{$result['date_e']}','{$result['date_n']}','{$result['creater']}','{$result['appname']}','{$result['create_time']}','{$result['priority']}','{$result['explain']}','{$result['cn_name']}','{$result['storetype']}','di@xiaozhu.com','{$result['authtype']}','{$result['authuser']}','{$result['mysql_weight']}','{$result['update_weight_time']}','$conf','{$result['weight_update_log']}','{$result['store_db']}')";
          $res=Yii::app()->db_metric_meta->createCommand($sql)->execute();
          return Yii::app()->db_metric_meta->createCommand()->update($this->project_conf, [
              'conf' => $conf,

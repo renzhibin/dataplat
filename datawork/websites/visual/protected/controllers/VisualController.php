@@ -311,7 +311,7 @@ class VisualController extends Controller
         }
         if (isset($tplArr['confArr']['type']) && $tplArr['confArr']['type'] == 9) {
             $time = time();
-            $md5 = MD5("CfQNGOKatc1s6TX2rT7OeG8FHdNJ3KvP" . $time . 'dt.qufenqi.com');
+            $md5 = MD5("CfQNGOKatc1s6TX2rT7OeG8FHdNJ3KvP" . $time . 'dt.xiaozhu.com');
             $tplArr['confArr']['url'] = str_replace('open=1', "open=1&token={$md5}&timestamp={$time}&user_name={$userName}", $tplArr['confArr']['url']);
             if (stripos(Yii::app()->getRequest()->queryString, 'param=1') >= 0) {
                 $tplArr['confArr']['url'] = str_replace('open=1', 'open=1&' . Yii::app()->getRequest()->queryString, $tplArr['confArr']['url']);

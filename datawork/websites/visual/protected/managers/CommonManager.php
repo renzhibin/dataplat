@@ -555,7 +555,7 @@ class CommonManager extends Manager
         $Cc 抄送人
 
     */
-    function sendMail($receiver, $body, $subject = '', $from = 'data-dt@qudian.com', $header = '', $flag = true, $Cc = '')
+    function sendMail($receiver, $body, $subject = '', $from = 'data-dt@xiaozhu.com', $header = '', $flag = true, $Cc = '')
     {
 
         require_once(dirname(__FILE__) . '/../../../../framework/extensions/PHPMailer/PHPMailerAutoload.php');
@@ -581,7 +581,7 @@ class CommonManager extends Manager
             if ($flag == true) {
                 foreach ($receiver as $strMail) {
                     if (strpos($strMail, '@') === false) {
-                        $strMail = $strMail . '@qudian.com';
+                        $strMail = $strMail . '@xiaozhu.com';
                     }
                     // $strMergeMail.=$strMail . ',';
 
@@ -591,7 +591,7 @@ class CommonManager extends Manager
             } else {
                 foreach ($receiver as $strMail) {
                     if (strpos($strMail, '@') === false) {
-                        $strMail = $strMail . '@qudian.com';
+                        $strMail = $strMail . '@xiaozhu.com';
                     }
                     $mail->addAddress($strMail);
                 }
@@ -599,7 +599,7 @@ class CommonManager extends Manager
         } else {
             $strMail = $receiver;
             if (strpos($strMail, '@') === false) {
-                $strMail = $strMail . '@qudian.com';
+                $strMail = $strMail . '@xiaozhu.com';
             }
             $mail->addAddress($strMail);
         }

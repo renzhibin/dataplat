@@ -4,88 +4,9 @@ class AuthManager extends Manager
 {
     //核心报表权限
     public $coreReportWhiteList = [
-        '554' => [//集团总览
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhoujing@qudian.com','haonaixin@qudian.com',
-            'pujiao@qudian.com', 'zhangqinghui@qufenqi.com','zhanglei@qudian.com','wangshanshanfa@qudian.com',
-            'wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com','lanwenping@qudian.com','linxiaomin@qudian.com','huchengwen@qudian.com','sissizhu@qudian.com'
-        ],
-        '553' => [//集团数据趋势
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhoujing@qudian.com','haonaixin@qudian.com',
-            'pujiao@qudian.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com','wangshanshanfa@qudian.com',
-            'wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com','linxiaomin@qudian.com','huchengwen@qudian.com'
-        ],
-        '783' => [//预测进度分析工具
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhoujing@qudian.com','haonaixin@qudian.com',
-            'pujiao@qudian.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com','wangshanshanfa@qudian.com',
-            'wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com','linxiaomin@qudian.com'
-        ],
-        '702' => [//流量统计
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhoujing@qudian.com','haonaixin@qudian.com',
-            'pujiao@qudian.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com','wangshanshanfa@qudian.com',
-            'wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com','lanwenping@qudian.com','linxiaomin@qudian.com','huchengwen@qudian.com'
-        ],
-        '659' => [//MAU
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhoujing@qudian.com','haonaixin@qudian.com',
-            'pujiao@qudian.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com','wangshanshanfa@qudian.com',
-            'wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com','linxiaomin@qudian.com'
-        ],
-        '902' => [//支付宝首页二级入口核心数据日报
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com',
-            'wangshanshanfa@qudian.com','wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com',
-            'lanwenping@qudian.com','linxiaomin@qudian.com'
-        ],
-        '1222' => [//流量数据报表
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com',
-            'wangshanshanfa@qudian.com','wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com',
-            'lanwenping@qudian.com','linxiaomin@qudian.com','shanlulu@qudian.com','huchengwen@qudian.com','huchengwen@qudian.com'
-        ],
-        '1225' => [//实物业务日报
-            'gechuanjiang@qufenqi.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com',
-            'wangshanshanfa@qudian.com','wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com',
-            'lanwenping@qudian.com','linxiaomin@qudian.com','huchengwen@qudian.com'
-        ],
-        '1016' => [//汽车业务核心日报
-            'xulong@qudian.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhoujing@qudian.com','haonaixin@qudian.com',
-            'jialiuliu@qufenqi.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com','wangshanshanfa@qudian.com',
-            'wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com','lanwenping@qudian.com','linxiaomin@qudian.com','shanlulu@qudian.com','huchengwen@qudian.com'
-        ],
-        '1034' => [//车型热销榜单数据
-            'xulong@qudian.com','gaoyan@qudian.com','zhengshuang@qudian.com','yangzongqiang@qufenqi.com',
-            'hanjiejiao@qudian.com','zhaotongyue@qudian.com','zhubaojian@qudian.com','fanpingping@qudian.com',
-            'tangmanqiang@qudian.com','zhangli@qudian.com', 'liyiyi@qudian.com','zhangxinxin@qufenqi.com',
-            'liumengmeng@qudian.com','wudi@qudian.com','zhoujing@qudian.com','haonaixin@qudian.com',
-            'jialiuliu@qufenqi.com','zhangqinghui@qufenqi.com','zhanglei@qudian.com','wangshanshanfa@qudian.com',
-            'wangyan@qudian.com','zhangyipeng@qudian.com','gaoyushi@qudian.com','lanwenping@qudian.com','linxiaomin@qudian.com','shanlulu@qudian.com'
-        ],
+
         '1260' => [//数据外发工具
-            'duguosheng@qudian.com','pengbangzhong@qudian.com','luguimei@qudian.com'
+
         ]
     ];
 

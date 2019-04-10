@@ -64,7 +64,7 @@
             <p>1: 请上传.csv文件</p>
             <p>2: 表名和列名必须为[英文] 或 [英文+下划线]组合,且回避关键字( type,flag,name,date )等</p>
             <p>3: 请等待预览效果出现后再点击生成按钮,目前只显示2条数据</p>
-            <p>4: 创建成功后, 请复制表名到 <a target='_blank' href='http://dq.qudian.com/#datasource=presto1&tab=treeview'>http://dq.qudian.com</a> 中查询,默认创建表到tmp库</p>
+            <p>4: 创建成功后, 请复制表名到 <a target='_blank' href='http://dq.xiaozhu.com/#datasource=presto1&tab=treeview'>http://dq.xiaozhu.com</a> 中查询,默认创建表到tmp库</p>
             <p>5: 选择追加，是把上传的数据追加到所填写的数据表中！（注：追加只需要填写临时表名称）</p>
             <p>6: 创建的临时表全称为： 您输入的临时表名称+ _tools_tmp_table 如： abc_tools_tmp_table</p>
         </div>

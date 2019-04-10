@@ -268,14 +268,14 @@
      //兼容menu表中json格式的tableid
      function  removeAllmenuReportbyTableid($table_id){
          $username = Yii::app()->user->username;
-         $username = str_ireplace(['@qudian.com', '@qufenqi.com'], '', $username);
+         $username = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', $username);
          $objReport = new ReportManager();
          $reprotInfo = $objReport->getReoport($table_id);
          $reportName = $reprotInfo["cn_name"];
          $reportCreater = $reprotInfo["creater"];
-         $reportCreater = str_ireplace(['@qudian.com', '@qufenqi.com'], '', $reportCreater);
+         $reportCreater = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', $reportCreater);
          $reportModifyer = $reprotInfo["modify_user"];
-         $reportModifyer = str_ireplace(['@qudian.com', '@qufenqi.com'], '', $reportModifyer);
+         $reportModifyer = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', $reportModifyer);
          unset($objReport);
          $menuInfoList = $this->selectMenu();
          $flag = 1; //标识变量，表示是否找到了要更改的menu记录
@@ -336,15 +336,15 @@
          $mailBody = '<div>监控内容：您创建或编辑的报表<b> '.$reportName.'(ID:'.$table_id.') </b>已做下线处理。</div>
                     <div>触发原因：'.$reason.'</div>
                     <div>所属菜单：'.$removeMenuStr.'</div>
-                    <div>恢复方法：请进入<a href="http://dt.qufenqi.com/report/reportlist">报表管理页面</a>，在"search"查询框输入 报表id（'.$table_id.'）或者报表名（'.$reportName.'） 进行查询，点击上线按钮即可完成报表上线。
-                    如需将该报表挂到菜单下，请在<a href="http://dt.qufenqi.com/menu/index">菜单管理页面</a>添加该报表。</div>';
+                    <div>恢复方法：请进入<a href="http://dt.xiaozhu.com/report/reportlist">报表管理页面</a>，在"search"查询框输入 报表id（'.$table_id.'）或者报表名（'.$reportName.'） 进行查询，点击上线按钮即可完成报表上线。
+                    如需将该报表挂到菜单下，请在<a href="http://dt.xiaozhu.com/menu/index">菜单管理页面</a>添加该报表。</div>';
 
-         $mailAddress = 'bi-service@qudian.com';
+         $mailAddress = 'bi-service@xiaozhu.com';
          if(!empty($reportCreater)){
-             $mailAddress = $mailAddress.";".$reportCreater."@qudian.com";
+             $mailAddress = $mailAddress.";".$reportCreater."@xiaozhu.com";
          }
          if(!empty($reportModifyer)){
-             $mailAddress = $mailAddress.";".$reportModifyer."@qudian.com";
+             $mailAddress = $mailAddress.";".$reportModifyer."@xiaozhu.com";
          }
          $this->objComm->sendMail($mailAddress,$mailBody,'【监控】data平台报表下线通知');
 
@@ -767,7 +767,7 @@
 
          if (!empty($html)) {
              ob_start();
-             $this->objComm->sendMail('bi-service@qudian.com', $html, '【重要】小伙子们，菜单添加规则出错了！！');
+             $this->objComm->sendMail('bi-service@xiaozhu.com', $html, '【重要】小伙子们，菜单添加规则出错了！！');
              ob_get_clean();
              ob_end_flush();
          }

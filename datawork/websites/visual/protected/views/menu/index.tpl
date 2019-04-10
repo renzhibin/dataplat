@@ -40,7 +40,7 @@
                 {//if/}
                 <br>
                 <span style='color: red; padding-left: 5px; font-size: 13px;'>
-                    注：一级菜单（增/删/改）需高玉石批准，详情咨询杨玉龙或查看<a href="http://fe.qufenqi.com/agg/doc?agg=da&doc=dt_internal_authority" target='_blank'>申请流程</a>
+                    <a href="http://fe.xiaozhu.com/agg/doc?agg=da&doc=dt_internal_authority" target='_blank'>申请流程</a>
                 </span>
                 <div style='position:relative;padding-top:35px'>
                     <table class="table table-bordered data-table">

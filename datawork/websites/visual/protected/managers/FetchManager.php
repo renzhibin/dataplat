@@ -9,7 +9,7 @@ class FetchManager extends Manager
             mkdir($this->fetch_data_path);
         }
         $this->fetch_water_mark = 'mono /home/apple/WaterMark/WaterMark.exe ';
-        $this->white_user_list = ['liuweiqi@qufenqi.com','duguosheng@qudian.com','yangzongqiang@qufenqi.com'];
+        $this->white_user_list = [];
         $this->fetchRequestList = "fetch_request_list";
         $this->fetchDownloadLog = "fetch_download_log";
     }

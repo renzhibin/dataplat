@@ -86,7 +86,7 @@ class Log(WsgiLog):
 
 
 if __name__ == "__main__":
-	web.config.debug = True
-	app = web.application(urls, globals())
-        app.run(Log)
+    web.config.debug = True
+    app = web.application(urls, globals())
+    app.run(Log)
 #application=app.wsgifunc(Log)

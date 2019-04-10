@@ -13,10 +13,10 @@ require_once(FRAMEWORK . '/yii/phpdotenv/Validator.php');
 $hostName = $_SERVER['SERVER_NAME'];
 $envFile = '.env';
 switch ($hostName) {
-    case 'dt.qufenqi.com':
+    case 'dt.xiaozhu.com':
         break;
-    #case 'dh.qufenqi.com':
-    case 'dh.qufenqi.com':
+    #case 'dh.xiaozhu.com':
+    case 'dh.xiaozhu.com':
         $envFile = '.envDh';
         break;
     default:

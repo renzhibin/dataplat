@@ -14,8 +14,8 @@ class RunTaskManager extends Manager {
     const JOB_NAME_PREFIX = 'dt_run_task_tool_';
     const HDFS_TMP_DIR = 'hdfs:///tmp/';
 
-    const URL = 'http://scheduler.qudian.com';
-    const CALL_BACK_URL = 'http://dt.qufenqi.com/RunTask/runtaskcallback?phantomjs=1';
+    const URL = 'http://scheduler.xiaozhu.com';
+    const CALL_BACK_URL = 'http://dt.xiaozhu.com/RunTask/runtaskcallback?phantomjs=1';
     const APP_KEY = 'cac12f01e96b15f17a29c35aa30eee12';
 
     private $sids = [];

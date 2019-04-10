@@ -194,7 +194,7 @@
         <ul class="nav navbar-nav navbar-right change-nav-right" style="line-height:40px;height:40px; float:right;">
           <li><a style="padding:1px 2px 4px 2px;line-height: 40px;"></a></li>
             <li>
-                <a title="" href="http://wiki.qudian.com/pages/viewpage.action?pageId=7537258" target="_blank">
+                <a title="" href="http://wiki.xiaozhu.com/pages/viewpage.action?pageId=7537258" target="_blank">
                     <span class="text" style="line-height: 40px;font-size: 14px;height: 50px !important;line-height: 50px;padding-left: 10px;color: #fff;">权限申请流程</span></a>
             </li>
             <li>

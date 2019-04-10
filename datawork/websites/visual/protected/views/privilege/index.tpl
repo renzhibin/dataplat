@@ -58,7 +58,7 @@
                     <label>姓名：</label>
                     <select name='user_id' multiple style='width:200px; visibility: hidden' placeholder="--请选择--">
                         {/foreach from =$userList item= item key=key/}
-                        <option value="{/$item.id/}">{/$item.realname/}（{/$item.user_name|regex_replace:"/@qufenqi.com|@qudian.com/":""/}）</option>
+                        <option value="{/$item.id/}">{/$item.realname/}（{/$item.user_name|regex_replace:"/@xiaozhu.com|@xiaozhu.com/":""/}）</option>
                         {//foreach/}
                     </select>
                     <label>手机号：</label>
@@ -99,7 +99,7 @@
                 <td>
                     <select name='user' multiple style='width:300px' placeholder="--请选择--">
                         {/foreach from =$userList item= item key=key/}
-                        <option value="{/$item.id/}">{/$item.realname/}（{/$item.user_name|regex_replace:"/@qufenqi.com|@qudian.com/":""/}）</option>
+                        <option value="{/$item.id/}">{/$item.realname/}（{/$item.user_name|regex_replace:"/@xiaozhu.com|@xiaozhu.com/":""/}）</option>
                         {//foreach/}
                     </select>
                 </td>
