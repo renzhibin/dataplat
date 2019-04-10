@@ -16,7 +16,6 @@ class UserIdentity extends CUserIdentity
        $user['id']=680;
        $user['realname']='test';
        $user['name']='test';
-exit();
         if ($user === false) {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
             $this->errorMessage = '获取用户信息错误';
