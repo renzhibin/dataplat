@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=no">
 {/include file="layouts/lib.tpl"/}
-<title>趣店数据分析平台</title>
+<title>小猪数据分析平台</title>
 <meta charset="UTF-8" />
 </head>
 <body>
