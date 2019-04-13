@@ -180,14 +180,14 @@ class Runner():
                 else:
                     high_run_count=diff_high_count
 
-            self.readCur.execute("select id,app_name,stat_date,run_module,ready_time,creater,priority,submitter from %s where status = %s and conf_name='%s' and creater is not null and priority>=5 order by priority desc,ready_time asc,stat_date desc limit %s" %(conf.QUEUE_TABLE,conf.READY,self.conf_name,str(high_run_count)))
+            self.readCur.execute("select id,app_name,stat_date,run_module,ready_time,creater,priority,submitter from %s where status = %s and conf_name='%s' and creater is not null and priority>=5 order by stat_date desc,priority desc,ready_time desc limit %s" %(conf.QUEUE_TABLE,conf.READY,self.conf_name,str(high_run_count)))
 
             h_list=self.readCur.fetchall()
             nor_run_count=int(remain_run_cnt)-len(h_list)
             running_list=running_list+list(h_list)
 
             if nor_run_count>0:
-                self.readCur.execute("select id,app_name,stat_date,run_module,ready_time,creater,priority,submitter from %s where status = %s and conf_name='%s' and creater is not null and priority<5 order by priority desc,ready_time asc,stat_date desc limit %s" %(conf.QUEUE_TABLE,conf.READY,self.conf_name,str(nor_run_count)))
+                self.readCur.execute("select id,app_name,stat_date,run_module,ready_time,creater,priority,submitter from %s where status = %s and conf_name='%s' and creater is not null and priority<5 order by stat_date desc,priority desc,ready_time desc limit %s" %(conf.QUEUE_TABLE,conf.READY,self.conf_name,str(nor_run_count)))
                 running_list=running_list+list(self.readCur.fetchall())
         for r in running_list:
             tmp={}

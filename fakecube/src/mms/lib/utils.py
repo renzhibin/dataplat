@@ -417,10 +417,10 @@ def checkScheduleInterval(schedule_interval='',stat_date=None,groupoffset=None,s
     stat_date_time=int(time.mktime(time.strptime(stat_date,'%Y-%m-%d')))
     if now_minute>0 and now_minute<=1:
         now_minute=0
-    #if groupoffset:
-    stat_date_time=stat_date_time+groupoffset
-    #else:
-    #    stat_date_time=stat_date_time-86400
+    if groupoffset:
+        stat_date_time=stat_date_time+groupoffset
+    else:
+        stat_date_time=stat_date_time-86400
     stat_date=time.strftime('%Y-%m-%d',time.localtime(stat_date_time))
     import re
     r = re.compile(r'^(\d+)(_(\d+)+)?$')

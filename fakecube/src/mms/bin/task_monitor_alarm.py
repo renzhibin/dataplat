@@ -22,7 +22,7 @@ RUNNING_NUM=5
 RATIO_NUM=30
 OVERTIME=1
 BIG_DATA_NUM=500000
-TO_EMAIL_LIST=['yangyulong', 'yangzongqiang']#di-alarm
+TO_EMAIL_LIST=['houyangyang', 'yangyulong', 'yangzongqiang']#di-alarm
 #TO_EMAIL_LIST=['di-alarm']
 
 START="start"
@@ -1556,7 +1556,7 @@ def getEmailHtmlContent(status_list=None,manual_status_list=None,all_status_list
                     <td class="content-wrap" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 20px 0px;">
                         <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0; font-size: 12px; font-weight: normal; margin-bottom: 10px;">
                             感谢您的订阅！任何问题，欢迎联系 数据团队
-                            <a href="mailto:di@" target="_blank">
+                            <a href="mailto:di@xiaozhu.com" target="_blank">
                                 di@qud<wbr>ian.com
                             </a>
                         </p>

@@ -4,8 +4,7 @@ startsupervisord(){
 start(){
 #/home/work/online/python/bin/supervisorctl start webapi
 #/home/service/python2.7/bin/uwsgi   -x webapi.xml
-#/usr/bin/uwsgi  -x webapi.xml --plugin python --limit-post=67108864
-/usr/bin/uwsgi  -x webapi.xml  --limit-post=67108864
+/usr/bin/uwsgi  -x webapi.xml --plugin python --limit-post=67108864
 }
 
 stop(){

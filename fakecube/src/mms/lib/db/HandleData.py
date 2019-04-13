@@ -228,6 +228,7 @@ class HandleData(object):
         a = time.time()
         try:
             ret_load=self.loadData()
+            logger.info('xxxxxxxxx')
         except Exception, ex:
             msg = "load data occurs error: %s" % ex.message
             return err_json(msg, logger=logger)
@@ -270,9 +271,14 @@ class HandleData(object):
                 grouping_id = int(grouping_id) >> 1 #remove cdate bit
             else:
                 return tmp
-
+        max_grouping_arr=[str(1) for i in range(len(dims))]
         flag= bin(int(grouping_id))[2:]
-
+        flag=flag.zfill(len(dims))
+        flag_arr=[flag[len(flag)-1-i] for i in range(len(flag))]
+        a_flag_arr=[]
+        for i in range(len(dims)):
+           a_flag_arr.append(str(int(max_grouping_arr[i])-int(flag_arr[i])))
+        flag=''.join(a_flag_arr)
         if len(flag) > len(dims):
             return
 

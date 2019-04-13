@@ -209,7 +209,7 @@ class TopoTask():
 
     def list_plat_app(self):
         rely_dict = {}
-        resp = requests.get('http://dt..com:8001/list_app')
+        resp = requests.get('http://dt.xiaozhu.com:8001/list_app')
         code = resp.status_code
         values = []
         if int(code) == 200:
@@ -223,7 +223,7 @@ class TopoTask():
                 if apps_date_e[app] and apps_date_e[app] < time.strftime('%Y-%m-%d 00:00:00',time.localtime(time.time())) :
                     continue
                 params = {'project': app, "get_hql": 1}
-                resp = requests.get('http://dt..com:8001/get_app_conf', params)
+                resp = requests.get('http://dt.xiaozhu.com:8001/get_app_conf', params)
                 resp_data = json.loads(resp.text).get('data', {})
                 project = resp_data['project'][0]
                 app_name = project['name']

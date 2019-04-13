@@ -1,6 +1,6 @@
 #coding=utf-8
 '''
- USERNAME = 'mailman@'
+ USERNAME = 'mailman@xiaozhu.com'
  PASSWD = '5be0d56f'
  SERVER = 'mail.meilishuo.com'
 

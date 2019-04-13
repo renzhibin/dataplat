@@ -13,7 +13,7 @@ import traceback
 from kazoo.client import KazooClient
 
 #zookeeper集群地址
-ZK_HOST="10.171.174.212:2181,10.161.208.166:2181,10.161.130.251:2181,10.27.13.35:2181,10.27.13.186:2181"
+ZK_HOST="10.8.9.12:2181"
 
 class TagManage(object):
 
@@ -39,7 +39,7 @@ class TagManage(object):
         self.check_num=check_num
         self.tag_path=''
         self.tag_value=0 #0为无效1有效
-        self.tag_root = '/di_tag_emr'
+        self.tag_root='/di_tag'
         self.tag_exist=False
         self.is_hour=False
         self.schedule_type=schedule_type#day,hour

@@ -5,9 +5,6 @@ import web
 import os
 import sys
 sys.path.append('..')
-sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/conf')
-sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/lib')
-sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/lib/db')
 import  mms.conf.env  as conf
 
 from list_app import ListApp
@@ -40,9 +37,8 @@ urls = (
          '/get_run_detail_real/?','GetRealLogDetail',
          '/run_monitor_info/?','RunMonitorInfo',
          '/get_cat/?','GetCat',
-	     '/apply_app_token/?','apply_app_token.ApplyAppToken',
+	'/apply_app_token/?','apply_app_token.ApplyAppToken',
          '/apply_project/?','apply_app_token.ApplyProject',
-         '/get_app_token_change/?','list_token_apps.ChangeAppProjects',
          '/get_app_token_list/?','list_token_apps.GetTokenApps',
          '/get_app_projects/?','list_token_apps.GetAppProjects',
          '/get_project_dim_conf/?','get_project_dim_conf.GetProjectDimConf',
@@ -62,11 +58,7 @@ urls = (
          '/get_table_status_tag/?','table_tag_interface.GetTableStatusByTag',
          '/get_topo_data/?', 'topo_manage_interface.GetTopoData',
          '/get_topo_condition/?', 'topo_manage_interface.GetTopoCondition',
-         '/save_topo_run_list/?', 'topo_manage_interface.SaveRunList',
-         '/save_report_json/?','list_token_apps.SaveReportJson',
-        '/get_list_report/?','list_token_apps.GetReportList',
-        '/get_check_report/?','list_token_apps.CheckReportList',
-
+         '/save_topo_run_list/?', 'topo_manage_interface.SaveRunList'
 	)
 
 

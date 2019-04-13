@@ -75,8 +75,8 @@ REALTIME_REDIS_TAG_REDIS_DB=1
 #手动提交限制
 MANUAL_RUN_TASK_NUM=15#手动提交任务个数
 MANUAL_SPECIAL_RUN_TASK_NUM=60#特殊用户提交任务个数
-MANUAL_USER_WHITE_LIST = ['yangyulong@', 'yangzongqiang@']
-MANUAL_USER_SPECIAL_LIST = ['zhangyipeng@']
+MANUAL_USER_WHITE_LIST = ['yangyulong@xiaozhu.com', 'yangzongqiang@xiaozhu.com']
+MANUAL_USER_SPECIAL_LIST = ['zhangyipeng@xiaozhu.com']
 
 #项目配置限制
 MMS_CONF_MAX_APP_CONF=30

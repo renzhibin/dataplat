@@ -67,23 +67,6 @@ def getHqlByTableId(id):
 
     return hqlList
 
-def getMmsAppConfIdByAppName(app_name, run_module):
-    mmsMysql = MmsMysql(mmsMysqlConf.MMS_DB_META_SLAVE)
-    conn = mmsMysql.get_conn()
-    cur = mmsMysql.get_cur()
-    sql = "select id from mms_app_conf where app_name='%s' and concat(category_name, '.', hql_name)= '%s'" % (app_name, run_module)
-    cur.execute(sql)
-    columns = cur.description
-    result = []
-    for value in cur.fetchall():
-        tmp = {}
-        for (index, column) in enumerate(value):
-            tmp[columns[index][0]] = column
-        result.append(tmp)
-    conn.close()
-
-    return result
-
 def getTableRelyTask(result):
     online_tasks_dict=[]
     udf=['max','min','sum','avg','count']

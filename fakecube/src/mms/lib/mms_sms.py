@@ -25,7 +25,7 @@ class MmsSMS(object):
     def sendSMS(self, contact_list, message=''):
         url = 'http://10.161.138.17/alarm/sms'
         to_str = ','.join(contact_list)
-        header = {"Host": "bi.service..com"}
+        header = {"Host": "bi.service.xiaozhu.com"}
         data = {}
         data['mobile'] = to_str
         data['content'] = message

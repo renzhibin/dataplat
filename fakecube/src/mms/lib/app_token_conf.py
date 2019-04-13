@@ -2,11 +2,9 @@
 # -*- coding: utf-8 -*-
 __author__ = 'bangzhongpeng'
 import sys
-import MySQLdb
-import json
-import utils
 import mms_mysql_conf as mmsMysqlConf
 from mms_mysql import MmsMysql
+
 
 class AppTokenConf(object):
 
@@ -70,6 +68,7 @@ class AppTokenConf(object):
 
 
     def select(self,app_name=None,token_val=None,user_name=None):
+
         sql="select * from %s "%("t_app_token")
         where=" where 1=1 "
         if user_name:
@@ -79,7 +78,8 @@ class AppTokenConf(object):
         if token_val:
             where+=" and token_val='%s' "%(token_val)
 
-        sql=sql+where + ' order by status desc '
+        sql=sql+where
+
         self.cur.execute(sql)
 
         columns=self.cur.description
@@ -93,36 +93,4 @@ class AppTokenConf(object):
             result.append(tmp)
 
         return  result
-
-
-    def update_status(self, app_id, status):
-        if status == '0':
-            msg = '下线'
-        if status == '1':
-            msg = '上线'
-
-        try:
-
-            sql = "update %s set status='%s' where id='%s' "
-            sql = sql % ("t_app_token", status, app_id)
-            self.cur.execute(sql)
-            self.conn.commit()
-            return True, msg+"成功！"
-        except Exception,e:
-            import traceback
-            traceback.print_exc()
-            return False,msg+"失败！"
-
-    def save_report_json(self, app_name, report_json, user_name):
-
-        try:
-            sql = "update %s set table_id=%s where app_name='%s' and user_name = '%s'"
-            sql = sql % ("t_app_token", report_json, app_name, user_name)
-            self.cur.execute(sql)
-            self.conn.commit()
-            return True, "更新成功！"
-        except Exception,e:
-            import traceback
-            traceback.print_exc()
-            return False,"更新失败！"
 

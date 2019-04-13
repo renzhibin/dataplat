@@ -75,28 +75,6 @@ class LocalToMysql(HandleData):
         conn.close()
         return columns_list
 
-    def getCustomTimeSingle(self):
-        custom_single = '$DATE(0)'
-        if self.group.has_key('custom_single') and self.group['custom_single']:
-            custom_single = self.group['custom_single']
-        params = {'dt': self.dt}
-        udf = ['DATE|MONTH']
-        reg_udf = '|'.join(udf)
-        repl = custom_single
-        r = re.compile(r'(\$(%s)\(([-a-zA-Z0-9,_ ]+)\))' % reg_udf, re.DOTALL)
-        result = r.findall(repl)
-        obj = FuncReplace()
-        for content in result:
-            b = getattr(obj, content[1])
-            replace_str = b(params, content[2])
-            repl = repl.replace(content[0], replace_str)
-        repl_list = repl.split(',')
-        result_list = []
-        for one_date in repl_list:
-            result_list.append("'" + one_date + "'")
-        return ','.join(result_list)
-
-
     def getCustomTime(self):
         custom_start = '$DATE(0)'
         custom_end = '$DATE(0)'
@@ -301,11 +279,6 @@ class LocalToMysql(HandleData):
             tmp_project_group='.'.join((self.metric_conf,self.cat,self.group['name']))
             white_project_list=conf.WHITE_PROJECT_LIST.split(',')#特殊项目不处理
             white_task_list=['ares.mogujie_data.shop_sale_month_rank','catalog_gmv_rate.general.catalog_st','mob_poster.general.poster2st_uv_pv']#[200万,500万)
-            white_task_list.append('ares.mogujie_data.shop_sale_month_rank')
-            white_task_list.append('ares.mogujie_data.goods_gmv_month_rank')
-            white_task_list.append('ares.mogujie_data.goods_gmv_week_rank')
-            white_task_list.append('ares.mogujie_data.mgj_week_hot_goods')
-            white_task_list.append('tag_poster_tid_num.general.poster_tid_num')
 
             #如果任务结果为空设置为警告
             if int(self.hive_result_nr)==0:
@@ -408,8 +381,6 @@ class LocalToMysql(HandleData):
                 dim_str = ",".join(tmp_arr)
                 if self.custom_cdate == 1:
                     dim_str = self.custom_time_suffix[num_file-1] + ',' + dim_str
-
-
                 if dim_str in self.exists_tables.keys():
                     target_table = self.exists_tables[dim_str]
                 else:
@@ -418,9 +389,7 @@ class LocalToMysql(HandleData):
                     warn_status=2
                     #return err_json(msg)
 
-
                 self.dict_file[target_table].append(line_dict)
-
                 # load data to mysql every cetern lines.
                 if num_file % 2000 == 0:
                     try:
@@ -561,25 +530,13 @@ class LocalToMysql(HandleData):
 
                 where_cdate =''
                 if self.custom_cdate ==1:
-                    if self.group.has_key('custom_type') and self.group['custom_type']:
-                        custom_type = self.group['custom_type']
+                    cdate_custom_start, cdate_custom_end = self.getCustomTime()
+                    if cdate_custom_start == cdate_custom_end:
+                        where_cdate="cdate='%s'" % cdate_custom_start
+                        logger.info("delete existed data in %s custom time: cdate='%s'" % (table_name, cdate_custom_start))
                     else:
-                        custom_type = 'range'
-                    if custom_type == 'range':
-                        cdate_custom_start, cdate_custom_end = self.getCustomTime()
-                        if cdate_custom_start == cdate_custom_end:
-                            where_cdate = "cdate='%s'" % cdate_custom_start
-                            logger.info(
-                                "delete existed data in %s custom time: cdate='%s'" % (table_name, cdate_custom_start))
-                        else:
-                            where_cdate = "cdate>='%s' and cdate<='%s'" % (cdate_custom_start, cdate_custom_end)
-                            logger.info("delete existed date in %s custom time: cdate>='%s' and cdate<='%s'" % (
-                                table_name, cdate_custom_start, cdate_custom_end))
-                    else:
-                        cdate_custom_single = self.getCustomTimeSingle()
-                        where_cdate = "cdate in (%s)" % cdate_custom_single
-                        logger.info(
-                            "delete existed data in %s custom time: cdate in (%s)" % (table_name, cdate_custom_single))
+                        where_cdate = "cdate>='%s' and cdate<='%s'" % (cdate_custom_start, cdate_custom_end)
+                        logger.info("delete existed date in %s custom time: cdate>='%s' and cdate<='%s'" % (table_name, cdate_custom_start, cdate_custom_end))
                 else:
                     where_cdate=" cdate='%s' "%(self.dt)
                     if self.group.has_key('schedule_interval') and self.group['schedule_interval']:
@@ -672,7 +629,6 @@ class LocalToMysql(HandleData):
             dim=[]
 
         met,result=self.insertEachTable_v2(data,table,dim)
-
 
 
         s_str= []

@@ -5,9 +5,6 @@ import web
 import os
 import sys
 sys.path.append('..')
-sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/conf')
-sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/lib')
-sys.path.insert(0,'/home/ec2-user/bi.analysis/fakecube/src/mms/lib/db')
 import  mms.conf.env  as conf
 
 from list_app import ListApp
@@ -58,11 +55,7 @@ urls = (
          '/get_table_status/?','table_tag_interface.GetTableStatus',
          '/get_topo_data/?', 'topo_manage_interface.GetTopoData',
          '/get_topo_condition/?', 'topo_manage_interface.GetTopoCondition',
-         '/save_topo_run_list/?', 'topo_manage_interface.SaveRunList',
-         '/get_app_token_change/?','list_token_apps.ChangeAppProjects',
-         '/save_report_json/?','list_token_apps.SaveReportJson',
-         '/get_list_report/?','list_token_apps.GetReportList',
-         '/get_check_report/?','list_token_apps.CheckReportList',
+         '/save_topo_run_list/?', 'topo_manage_interface.SaveRunList'
 
 	)
 
@@ -89,7 +82,7 @@ class Log(WsgiLog):
 
 
 if __name__ == "__main__":
-    web.config.debug = True
-    app = web.application(urls, globals())
-    app.run(Log)
+	web.config.debug = True
+	app = web.application(urls, globals())
+        app.run(Log)
 #application=app.wsgifunc(Log)

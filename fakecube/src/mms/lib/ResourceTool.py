@@ -35,7 +35,7 @@ class ResourceTool(object):
         '''
         try:
 
-            resp=requests.get('http://bi-namenode-1:8088/ws/v1/cluster/metrics',timeout=1)
+            resp=requests.get('http://10.8.10.47:8088/ws/v1/cluster/metrics',timeout=1)
             re_status=resp.status_code
 
             if re_status and re_status==200:

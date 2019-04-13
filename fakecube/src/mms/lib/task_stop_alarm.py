@@ -79,8 +79,8 @@ def run(app_id,tasks_str,editor=''):
     '''
     mail_con=''
 
-    removeSuffix = re.compile('@|@.com');
-    show_report_url='http://dt..com/report/showreport/'
+    removeSuffix = re.compile('@xiaozhu.com|@xiaozhu.com');
+    show_report_url='http://dt.xiaozhu.com/report/showreport/'
     for k,v in stop_tasks.items():
         if len(v)>0:
             p_inf=v[0]
