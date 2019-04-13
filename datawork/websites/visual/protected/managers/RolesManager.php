@@ -24,7 +24,7 @@ class RolesManager extends Manager
 
     // 获取 用户列表 信息
     function getUserList($searchArr =array(),$page=1,$limit=0){
-
+        
         $offset = $limit * ($page -1);
         $sql = "select `id`, `user_name`, `group`, `realname`, `iphone` from {$this->userTable} where 1 = 1 ";
         $whereSql = "";
@@ -52,13 +52,13 @@ class RolesManager extends Manager
                     break;
             }
         }
-
-
+        
+        
         if (!empty($searchArr['reportIds']) ) {
             //获取具体当前报表权限的用户ID
             $userIds = $this->getRoleReport($searchArr,'role.user_id');
             $userIds = $this->common->pickup($userIds,'user_id');
-
+            
             if(!empty($searchArr['user_id'])){
                 $userIds = array_intersect($searchArr['user_id'], $userIds);
             }
@@ -72,12 +72,12 @@ class RolesManager extends Manager
         //计算总数
         $countSql = "select count(*) as total from {$this->userTable} where 1 = 1 ";
         $countSql = $countSql." ".$whereSql;
-
+        
         $sql = $sql." ".$whereSql." ".$this->comquery->parseLimit($limit,$offset);
         $db    = Yii::app()->sdb_metric_meta;
         $user_data = $db->createCommand($sql)->queryAll();
         $total  =   $db->createCommand($countSql)->queryRow();
-
+        
         return array('rows'=>$user_data,'total'=>$total['total']);
     }
 
@@ -276,7 +276,7 @@ class RolesManager extends Manager
         $countSql = "select count(*) as total from {$this->reportRolesTable} where 1 = 1 ";
         $countSql = $countSql." ".$whereSql;
         $sql = $sql." ".$whereSql." ".$this->comquery->parseLimit($limit,$offset);
-
+        
         $db = Yii::app()->sdb_metric_meta;
         $report_roles_data = $db->createCommand($sql)->queryAll();
         $total  =   $db->createCommand($countSql)->queryRow();
@@ -375,7 +375,7 @@ class RolesManager extends Manager
         return true;
     }
 
-    function addUserRolesMultiple($user_id, $role_id, &$message, $skipEmpty=false)
+    function addUserRolesMultiple($user_id, $role_id, &$message)
     {
         $list = [];
 
@@ -412,7 +412,7 @@ class RolesManager extends Manager
 
         if (count($insertList) <= 0) {
             $message = '所有的关系都已存在，不要再添加了';
-            return $skipEmpty;
+            return false;
         }
 
         //添加
@@ -531,7 +531,7 @@ class RolesManager extends Manager
         //检查reprot是不是存在
 
         //检查role是不是存在
-
+        
         //添加
         $del_sql = "delete from {$this->userRolesTable} ";
         if(!is_array($user_id)){
@@ -570,17 +570,6 @@ class RolesManager extends Manager
         $message = '删除成功';
         return true;
     }
-
-
-    // 清空 用户的所有权限，用于用户离职时一次性清空数据
-    function clearUserRoles($id)
-    {
-        $del_sql = "DELETE FROM {$this->userRolesTable} WHERE user_id = {$id}";
-        $db = Yii::app()->db_metric_meta;
-        $res = $db->createCommand($del_sql)->execute();
-        return true;
-    }
-
 
     //删除report role 关系
     function delReportRole($report_id,$role_id,&$message)
@@ -739,15 +728,15 @@ class RolesManager extends Manager
             return false;
         }
     }
-
+    
     /**
      * 获取有权限的报表
      */
     public function getRoleReport($search = array(),$goupby=''){
-
+        
         $sql ="select  re.report_id,re.role_id,role.user_id,role.id,re.created_at from t_eel_admin_relation_report re left join "
                 . " t_eel_admin_relation_user as role  on  re.role_id = role.role_id where  1=1 and report_id !=0 ";
-
+        
         if(!empty($search['reportIds'])){
             $sql .=" and re.report_id in (".implode(',', $search['reportIds']).") ";
         }
@@ -787,14 +776,6 @@ class RolesManager extends Manager
     public function getUser($userId){
         $db = Yii::app()->db_metric_meta;
         $sql = "select * from {$this->userTable} where id = $userId ";
-        $userArr = $db->createCommand($sql)->queryRow();
-        return $userArr;
-    }
-
-    // 通过用户名获取用户信息
-    public function getUserByName($userName){
-        $db = Yii::app()->db_metric_meta;
-        $sql = "select * from $this->userTable where user_name = '$userName'";
         $userArr = $db->createCommand($sql)->queryRow();
         return $userArr;
     }

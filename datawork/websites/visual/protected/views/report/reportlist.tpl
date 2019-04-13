@@ -87,7 +87,7 @@
                              class='btn btn-default btn-sm delVisual'>下线</button>
                              <a target='_blank' data-id='{/$item.id/}' data-type='{/$item.type/}' style='padding:3px 10px'  class='btn btn-default btn-sm showMore'>更多</a>
                              <div class="powerbox" style="display:inline-block;margin-top:3px"></div>
-                          {/elseif $item.type eq 1 or $item.type eq 2 or $item.type eq 5  or $item.type eq 7 or $item.type eq 8 or $item.type eq 6 or $item.type eq 10/}
+                          {/elseif $item.type eq 1 or $item.type eq 2 or $item.type eq 5  or $item.type eq 7 or $item.type eq 8/}
                             <a href='/report/editorreport/{/$item.id/}'
                                   style='padding:3px 10px' class='btn btn-default btn-sm'>编辑</a>
                                   <a target='_blank' href='/report/showreport/{/$item.id/}' style='padding:3px 10px' class='btn btn-default btn-sm'>查看</a>

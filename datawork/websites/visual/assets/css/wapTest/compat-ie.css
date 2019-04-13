@@ -1,0 +1,87 @@
+/* 兼容IE */
+
+/* 顶部nav导航 */
+.navbar-inverse{
+    border:none;
+    background-color: #1356a9\9;
+
+}
+
+.navbar-collapse{
+    height:40px\9;
+    line-height: 40px\9;
+    position: absolute\9;
+    top:0\9;
+    border:none\9;
+    width:100%\9;
+    margin:0\9;
+    padding:0\9;
+    right:0\9;
+}
+
+.navbar-collapse .navbar-left{
+    margin:0\9;
+    width:200px;
+    float:left\9;
+    margin-left:80px\9;
+}
+.navbar-collapse .navbar-right{
+    float:right\9;
+    margin:0\9;
+    margin-top:0\9;
+
+}
+.navbar-collapse .navbar-right li{
+    float:left\9;
+    height:40px\9;
+    line-height: 40px\9;
+}
+.navbar-collapse .navbar-right li#profile-messages{
+
+    top:0;
+    right:0;
+    height:40px;
+    line-height: 40px;
+}
+.navbar-collapse .navbar-right li#profile-messages a{
+    height:40px;
+}
+
+.navbar-collapse .navbar-right  ul.dropdown-menu{
+    right:0\9;
+    left:auto\9;
+}
+
+/*报表表格背景色*/
+.datagrid-wrap .datagrid-htable tbody tr.datagrid-header-row{
+    background-color: #949494\9;
+}
+
+/* 表格上方 日期选择,下载工具栏*/
+#search .timestyle input[name="startTime"] {
+
+}
+
+.filter .web-filter-content .btnSearch{
+    /*background-color: #C0C0C0;*/
+}
+
+
+/* byy 2017-11-9 報表hover是出現多餘的滾動條*/
+.compros .data_name{
+    height:auto;
+    line-height: 20px;
+    overflow: hidden;
+    display: block;
+}
+
+.datagrid-view2 .datagrid-body .datagrid-btable tr td{
+    overflow: hidden;
+}
+
+
+/*.showbox button.ePopup , .showbox  button.trend{
+ height:16px;
+ line-height: 16px;
+    padding:0 5px;
+ }*/

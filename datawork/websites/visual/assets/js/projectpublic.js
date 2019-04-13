@@ -689,41 +689,15 @@ $(function(){
                 groups.custom_cdate = $('.rightContent').find('input.custom_cdate').is(':checked')?1:0;
                 groups.custom_start = $('.rightContent').find('input.custom_start').val();
                 groups.custom_end = $('.rightContent').find('input.custom_end').val();
-                groups.custom_type = $('#custome_cdate_type').val();
-                groups.custom_single = $('.custom_single').val();
                 groups.schedule_interval = $('.rightContent').find('select[name="schedule_interval"]').val();
                 groups.schedule_interval_offset = $('.rightContent').find('input[name="schedule_interval_offset"]').val();
-                groups.hive_queue = $('.rightContent').find('select[name="hive_queue"]').val();
                 var project = JSON.parse(projectInfo.project_1);
-
-                var latest_end_time = $('.rightContent').find('input[name="latest_end_time"]').val();
-                var radio_val = $('.rightContent').find('input[name="alarm_type"]:checked').val();
-                var alarm_users = $('.rightContent').find('input[name="alarm_users"]').val();
-                if(radio_val != 'undefined') {
-                    groups.alarm_type = radio_val;
-                }
-                if(alarm_users != '') {
-                    groups.alarm_users = alarm_users.toLocaleLowerCase();
-                }
-                if(latest_end_time !=''){
-                    var end_time;
-                    end_time = latest_end_time.replace(/day|hour|minute|\)|\(/gi, '');
-                    if (!/^(20|21|22|23|[0-1]\d):[0-5]\d$/.test(end_time)) {
-                        if (end_time < 0 || end_time > 60) {
-                            alert('报警时间格式错误');
-                            return ;
-                        } else {
-                            groups.latest_end_time = latest_end_time;
-                        }
-                    }
-                    groups.latest_end_time = latest_end_time;
-                }
-
                 groups.hql_type = (project['hql_type'])?project.hql_type:1;
                 if(groups.cn_name ==''){
                     alert('请填写中文名');
                     return;
                 }
+                console.log(project);
                 if(groups.schedule_interval_offset ==''){
                     alert('调度不能为空');
                     return;
@@ -732,13 +706,8 @@ $(function(){
                     alert('请填写英文名');
                     return;
                 }
-                if(groups.custom_cdate == 1 && groups.custom_type == 'range' && (groups.custom_start == '' || groups.custom_end == '')){
+                if(groups.custom_cdate == 1 && (groups.custom_start == '' || groups.custom_end == '')){
                     alert('起始终止时间不能为空');
-                    return false;
-                }
-
-                if(groups.custom_cdate == 1 && groups.custom_type == 'single' && (groups.custom_single == '')){
-                    alert('时间不能为空');
                     return false;
                 }
 
@@ -932,39 +901,13 @@ $(function(){
                     groups.custom_cdate = $rightContent.find('input.custom_cdate').is(':checked')?1:0;
                     groups.custom_start = $rightContent.find('input.custom_start').val();
                     groups.custom_end = $rightContent.find('input.custom_end').val();
-                    groups.custom_type = $('#custome_cdate_type').val();
-                    groups.custom_single = $('.custom_single').val();
                     groups.schedule_interval = $rightContent.find('select[name="schedule_interval"]').val();
-                    groups.hive_queue = $('.rightContent').find('select[name="hive_queue"]').val();
                     groups.run_times = $rightContent.find('input[name=run_times]').val();//回溯次数
 
-                    var schedule_interval_offset =  $rightContent.find('input[name="schedule_interval_offset"]').val();
-                    var latest_end_time = $rightContent.find('input[name="latest_end_time"]').val();
-                    var radio_val = $rightContent.find('input[name="alarm_type"]:checked').val();
-                    var alarm_users = $rightContent.find('input[name="alarm_users"]').val();
+                    var  schedule_interval_offset =  $rightContent.find('input[name="schedule_interval_offset"]').val();
                     if(schedule_interval_offset !=''){
                         groups.schedule_interval_offset = schedule_interval_offset;
                     }
-                    if(radio_val != 'undefined') {
-                        groups.alarm_type = radio_val;
-                    }
-                    if(alarm_users != '') {
-                        groups.alarm_users = alarm_users.toLocaleLowerCase();
-                    }
-                    if(latest_end_time !=''){
-                        var end_time;
-                        end_time = latest_end_time.replace(/day|hour|minute|\)|\(/gi, '');
-                        if (!/^(20|21|22|23|[0-1]\d):[0-5]\d$/.test(end_time)) {
-                            if (end_time < 0 || end_time > 60) {
-                                alert('报警时间格式错误');
-                                return ;
-                            } else {
-                                groups.latest_end_time = latest_end_time;
-                            }
-                        }
-                        groups.latest_end_time = latest_end_time;
-                    }
-
                     var project = JSON.parse(projectInfo.project_1);
                     groups.hql_type = (project['hql_type'])?project.hql_type:1;
                     if(groups.cn_name ==''){
@@ -976,13 +919,8 @@ $(function(){
                         return;
                     }
 
-                    if(groups.custom_cdate == 1 && groups.custom_type == 'range' && (groups.custom_start == '' || groups.custom_end == '')){
+                    if(groups.custom_cdate == 1 && (groups.custom_start == '' || groups.custom_end == '')){
                         alert('起始终止时间不能为空');
-                        return false;
-                    }
-
-                    if(groups.custom_cdate == 1 && groups.custom_type == 'single' && (groups.custom_single == '')){
-                        alert('时间不能为空');
                         return false;
                     }
 
@@ -1500,13 +1438,9 @@ $(function(){
 
                 data.hql_type = project_1['hql_type'];
                 var attach = data.attach?data.attach:"";
-                var hive_queue = data.hive_queue ? data.hive_queue : 'bloc';
                 var schedule_interval = data.schedule_interval?data.schedule_interval:"0";
                 var schedule_interval_offset = data.schedule_interval_offset?data.schedule_interval_offset: getOffsetVal(schedule_interval);
-                var latest_end_time = data.latest_end_time ? data.latest_end_time : '';
-                var alarm_users = data.alarm_users ? data.alarm_users : '';
-                var alarm_type = data.alarm_type ? data.alarm_type : '';
-                data.typeStatus = typeStatus;
+                data.typeStatus = typeStatus; 
                 data.field_type = field_type;          
                 if(data.hql_type && data.hql_type == 2){
                    var interText = doT.template($("#interpolationtmpl2").text());
@@ -1531,41 +1465,16 @@ $(function(){
                 if(data.run_times !=undefined){
                     $('.rightContent').find('.hqlInfo').find('input[name=run_times]').val(data.run_times);
                 }
-                $rightContent.find('select[name="hive_queue"]').val(hive_queue);
                 $rightContent.find('select[name="schedule_interval"]').val(schedule_interval);
                 $rightContent.find('input[name="schedule_interval_offset"]').val(schedule_interval_offset);
 
-                $rightContent.find('input[name="latest_end_time"]').val(latest_end_time);
-                $rightContent.find('input[name="alarm_users"]').val(alarm_users);
-
-                if (alarm_type != '') {
-                    var check_type;
-                    if(alarm_type == 0) {
-                        $('input[type="radio"][name="alarm_type"]').eq(1).attr("checked", true);
-                    } else if (alarm_type == 1) {
-                        $('input[type="radio"][name="alarm_type"]').eq(0).attr("checked", true);
-                    }
-                }
-
                 if(data.custom_cdate && data.custom_cdate == '1'){
-                    var custom_type = data.custom_type?data.custom_type:'range';
-                    $rightContent.find('#custome_cdate_type').val(custom_type);
                     var start = data.custom_start?data.custom_start:"$DATE(0)",
-                        end = data.custom_end?data.custom_end:"$DATE(0)",
-                        single = data.custom_single?data.custom_single:"$DATE(0)";
+                        end = data.custom_end?data.custom_end:"$DATE(0)";
                     $rightContent.find('input.custom_cdate').prop('checked',true);
                     $rightContent.find('input.custom_start').val(start);
                     $rightContent.find('input.custom_end').val(end);
-                    console.log(single);
-                    $rightContent.find('input.custom_single').val(single);
-                    $(".custome_cdate_type").show();
-                    if (custom_type == 'range') {
-                        $rightContent.find('#custom_cdatecon').show();
-                        $rightContent.find('#custom_cdatecon2').hide();
-                    } else {
-                        $rightContent.find('#custom_cdatecon').hide();
-                        $rightContent.find('#custom_cdatecon2').show();
-                    }
+                    $rightContent.find('.custom_cdatecon').show();
                 }
 
                 //$('.rightContent').find('.hqlInfo').find('.code').val(data.hql);
@@ -1601,8 +1510,8 @@ $(function(){
     $('body').on('click','.closeBtn',function(){
 
         var key = $(this).parent().attr('data_id');
-        var key_name = $(this).parent().attr('category_name');
         var tempname  = JSON.parse(projectInfo[key])['name'];
+        console.log('tempname:'+tempname);
         if($(this).parent().attr('data-type') !='groups'){
             var obj = $(this).parent().children('ul');
 
@@ -1614,10 +1523,9 @@ $(function(){
             $('.hqllist').find('td[name="'+tempname+'"]').closest('tr').remove();
         } else {
            //删除执行任务的hql
-            $('.hqllist').find('li[data_id="'+key+'"] >li[name="'+tempname+'"]').remove();
-            $('.hqllist').find('td[name="'+key_name+'"] + td > ul >li[name="'+tempname+'"]').remove();
+            $('.hqllist').find('li[name="'+tempname+'"]').remove(); 
         }
-
+        
         delete projectInfo[key];
         $('.rightContent').html('');
         if(JSON.stringify(projectInfo) == '{}'){
@@ -1716,15 +1624,15 @@ $(function(){
                             if(localtempcount >= 0) {
                                 $.messager.confirm('提示','项目配置保存成功,需要手动启动，是否现在启动？', function(r){
                                     if(r){
-                                        window.location.href ='/project/runlist?project='+configObj.project[0].name+'&id='+sendOJb.id;
+                                        window.location.href ='/projecttpl/Projecttplrunlist?project='+configObj.project[0].name+'&id='+sendOJb.id;
                                     } else {
-                                        window.location.href ='/project/index';
+                                        window.location.href ='/projecttpl/projecttplindex';
                                     }
                                 });
 
                             } else {
                                 alert('项目配置保存成功！');
-                                window.location.href ='/project/index';
+                                window.location.href ='/projecttpl/projecttplindex';
                             }
                             localtempcount = -1;
                         }else{
@@ -1849,45 +1757,20 @@ $(function(){
         }
     });
 
-    $('body').on('change', '.custome_cdate_type' , function() {
-        var $custom_cdatecon = $("#custom_cdatecon"),
-            $custom_cdatecon2 = $("#custom_cdatecon2");
-        if ($("#custome_cdate_type").val() == 'range') {
-            $custom_cdatecon.show();
-            $custom_cdatecon2.hide();
-        } else {
-            $custom_cdatecon.hide();
-            $custom_cdatecon2.show();
-        }
-    });
-
     //自定义数据时间展现
     $('body').on('click','input.custom_cdate',function(){
-
         var $custom_cdatebox = $(this).closest('.custom_cdatebox'),
-            $custom_cdate_type = $custom_cdatebox.find("#s2id_custome_cdate_type"),
-            $custom_cdatecon = $custom_cdatebox.find("#custom_cdatecon"),
-            $custom_cdatecon2 = $custom_cdatebox.find("#custom_cdatecon2");
+            $custom_cdatecon = $custom_cdatebox.find('.custom_cdatecon');
         var old_custom_cdate = localConfigHql.custom_cdate!= undefined ? localConfigHql.custom_cdate : -1 ;
 
         if($(this).is(':checked')){
-            $custom_cdate_type.show();
-            if ($("#custome_cdate_type").val() == 'range') {
-                $custom_cdatecon.show();
-                $custom_cdatecon2.hide();
-            } else {
-                $custom_cdatecon.hide();
-                $custom_cdatecon2.show();
-            }
+            $custom_cdatecon.show();
             if(old_custom_cdate!=1){
                 //alert('设置自定义数据展现时间，必须要重新解析hql');
                 $(".metricsBox").html('');
             }
         } else {
             $custom_cdatecon.hide();
-            $custom_cdate_type.hide();
-            $custom_cdatecon.hide();
-            $custom_cdatecon2.hide();
             $.messager.alert('提示','您取消了自定义数据展现时间设置,请注意修改hql中的cdate字段','info');
         }
 
@@ -1900,4 +1783,3 @@ $(function(){
     }
 
 });
-

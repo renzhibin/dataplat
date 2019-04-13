@@ -809,59 +809,12 @@ class  VisualManager extends Manager
         return $id2name;
     }
 
-    function InitSensitiveTableConf($allmenuResult) {
-        $objauth =new AuthManager();
-        $objProject=new ProjectManager();
-        $superProject=$objauth->getSuperProject();
-        $superFlag=Yii::app()->user->isSuper();
-
-        //从cube中获取有权限的项目信息
-        $projectList=$objProject->getProjectAuth();
-
-        $sql = 'select id,cn_name,project from t_visual_table where (params like \'%s:9:"sensitive";s:1:"1"%\' or params like \'%sensitive=1%\')  and flag=1';
-        $orgIdName = $this->db->createCommand($sql)->queryAll();
-        foreach ($orgIdName as $table_info) {
-            if(!empty($table_info['project'])&&!in_array($table_info['project'],$projectList))
-                continue;
-            $id2name[$table_info['id']] = $table_info['cn_name'];
-            if (isset($allmenuResult[$table_info['id']]) ) {
-                //这里有个问题
-                //在getProjectAuth已经去掉没有非super用户的super项目了
-                //这里应该不用再处理了
-                if(!empty($superProject) && in_array($table_info['project'],$superProject)){
-                    if($superFlag){
-                        $superId2name[$table_info['id']]=array(
-                            'project'=>$table_info['project'],
-                            'cn_name' => $table_info['cn_name'],
-                            'all_name' => $table_info['id'] . '_' . $table_info['cn_name']
-                        );
-                    }
-                }else{
-                    $authId2name[$table_info['id'] . '_' . $table_info['cn_name']] = array(
-                        'project'=>$table_info['project'],
-                        'id' => $table_info['id'],
-                        'cn_name' => $table_info['cn_name']
-                    );
-                    $id2all[$table_info['id']] = array(
-                        'project'=>$table_info['project'],
-                        'cn_name' => $table_info['cn_name'],
-                        'all_name' => $table_info['id'] . '_' . $table_info['cn_name']);
-                }
-            }
-        }
-
-        $this->id2name = $id2name;
-        $this->authId2name = $authId2name;
-        $this->id2all = $id2all;
-        $this->superId2name=$superId2name;
-    }
-
     function InitTableConf($allmenuResult)
     {
         $objauth =new AuthManager();
         $objProject=new ProjectManager();
         $superProject=$objauth->getSuperProject();
-        $superFlag=Yii::app()->user->isSuper();
+        $superFlag=$objauth->isSuper();
 
         //从cube中获取有权限的项目信息
         $projectList=$objProject->getProjectAuth();
@@ -1131,20 +1084,11 @@ class  VisualManager extends Manager
         echo json_encode(array('status' => $code, 'msg' => $message, 'data' => $data));
     }
 
-
-    private function getCoreReportIsShow($id, $userName, $whiteList) {
-        if (!isset($whiteList[$id])) {
-            return true;
-        }
-        if (!in_array($userName, $whiteList[$id])) {
-            return false;
-        }
-        return true;
-    }
-
     #获取首页
-    function getShowMenu($admin = false, $menuResult = null, $allmenutable=null,$menu_id=null, $whiteList = [], $userName)
+    function getShowMenu($admin = false, $menuResult = null, $allmenutable=null,$menu_id=null)
     {
+
+
         if (empty($this->authId2name)) {
             $this->InitTableConf($allmenutable);
         }
@@ -1210,29 +1154,6 @@ class  VisualManager extends Manager
 
 
         }
-        $result = [];
-        foreach ($retu as $firstMenuTitle => $value) {
-            foreach ($value as $secondMenuId => $tables) {
-                foreach ($tables['table'] as $table) {
-                    if (isset($whiteList[$table['id']]) && !in_array($userName, $whiteList[$table['id']])) {
-                        continue;
-                    }
-                    if (!isset($result[$firstMenuTitle])) {
-                        $result[$firstMenuTitle] = [];
-                    }
-                    if (!isset($result[$firstMenuTitle][$secondMenuId])) {
-                        $result[$firstMenuTitle][$secondMenuId] = [
-                            'menu_id' => $tables['menu_id'],
-                            'type' => $tables['type'],
-                            'name' => $tables['name'],
-                            'table' => []
-                        ];
-                    }
-                    array_push($result[$firstMenuTitle][$secondMenuId]['table'], $table);
-                }
-            }
-        }
-        $retu = $result;
         if(empty($retu)){
            return array(); 
         }
@@ -1444,7 +1365,7 @@ class  VisualManager extends Manager
 
     function sendMail($names,$html,$title,$Cc="",$isreply=false){
         $this->objComm=new CommonManager();
-        $from = "<data-dt@xiaozhu.com>";
+        $from = "<data-dt@.com>";
         $this->objComm->sendMail($names,$html,$title,$from,'',true,$Cc);
     }
 
@@ -1627,7 +1548,7 @@ class  VisualManager extends Manager
         $sql=$sql."('{$map_name}','{$mapkey}','{$map_data}','{$username}','{$username}','{$cdate}','{$cdate}') ";
         $sql=$sql."ON DUPLICATE KEY UPDATE map_name='{$map_name}',map_data='{$map_data}',updater='{$username}',update_time='{$cdate}'";
 
-        $result=Yii::app()->db_metric_meta->createCommand($sql)->execute();
+        $result=Yii::app()->sdb_metric_meta->createCommand($sql)->execute();
         return $result;
 
     }

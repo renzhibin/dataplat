@@ -118,7 +118,6 @@ dataSource.prototype = {
 			'<label class="radio-inline" for="type2"><input type="radio" name="type" id="type2" value="2">对比表格</label>'+
 		    '<label class="radio-inline" for="type7"><input type="radio" name="type" id="type7" value="7">聚合表格</label>'+
 			'<label class="radio-inline" for="type8"><input type="radio" name="type" id="type8" value="8">自定义表格</label>'+
-			'<label class="radio-inline" for="type10"><input type="radio" name="type" id="type10" value="10">交叉表格</label>'+
 			'</div></div>'+
 		    '<div class="panel panel-info isaddmeterbox" style="margin:5px 0;"><div class="panel-heading"><input type="checkbox" value="" name="isaddmeter" /> 新增副表 <lable style="color:#ff0000">(提示：新增副表时主表不分页，且只显示100条)</lable></div> </div>';
 

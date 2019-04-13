@@ -1,0 +1,559 @@
+body,html,#container{
+    height: 100%;
+    margin: 0px;
+    font:12px Arial;
+}
+.panel-query {
+    top: 10px;
+    right: 30px;
+    height:30px;
+    padding-left: 14px;
+    padding-right: 7px;
+    padding-bottom: 7px;
+    line-height: 10px;
+    border-top: 0;
+    border-left: 0;
+    background-color: rgba(255, 255, 255, 1);
+}
+.panel-right {
+    top: 100px;
+    right: 30px;
+    padding-left: 14px;
+    padding-right: 7px;
+    padding-bottom: 7px;
+    line-height: 30px;
+    border-top: 0;
+    border-left: 0;
+    text-align: left;
+}
+.ware-house{
+    border: solid 1px red;
+    color: red;
+    float: left;
+    min-width: 50px;
+    text-align: center;
+    background-color: rgba(255,0,0,0.1)
+}
+.wholesale {
+    color: red;
+    font-size: 20px;
+}
+.point-still {
+    font-size: 20px;
+    color: #ff930a;
+}
+.pay-point {
+    border-radius: 25px;
+    background-color: red;
+}
+.point-move {
+    width: 6px;
+    height: 6px;
+    padding: 2px;
+    border-radius: 3px;
+    /*background-color: green;*/
+    font-size: 12px;
+    color: green;
+}
+.move-animate {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+}
+
+/* 雷达波效果 */
+.dot-rider:after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px 2px rgba(255, 66, 0, 0.8);
+    top: 50%;
+    left: 50%;
+    margin-top: -60px;
+    margin-left: -60px;
+    z-index: 3;
+    opacity: 0;
+    -webkit-animation: halo 1s 0.5s infinite ease-out;
+    -moz-animation: halo 1s 0.5s infinite ease-out;
+    animation: halo 1s 0.5s infinite ease-out;
+}
+
+/*这相当于一个model*/
+.modal{
+    position: fixed;
+    width: 600px;
+    height: 200px;
+    left: 50%;
+    top:50%;
+    margin-left:-300px;
+    margin-top: -100px;
+    background-color: white;
+    z-index: 999;
+    border-radius: 5px;
+    box-shadow: 0 0 1px 2px rgba(0, 176, 239, 0.8);
+    font-size: 18px;
+}
+.modal .tip-message{
+    width: 570px;
+    border-bottom: 1px solid #B5B9D1;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 30px;
+}
+.modal #cellphone{
+    padding:30px 0 0 30px;
+}
+.modal #cellphone .cell-option{
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+.modal #cellphone input[type=radio]{
+    margin:-2px 10px 1px 0;
+    display: inline-block;
+    vertical-align:middle;
+}
+
+#searchBox .search-time-input{
+    width: 140px;
+}
+
+#searchBox .search-name-input{
+    width: 60px;
+}
+
+#searchBox .search-phone-input{
+    width: 90px;
+}
+#searchBox .search-order-input{
+    width: 140px;
+}
+#searchBox label{
+    display: inline-block;
+    margin: 0 5px 0 0;
+    height:20px;
+    line-height: 40px;
+}
+
+.hidden{
+    display: none;
+}
+.search-btn{
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    margin: 3px 5px;
+    line-height: 20px;
+}
+#searchByPhone{
+    margin:10px auto;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #00B0EF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.intro{
+  display: inline-block;
+  position: relative;
+}
+.intro>span{
+  color:#00B0EF;
+  cursor: pointer;
+}
+.intro .intro-content{
+  display: none;
+  position: absolute;
+  top:55px;
+  width: 300px;
+  height: 160px;
+  background-color: white;
+  padding: 10px;
+  line-height: 20px;
+  border: 1px solid rgba(51,51,51,.2);
+  box-shadow: 2px 2px 2px 0 rgba(0,0,0,.2);
+}
+.intro:hover .intro-content{
+  display: block;
+}
+.intro .intro-content span{
+  font-weight: bold;
+}
+@-webkit-keyframes halo {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(0.1);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.2);
+    }
+}
+
+@-moz-keyframes halo {
+    0% {
+        opacity: 0;
+        -moz-transform: scale(0.1);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        -moz-transform: scale(1.2);
+    }
+}
+
+@-ms-keyframes halo {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-o-keyframes halo {
+    0% {
+        opacity: 0;
+        -o-transform: scale(0.1);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        -o-transform: scale(1.2);
+    }
+}
+
+@keyframes halo {
+    0% {
+        opacity: 0;
+        transform: scale(0.1);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.2);
+    }
+}
+
+
+.dot-ripple:before{
+    content:' ';
+    position: absolute;
+    z-index:2;
+    left:0;
+    top:0;
+    width:10px;
+    height:10px;
+    background-color: #ff4200;
+    border-radius: 50%;
+}
+
+.dot-ripple:after {
+    content:' ';
+    position: absolute;
+    z-index:1;
+    width:10px;
+    height:10px;
+    background-color: #ff4200;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0,0,0,.3) inset;
+    -webkit-animation-name:'ripple';/*动画属性名，也就是我们前面keyframes定义的动画名*/
+    -webkit-animation-duration: 1s;/*动画持续时间*/
+    -webkit-animation-timing-function: ease; /*动画频率，和transition-timing-function是一样的*/
+    -webkit-animation-delay: 0s;/*动画延迟时间*/
+    -webkit-animation-iteration-count: infinite;/*定义循环资料，infinite为无限次*/
+    -webkit-animation-direction: normal;/*定义动画方式*/
+}
+@keyframes ripple {
+    0% {
+        left:5px;
+        top:5px;
+        opcity:75;
+        width:0;
+        height:0;
+    }
+    100% {
+        left:-20px;
+        top:-20px;
+        opacity: 0;
+        width:50px;
+        height:50px;
+    }
+}
+
+
+/*
+  在运司机列表样式
+*/
+.info-driverlist{
+    position: absolute;
+    width:200px;
+    top: 100px;
+    right: 170px;
+}
+.driver-list-btn{
+    position: absolute;
+    top: 370px;
+    right: 42px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+}
+.info-driverlist .driver-list-content{
+  display: none;
+}
+.info-driverlist .driver-list{
+  position: static;
+  height:415px;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-bottom: 7px;
+  line-height: 30px;
+  border-top: 0;
+  border-left: 0;
+  overflow: scroll;
+}
+.info-driverlist .driver-list-item{
+  position: relative;
+  cursor:pointer;
+  border-bottom: 1px solid #a2b1aa;
+}
+.info-driverlist label{
+  cursor: pointer;
+}
+.info-driverlist .driver-list-radio{
+  position: absolute;
+  top:20px;
+  right:10px;
+}
+.info-driverlist .driver-search-btn{
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  margin: 10px auto;
+  background-color: #00B0EF;
+  border-radius: 5px;
+  cursor:pointer;
+  color:white;
+}
+.seq-icon{
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  color:red;
+  font-weight: bold;
+}
+.begin-move-point{
+    background-color: green;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 10px;
+    color: white;
+}
+.end-move-point{
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+/*超市聚焦功能样式*/
+.market-search-btn{
+    position: absolute;
+    top: 415px;
+    right: 42px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+}
+.info-market-search{
+    display: none;
+    position: absolute;
+    top: 455px;
+    right: 17px;
+    width: 160px;
+    height: 60px;
+    padding-top: 5px;
+}
+.search-submit-btn{
+    margin-top: 5px;
+    width: 50px;
+}
+.market-address-id{
+    width: 154px;
+}
+
+/*移动端适配相关样式*/
+
+.retract-btn,.mobile-menu{
+  display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+  .retract-btn{
+    display: block;
+  }
+  #menu {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background-color: #FFF;
+      padding-left: 14px;
+      padding-right: 7px;
+      padding-bottom: 7px;
+      line-height: 30px;
+      border: 1px solid rgba(51,51,51,.2);
+      box-shadow: 2px 2px 2px 0 rgba(0,0,0,.2);
+      border-top: 0;
+      border-left: 0;
+  }
+  .panel-query {
+      height:auto;
+      display: none;
+  }
+  .driver-list-btn{
+      display: none;
+  }
+  .market-search-btn{
+      display: none;
+  }
+  #searchBox input{
+      min-width: 100px;
+  }
+  #searchBox label{
+    display: inline-block;
+    margin:5px 0;
+  }
+  .mobile-menu{
+    display: block;
+  }
+  .mobile-menu .panel{
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 13px;
+    background-color: #FFF;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-bottom: 7px;
+    line-height: 30px;
+    border: 1px solid rgba(51,51,51,.2);
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,.2);
+    border-top: 0;
+    border-left: 0;
+  }
+  .mobile-menu .panel .menu-item{
+    width: 2rem;
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    font-size: 16px;
+  }
+  .mobile-menu .action{
+    position: absolute;
+    right:10px;
+    top: 10px;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    margin: 14px 5px;
+    line-height: 30px;
+    text-align: center;
+    color: white;
+    background-color: #00B0EF;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    color:white;
+  }
+  #searchBox label{
+    display: block;
+  }
+  .query-retract-btn{
+      display: inline-block;
+      width: 30px;
+      height: 20px;
+      margin: 15px 5px;
+      line-height: 20px;
+  }
+  .info-driverlist{
+      position: absolute;
+      width:200px;
+      top: 100px;
+      right: 60px;
+  }
+  .info-driverlist .driver-list{
+    height:200px;
+    background-color: #FFF;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 7px;
+    line-height: 30px;
+    border: 1px solid rgba(51,51,51,.2);
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,.2);
+    border-top: 0;
+    border-left: 0;
+    overflow: scroll;
+  }
+  .info-driverlist .driver-search-btn{
+    margin:10px 15px 0 20px;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #00B0EF;
+    border-radius: 5px;
+    cursor:pointer;
+    color:white;
+  }
+  .info-driverlist .driver-retract-btn{
+    display: inline-block;
+    margin:10px 20px 0 15px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #00B0EF;
+    border-radius: 5px;
+    cursor:pointer;
+    color:white;
+  }
+  #menu .menu-retract-btn{
+    display: inline-block;
+    margin:10px 30px 0 30px;
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #00B0EF;
+    border-radius: 5px;
+    cursor:pointer;
+    color:white;
+  }
+}

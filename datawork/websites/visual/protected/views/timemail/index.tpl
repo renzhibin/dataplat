@@ -43,9 +43,7 @@
                         <th style='width:4%'>报表ID</th>
                         <th style='width:12%'>对应报表名称</th>
                         <th style='width:10%'>创建者</th>
-                        <th style='width:5%'>推送类型</th>
-                        <th style='width:5%'>推送时间(小时/分)</th>
-                        <th style='width:5%'>开始/结束时间</th>
+                        <th style='width:5%'>推送时间</th>
                         <th style='width:20%'>操作</th>
                     </tr>
                     </thead>
@@ -106,15 +104,7 @@
                         <td><a target="_blank" href='/report/showreport/{/$item.report_id/}'>{/$item.report_id/}</a></td>
                         <td>{/$item.cn_name/}</td>
                         <td>{/$item.author/}</td>
-                        <td>
-                            {/if $item.run_type eq 0 /}
-                                天
-                            {/else/}
-                                小时
-                            {//if/}
-                        </td>
                         <td>{/$item.time/}</td>
-                        <td>{/$item.begin_at/}/{/$item.end_at/}</td>
                         <td>
                             <!--<button class='btn btn-default btn-xs editMail'>编辑</button>-->
                             <!--<a href='/timemail/edit?id={/$item.mail_id/}' style='padding:3px 10px' class='btn btn-default btn-sm'>编辑</a>-->
@@ -169,113 +159,99 @@
             </td>
         </tr>
         <tr>
-            <td style='text-align:right;width:30%'>推送类型<b style='color:red'>*</b></td>
+            <td style='text-align:right;width:30%'>推送时间（天级）<b style='color:red'>*</b></td>
             <td>
-                <select style="width: 80px" name="run_type">
-                    <option value="99999">请选择</option>
-                    <option value="0">天</option>
-                    <option value="1">小时</option>
+                <span>时</span>
+                <select style="width: 60px" name="hour">
+                    <!-- <option value="00">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option> -->
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10" selected="selected">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
                 </select>
-            </td>
-        </tr>
-        <tr>
-            <td style='text-align:right;width:30%'>推送时间<b style='color:red'>*</b></td>
-            <td>
-                <div style="display: none;" id="run_hour">
-                    <span>时</span>
-                    <select style="width: 60px" name="hour">
-                        <!-- <option value="00">00</option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option> -->
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10" selected="selected">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                    </select>
-                </div>
-                <div style="display: none;" id="run_minute">
-                    <span>分:</span>
-                    <select style="width: 80px" name="minute">
-                        <option value="00" selected="selected">00</option>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="21">21</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                        <option value="32">32</option>
-                        <option value="33">33</option>
-                        <option value="34">34</option>
-                        <option value="35">35</option>
-                        <option value="36">36</option>
-                        <option value="37">37</option>
-                        <option value="38">38</option>
-                        <option value="38">39</option>
-                        <option value="40">40</option>
-                        <option value="41">41</option>
-                        <option value="42">42</option>
-                        <option value="43">43</option>
-                        <option value="44">44</option>
-                        <option value="45">45</option>
-                        <option value="46">46</option>
-                        <option value="47">47</option>
-                        <option value="48">48</option>
-                        <option value="49">49</option>
-                        <option value="50">50</option>
-                        <option value="51">51</option>
-                        <option value="52">52</option>
-                        <option value="53">53</option>
-                        <option value="54">54</option>
-                        <option value="55">55</option>
-                        <option value="56">56</option>
-                        <option value="57">57</option>
-                        <option value="58">58</option>
-                        <option value="59">59</option>
-                    </select>
-                </div>
+                <span>分:</span>
+                <select style="width: 80px" name="minute">
+                    <option value="00" selected="selected">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                    <option value="37">37</option>
+                    <option value="38">38</option>
+                    <option value="38">39</option>
+                    <option value="40">40</option>
+                    <option value="41">41</option>
+                    <option value="42">42</option>
+                    <option value="43">43</option>
+                    <option value="44">44</option>
+                    <option value="45">45</option>
+                    <option value="46">46</option>
+                    <option value="47">47</option>
+                    <option value="48">48</option>
+                    <option value="49">49</option>
+                    <option value="50">50</option>
+                    <option value="51">51</option>
+                    <option value="52">52</option>
+                    <option value="53">53</option>
+                    <option value="54">54</option>
+                    <option value="55">55</option>
+                    <option value="56">56</option>
+                    <option value="57">57</option>
+                    <option value="58">58</option>
+                    <option value="59">59</option>
+                </select>
                 <br>
                 <span class='tipinfoother'>(推送时间仍未生成数据将推送报警邮件，请及时处理)</span>
             </td>
@@ -302,12 +278,6 @@
 </div>
 <script type='text/javascript'>
     $(function(){
-        $("#addbox").find('select[name=run_type]').change(function () {
-            $('#run_hour').css("display","inline");
-            $('#run_minute').css("display","inline");
-            $('#begin_at').css("display","none");
-            $('#end_at').css("display","none");
-        });
         //$(".secondTimebox").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
 //        $('select').select2();
 //        $('.data-table').dataTable({
@@ -345,27 +315,11 @@
                     mailInfo.title     = $("#addbox").find('input[name=title]').val();
                     mailInfo.addressee = $("#addbox").find('textarea[name=addressee]').val();
                     mailInfo.warning_address = $("#addbox").find('textarea[name=warning_address]').val();
-                    mailInfo.run_type = $("#addbox").find('select[name=run_type]').val();
-
-                    if (mailInfo.run_type == 1) {
-                        hour = $("#addbox").find('select[name=minute]').val();
-                        minute = '00';
-                    } else {
-                        hour = $("#addbox").find('select[name=hour]').val();
-                        minute = $("#addbox").find('select[name=minute]').val();
-                    }
-                    mailInfo.time      = hour +":"+ minute;
-                    mailInfo.begin_at = $("#addbox").find('select[name=start_hour]').val() +":"+ $("#addbox").find('select[name=start_minute]').val();
-                    mailInfo.end_at = $("#addbox").find('select[name=end_hour]').val() +":"+ $("#addbox").find('select[name=end_minute]').val();
-
+                    mailInfo.time      = $("#addbox").find('select[name=hour]').val()+":"+ $("#addbox").find('select[name=minute]').val();
                     mailInfo.comments = $("#addbox").find('textarea[name=mail_comments]').val();
                     mailInfo.type = $("#addbox").find('select[name=comments_place]').val();
                     if(mailInfo.report_id =='filer_not' ){
                         $.messager.alert('提示','请选择要发送邮件的报表','info');
-                        return;
-                    }
-                    if(mailInfo.run_type == '99999' ){
-                        $.messager.alert('提示','请选择推送类型','info');
                         return;
                     }
                     if(mailInfo.time =='00:00'){
@@ -374,10 +328,6 @@
                     }
                     if(mailInfo.addressee ==''){
                         $.messager.alert('提示','收件人不能为空','info');
-                        return;
-                    }
-                    if(mailInfo.begin_at > mailInfo.end_at){
-                        $.messager.alert('提示','结束时间不能大于开始时间','info');
                         return;
                     }
                     if(mailInfo.warning_address ==''){
@@ -409,18 +359,11 @@
                     mailInfo.title     = $("#addbox").find('input[name=title]').val();
                     mailInfo.addressee = $("#addbox").find('textarea[name=addressee]').val();
                     mailInfo.warning_address = $("#addbox").find('textarea[name=warning_address]').val();
-                    mailInfo.run_type = $("#addbox").find('select[name=run_type]').val();
-                    hour = $("#addbox").find('select[name=hour]').val();
-                    minute = $("#addbox").find('select[name=minute]').val();
-                    mailInfo.time = hour+":"+ minute;
+                    mailInfo.time = $("#addbox").find('select[name=hour]').val()+":"+ $("#addbox").find('select[name=minute]').val();
                     mailInfo.comments = $("#addbox").find('textarea[name=mail_comments]').val();
                     mailInfo.type = $("#addbox").find('select[name=comments_place]').val();
                     if(mailInfo.report_id =='filer_not' ){
                         $.messager.alert('提示','请选择要发送邮件的报表','info');
-                        return;
-                    }
-                    if(mailInfo.run_type == '99999' ){
-                        $.messager.alert('提示','请选择推送类型','info');
                         return;
                     }
                     if(mailInfo.time =='00:00'){

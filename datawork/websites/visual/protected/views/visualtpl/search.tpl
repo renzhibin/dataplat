@@ -33,7 +33,7 @@
     {{ } }}
 </script>
 <script id ='searchtmpl' type='text/x-dot-template'>
-    <div class="navbar navbar-default timebar three-mnue" role="navigation" style="top:0px;{/if !$isMobile /}height: 50px{//if/}">
+    <div class="navbar navbar-default timebar three-mnue" role="navigation" style="top:0px;height: 50px">
         <div class='row search_style d_search_wrapper'   style='padding:0px; margin:1px'>
             {{ if ( it.timereport.shortcut !=undefined &&  it.timereport.shortcut.length >0){  }}
                 <div class='timestyle max-hide' style='padding-left:5px'>
@@ -124,7 +124,7 @@
                     </span>
                 {//if/}
                 {{ if ( it.basereport.author !=undefined ){  }}
-                    <a class='collnet pull-right showinfo' data-toggle="tooltip"  title='报表负责人' target='_blank'  style='color:#333;text-decoration:none'  href='http://www.xiaozhu.com/?q={{=it.basereport.author}}' onclick="return false;">
+                    <a class='collnet pull-right showinfo' data-toggle="tooltip"  title='报表负责人' target='_blank'  style='color:#333;text-decoration:none'  href='http://www..com/?q={{=it.basereport.author}}' onclick="return false;">
                         <i class='glyphicon glyphicon-user'></i>
                         <span>{{=it.basereport.author?it.basereport.author:'未知'}}</span>
                     </a> 

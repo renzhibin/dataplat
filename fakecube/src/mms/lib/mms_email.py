@@ -1,6 +1,6 @@
 #coding=utf-8
 '''
- USERNAME = 'bi-warn@qudian.com'
+ USERNAME = 'bi-warn@'
  PASSWD = 'h5T17F8rNqgF'
  SERVER = 'smtp.exmail.qq.com'
 
@@ -17,10 +17,10 @@ class MmsEmail:
     def __init__(self,cc=''):
 
         self.smtpserver='smtp.exmail.qq.com'
-        self.smtpuser='bi-warn@qudian.com'
+        self.smtpuser='bi-warn@'
         self.smtppass='h5T17F8rNqgF'
         self.smtpport='465'
-        self.emailfrom='bi-warn@qudian.com'
+        self.emailfrom='bi-warn@'
         self.server=smtplib.SMTP_SSL(self.smtpserver,self.smtpport)
         self.server.ehlo()
         self.server.login(self.smtpuser,self.smtppass)
@@ -44,10 +44,10 @@ class MmsEmail:
         else:
             hostname = 'Unkwon'
 
-        if hostname.find('.qudian.com') > 0:
+        if hostname.find('.') > 0:
             return "mailman@%s" % hostname
         else:
-            return "mailman@%s.qudian.com" % hostname
+            return "mailman@%s." % hostname
 
     def addsuff(self,a):
         emailAddress = str(a)
@@ -56,7 +56,7 @@ class MmsEmail:
             name = emailAddress[0:emailAddress.find('@')]
         else:
             name = emailAddress
-        return name+'@qudian.com'
+        return name+'@'
 
     def sendmessage(self,to='',subj='',content='',attach=None):
        # self.emailfrom=self.hostname()

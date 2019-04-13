@@ -45,7 +45,7 @@ Class FackcubeManager extends Manager
         $superProject=$objauth->getSuperProject();
 
 
-        if(empty($superProject) ||  Yii::app()->user->isSuper())
+        if(empty($superProject) ||  $objauth->isSuper())
             return $finalRetu;
         $superRetu=array();
         foreach($finalRetu as $tmp){
@@ -491,23 +491,6 @@ Class FackcubeManager extends Manager
         return $res;
     }
 
-    public function get_hive_queue() {
-        return [
-            'status' => 0,
-            'msg'    => 'success',
-            'data'   => [
-                [
-                    'value'  => '集团',
-                    'key'    => 'bloc'
-                ],
-                [
-                    'value'  => '汽车',
-                    'key'    => 'car'
-                ]
-            ]
-        ];
-    }
-
     public function get_real_schedule_interval()
     {
         return [
@@ -555,14 +538,6 @@ Class FackcubeManager extends Manager
                 [
                     'value' => 'auto_alive_account',
                     'key'   => 'auto_alive_account',
-                ],
-                [
-                    'value' => 'toy_order',
-                    'key'   => 'toy_order',
-                ],
-                [
-                    'value' => 'realtime_market',
-                    'key'   => 'realtime_market',
                 ],
             ],
         ];
@@ -1335,22 +1310,17 @@ Class FackcubeManager extends Manager
     /**
      * 获取文件
      */
-    public function getTaskDataAll($search = array(), $type = 'all'){
+    public function getTaskDataAll($search = array()){
         $where = "  ";
         if(!empty($search)){
             $where .=" where  t.task in (".implode(",", $search).")";
         }
-        if ($type <> 'all') {
-            $where .= " and t.update_time is null and p.ass_table is null ";
-        }
-        $sql ="select t.id,t.task,creater,p.rely_task,p.ass_table,t.update_time,t.schedule_level from  t_rely_task  as t join t_rely_topo  p on t.task = p.task ".$where."   group by t.task,rely_task";
+        $sql ="select t.id,t.task,creater,p.rely_task,p.ass_table,t.update_time,t.schedule_level from  t_rely_task  as t join t_rely_topo  p on t.task = p.task ".$where."  group by t.task,rely_task";
         $db    = Yii::app()->sdb_metric_meta;
         $taskArr = $db->createCommand($sql)->queryAll();
         return $taskArr;
          
     }
-
-
     /**
      * 获取任务依赖信息
      */
@@ -1368,15 +1338,8 @@ Class FackcubeManager extends Manager
         foreach ($taskArr as $item){
             $sqlIn [] = "'".$item."'";
         }
-
-        if (empty($sqlIn)) {
-            return [];
-        }
-
         $timeStr = date("Y-m-d 00:00:00", time());
-        $sql ="select * from ( select  max(id) as id,app_name,status,create_time,start_time,end_time,concat(app_name,'.',run_module) as  task_name from mms_run_log  where create_time >='{$timeStr}' and concat(app_name,'.',run_module) in (". implode(",", $sqlIn).") group by task_name,id order by id desc )  as a  
-        join mms_conf on mms_conf.appname =  a.app_name and mms_conf.storetype = 2
-        group by a.task_name  ";
+        $sql ="select * from ( select  max(id) as id,app_name,status,create_time,start_time,end_time,concat(app_name,'.',run_module) as  task_name from mms_run_log  where create_time >='{$timeStr}' and concat(app_name,'.',run_module) in (". implode(",", $sqlIn).") group by task_name,id order by id desc )  as a  group by a.task_name  ";
         $db    = Yii::app()->sdb_metric_meta;
         $taskArr = $db->createCommand($sql)->queryAll();
         return $taskArr;

@@ -1,5 +1,6 @@
 node_modules/
 *.DS_Store
+*.tar.gz
 .idea/
 log/*
 fakecube/log/*
@@ -10,6 +11,7 @@ rev-manifest.json
 fakecube/logs/*
 nbproject/*
 logs/*
+datawork.peng/*
 datawork/websites/visual/assets/vue
 datawork/websites/visual/assets/vue_build
 fakecube/src/mms/conf/env.py

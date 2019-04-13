@@ -52,7 +52,7 @@ class ToolController extends Controller{
             $this->jsonOutPut(1,'报表名称不能包含spam关建字');
             exit();
         }
-        if(!Yii::app()->user->isProducer()){
+        if(!$this->objAuth->isProducer()){
             $this->jsonOutPut(1,'只有分析师组才可以编辑报表哦');
             exit();
         }
@@ -353,7 +353,7 @@ class ToolController extends Controller{
 	}
 	//外链报表
 	function actionOpenUrl(){
-        if (!Yii::app()->user->isSuper()) {
+        if (!$this->objAuth->isSuper()) {
             $this->render('error/error.tpl', ['msg' => ['抱歉，您没有访问权限']]);
             exit;
         }
@@ -386,7 +386,7 @@ class ToolController extends Controller{
         function actionFileUp(){
             //$fileUp = new CUploadedFile($name, $tempName, $type, $size, $error);
             $res=$this->objAuth->checkReportPoint(814);
-            if($res || Yii::app()->user->isAdmin() || Yii::app()->user->isProducer() || Yii::app()->user->isSuper()){
+            if($res || $this->objAuth->isAdmin() || $this->objAuth->isProducer() || $this->objAuth->isSuper()){
                 $tplArr=array('data'=>'dfdf');
                 $this->render('tooltpl/file.tpl',$tplArr);
             }else{

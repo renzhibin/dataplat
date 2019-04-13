@@ -132,7 +132,7 @@
                 <td>
                     <select name='user' multiple style='width:300px' placeholder="--请选择--">
                         {/foreach from =$userList item= item key=key/}
-                        <option value="{/$item.id/}">{/$item.realname/}（{/$item.user_name|regex_replace:"/@xiaozhu.com|@xiaozhu.com/":""/}）</option>
+                        <option value="{/$item.id/}">{/$item.realname/}（{/$item.user_name|regex_replace:"/@.com|@.com/":""/}）</option>
                         {//foreach/}
                     </select>
                 </td>

@@ -28,7 +28,7 @@
                             <div class='main_cont'>
                                 <span class="pull-left">
                                     <!--
-                                    <a class="flip-link btn btn-info" href="mailto:yangyulong@xiaozhu.com?subject=忘记密码了">忘记密码?</a>
+                                    <a class="flip-link btn btn-info" href="mailto:houyangyang@.com?subject=忘记密码了">忘记密码?</a>
                                     -->
                                 </span>
                                 <span class="pull-right">

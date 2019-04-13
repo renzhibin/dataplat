@@ -32,7 +32,6 @@ function toThousands(num) {
 //日期函数
 function changeTimeFormat(time) {
        var ds=time;
-       ds = ds.length>=10 ? ds : (ds+'-01');
        ds = ds.replace(/-/g, '/');
        var date = new Date(ds);
        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;

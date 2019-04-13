@@ -1,26 +1,22 @@
 <?php
-
-class CommonManager extends Manager
-{
+class CommonManager extends Manager {
     private $strList = array();
 
 
-    function addSinglequote($arr)
-    {
-        foreach ($arr as $tmp) {
-            $retu[] = '\'' . $tmp . '\'';
+    function addSinglequote($arr){
+        foreach($arr as $tmp){
+            $retu[]='\''.$tmp.'\'';
         }
-
         return $retu;
 
     }
-
-    const PICKUP_KK_AUTOINCR = NULL;
-    const PICKUP_KK_HOLD = TRUE;
-    const PICKUP_VK_ENTIRE = NULL;
-    const PICKUP_VD_SKIP = FALSE;
+    
+    const PICKUP_KK_AUTOINCR  = NULL;
+    const PICKUP_KK_HOLD      = TRUE;
+    const PICKUP_VK_ENTIRE    = NULL;
+    const PICKUP_VD_SKIP      = FALSE;
     const PICKUP_VD_OVERWRITE = TRUE;
-    const PICKUP_VD_MERGE = NULL;
+    const PICKUP_VD_MERGE     = NULL;
 
     /**
      * pickup
@@ -42,14 +38,13 @@ class CommonManager extends Manager
      * @access public
      * @return array 提取到的信息
      */
-    public static function pickup($array, $valueKey, $keyKey = self::PICKUP_KK_HOLD, $onDup = self::PICKUP_VD_SKIP)
-    {
+    public static function pickup($array, $valueKey, $keyKey = self::PICKUP_KK_HOLD, $onDup = self::PICKUP_VD_SKIP) {
         $target = array();
         if (is_array($array)) {
             $index = -1;
             foreach ($array as $k => $v) {
                 $key = $keyKey === self::PICKUP_KK_AUTOINCR
-                    ? (++$index)
+                    ? (++ $index)
                     : ($keyKey === self::PICKUP_KK_HOLD ? $k : @$v[$keyKey]);
 
                 if (is_string($valueKey)) {
@@ -72,70 +67,62 @@ class CommonManager extends Manager
                 }
             }
         }
-
         return $target;
     }
-
+    
     //判断网站访问类型
-    function checkDevice()
-    {
-        if (isset($_SERVER['HTTP_USER_AGENT'])) {
-            $clientkeywords = array('nokia',
-                'sony', 'ericsson', 'mot', 'samsung', 'htc', 'sgh', 'lg', 'sharp', 'sie-',
-                'philips', 'panasonic', 'alcatel', 'lenovo', 'iphone', 'ipod', 'blackberry', 'meizu',
-                'android', 'netfront', 'symbian', 'ucweb', 'windowsce', 'palm', 'operamini', 'operamobi',
-                'openwave', 'nexusone', 'cldc', 'midp', 'wap', 'mobile'
-            );
+    function checkDevice(){
+        if(isset($_SERVER['HTTP_USER_AGENT'])){
+            $clientkeywords = array ('nokia',
+                'sony','ericsson','mot','samsung','htc','sgh','lg','sharp','sie-',
+                'philips','panasonic','alcatel','lenovo','iphone','ipod','blackberry','meizu',
+                'android','netfront','symbian','ucweb','windowsce','palm','operamini','operamobi',
+                'openwave','nexusone','cldc','midp','wap','mobile'
+            ); 
             // 从HTTP_USER_AGENT中查找手机浏览器的关键字
-            if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))) {
+            if (preg_match("/(" . implode('|', $clientkeywords) . ")/i", strtolower($_SERVER['HTTP_USER_AGENT']))){
                 return true;
-            } else {
+            }else{
                 return false;
             }
-        } else {
+        }else{
             return false;
         }
     }
-
-    function arrayUnique($arr, $key)
-    {
-        $rAr = array();
-        for ($i = 0; $i < count($arr); $i++) {
-            if (!isset($rAr[$arr[$i][$key]])) {
-                $rAr[$arr[$i][$key]] = $arr[$i];
-            }
-        }
-        $arr = array_values($rAr);
-
+    function arrayUnique($arr,$key){ 
+        $rAr=array(); 
+        for($i=0;$i<count($arr);$i++){ 
+            if(!isset($rAr[$arr[$i][$key]])){ 
+                $rAr[$arr[$i][$key]]=$arr[$i]; 
+            }   
+        }   
+        $arr=array_values($rAr); 
         return $arr;
-    }
-
+    } 
     /*
      @date 2015-06-25
      @method 数据千分隔 处理
     */
-    public function thousandPoints($data)
-    {
+    public function thousandPoints($data){
         return preg_replace('/(?<=[0-9])(?=(?:[0-9]{3})+(?![0-9]))/', ',', $data);
     }
 
     //处理图表数据
-    public function chartTable($chartData)
-    {
+    public function  chartTable($chartData){
         $keyList = array();
         $abMERGE = array();
-        if (empty($chartData)) {
+        if(empty($chartData)){
             return array();
         }
         foreach ($chartData as $index => $dataArray) {
-            $$dataArray['name'] = str_replace("\n", "", $dataArray['name']);
+            $$dataArray['name'] = str_replace("\n","",$dataArray['name']);
             $dataArray['name'] = trim($dataArray['name']);
             foreach ($dataArray['data'] as $values) {
                 //list($dt, $value) = $values;
                 if (!array_key_exists($values['name'], $abMERGE)) {
                     $abMERGE[$values['name']] = array();
                 }
-                if (!isset($keyList[$dataArray['name']])) {
+                if(!isset($keyList[$dataArray['name']]) ){
                     $keyList[$dataArray['name']] = $this->generate_Str(5);
                 }
                 $abMERGE[$values['name']][$keyList[$dataArray['name']]] = $values['value'];
@@ -145,10 +132,10 @@ class CommonManager extends Manager
         $tmpArr = array();
         $tmpNum = 0;
         $list = array_keys($abMERGE);
-        sort($list, SORT_NUMERIC);
+        sort($list,SORT_NUMERIC);
         $newMerge = array();
-        foreach ($list as $sort) {
-            $newMerge[$sort] = $abMERGE[$sort];
+        foreach ($list as  $sort) {
+            $newMerge[$sort]  =   $abMERGE[$sort];
         }
         // echo "<pre>";
         // print_r($newMerge);exit;
@@ -157,53 +144,46 @@ class CommonManager extends Manager
         $returnArr = array();
         $returnArr['header'] = $keyList;
         $returnArr['data'] = $newMerge;
-
         return $returnArr;
     }
 
     //二维数组排序
-
     /**
-     * $arr 数组
-     * $key 要排序的列
-     * $sort  asc  desc
-     */
-    function arrSort($arr, $key, $sort)
-    {
-        if (!empty($arr)) {
+        $arr 数组
+        $key 要排序的列
+        $sort  asc  desc  
+    */
+    function  arrSort($arr,$key,$sort){
+        if(!empty($arr)){
             foreach ($arr as $user) {
                 $ages[] = $user[$key];
             }
-            if ($sort == 'asc') {
-                array_multisort($ages, SORT_ASC, $arr);
-            } else {
-                array_multisort($ages, SORT_DESC, $arr);
+            if($sort =='asc'){
+                array_multisort($ages, SORT_ASC,$arr);
+            }else{
+                array_multisort($ages, SORT_DESC,$arr);
             }
-
+           
         }
-
         return $arr;
     }
-
-    public function DataToArray($dbData, $keyword)
-    {
-        $retArray = array();
-        if (is_array($dbData) == false or empty ($dbData)) {
+    public function DataToArray($dbData, $keyword) {
+        $retArray = array (); 
+        if (is_array ( $dbData ) == false or empty ( $dbData )) {
             return $retArray;
-        }
-        foreach ($dbData as $oneData) {
-            if (isset ($oneData [$keyword]) and empty ($oneData [$keyword]) == false) {
+        }   
+        foreach ( $dbData as $oneData ) { 
+            if (isset ( $oneData [$keyword] ) and empty ( $oneData [$keyword] ) == false) {
                 $retArray [] = $oneData [$keyword];
-            } else {
-                if (isset($oneData [$keyword]) and intval($oneData[$keyword]) === 0) {
+            }else{
+                if(isset($oneData [$keyword]) and intval($oneData[$keyword])===0){
                     $retArray [] = $oneData [$keyword];
-                } else {
+                }else{
                     $retArray [] = '-';
                 }
 //                 $retArray [] = '-';
             }
-        }
-
+        }   
         return $retArray;
     }
 
@@ -249,64 +229,60 @@ class CommonManager extends Manager
         return array_values($retArray);
     }
 
-    public function getDateRangeArray($date_from, $date_to, $date_type)
-    {
+    public function getDateRangeArray($date_from, $date_to,$date_type) {
         $date_from = trim($date_from);
         $date_to = trim($date_to);
         $dates = array();
-        if ($date_from == $date_to) {
+        if($date_from == $date_to){
             $dates[] = $date_to;
-
             return $dates;
         }
-        if ($date_to === "") {
+        if($date_to === "") {
             $date_to = date("Y-m-d", strtotime("-1 day"));
         }
         $time_from = strtotime($date_from);
         $time_to = strtotime($date_to);
         //时间处理 月天小时
-        $date_type = $date_type ? $date_type : 'day';
+        $date_type = $date_type?$date_type:'day';
         switch ($date_type) {
             case 'hour':
-                while ($time_from <= $time_to) {
-                    $dates[] = date("Y-m-d H:00", $time_from);
-                    $time_from += 60 * 60;
+                 while($time_from <= $time_to) {
+                    $dates[] = date("Y-m-d H:00",$time_from);
+                    $time_from += 60*60;
                 }
                 break;
             case 'day':
-                while ($time_from <= $time_to) {
-                    $dates[] = date("Y-m-d", $time_from);
-                    $time_from += 24 * 60 * 60;
+                 while($time_from <= $time_to) {
+                    $dates[] = date("Y-m-d",$time_from);
+                    $time_from += 24*60*60;
                 }
                 break;
             case 'month':
-                while ($time_from <= $time_to) {
-                    $dates[] = date("Y-m", $time_from);
+                 while($time_from <= $time_to) {
+                    $dates[] = date("Y-m",$time_from);
                     $arr = getdate($time_from);
-                    if ($arr['mon'] == '12') {
-                        $year = $arr['year'] + 1;
-                        $month = $arr['mon'] - 11;
+                    if($arr['mon'] == '12'){
+                        $year = $arr['year']+1;
+                        $month = $arr['mon']-11;
                     } else {
                         $year = $arr['year'];
-                        $month = $arr['mon'] + 1;
+                        $month = $arr['mon']+1;
                     }
-                    $date_from = $year . '-' . $month;
+                    $date_from = $year.'-'.$month;
                     $time_from = strtotime($date_from);
                 }
                 break;
             default:
-                while ($time_from <= $time_to) {
-                    $dates[] = date("Y-m-d", $time_from);
-                    $time_from += 24 * 60 * 60;
+                while($time_from <= $time_to) {
+                    $dates[] = date("Y-m-d",$time_from);
+                    $time_from += 24*60*60;
                 }
                 break;
         }
-
         return $dates;
     }
 
-    function array_orderby()
-    {
+    function array_orderby() {
         $args = func_get_args();
         $data = array_shift($args);
         foreach ($args as $n => $field) {
@@ -319,31 +295,27 @@ class CommonManager extends Manager
         }
         $args[] = &$data;
         call_user_func_array('array_multisort', $args);
-
         return array_pop($args);
     }
 
-    function array_column($array, $column)
-    {
-        if (function_exists("array_column")) {
+    function array_column($array, $column) {
+        if(function_exists("array_column")) {
             return array_column($array, $column);
         } else {
-            if (!is_array($array) || count($array) === 0) {
+            if(!is_array($array) || count($array) === 0) {
                 return array();
             }
             $ret = array();
-            foreach ($array as $row) {
+            foreach($array as $row) {
                 $ret[] = $row[$column];
             }
-
             return $ret;
         }
     }
 
-    function exportExcel($titles, $columns, $rows, $filename)
-    {
+    function exportExcel($titles, $columns, $rows, $filename){
         // export to excel
-        if (empty($filename)) $filename = date('Ymd') . '.xls';
+        if(empty($filename)) $filename = date('Ymd') . '.xls';
         $excel = new CPHPExcel();
         $sheet = $excel->getActiveSheet();
         $excel->getProperties()->setCreator("focus");
@@ -359,7 +331,7 @@ class CommonManager extends Manager
             }
             $data[] = $tmp;
         }
-
+        
         $sheet->fromArray($data, null, "A1");
         $excel->dumpToClient($filename);
     }
@@ -369,17 +341,17 @@ class CommonManager extends Manager
         $jsonUser = Yii::app()->session['data_analysis_login_user'];
         $userInfo = json_decode($jsonUser, true);
 
-        $userRealName = isset($userInfo['realname']) ? $userInfo['realname'] : '';
-        $userEmail = isset($userInfo['user_name']) ? $userInfo['user_name'] : '';
-        $requestTime = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
-        $userIP = $_SERVER['REMOTE_ADDR'];
-        $searchUrl = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $getParameter = str_replace('\\', '', json_encode($_GET, JSON_UNESCAPED_UNICODE));
+        $userRealName  = isset($userInfo['realname']) ? $userInfo['realname'] : '';
+        $userEmail     = isset($userInfo['user_name']) ? $userInfo['user_name'] : '';
+        $requestTime   = date('Y-m-d H:i:s', $_SERVER['REQUEST_TIME']);
+        $userIP        = $_SERVER['REMOTE_ADDR'];
+        $searchUrl     = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $getParameter  = str_replace('\\', '', json_encode($_GET, JSON_UNESCAPED_UNICODE));
         $postParameter = str_replace('\\', '', json_encode($_POST, JSON_UNESCAPED_UNICODE));
         if (count($requestData) >= 10000) { // 数组过大时不记录data日志
             $requestData = [];
         }
-        $requestData = json_encode($requestData, JSON_UNESCAPED_UNICODE);
+        $requestData   = json_encode($requestData, JSON_UNESCAPED_UNICODE);
 
         $sql = "insert into t_user_request_log (`time`, `ip`, `url`, `get`, `post`, `data`, `user_name`, `user_email`) values (:time, :ip, :url, :get, :post, :data, :user_name, :user_email)";
         $parament = array(':time' => $requestTime, ':ip' => $userIP, ':url' => $searchUrl, ':get' => $getParameter, ':post' => $postParameter, ':data' => $requestData, ':user_name' => $userRealName, ':user_email' => $userEmail);
@@ -388,7 +360,7 @@ class CommonManager extends Manager
 
     public function insertMailLog($row)
     {
-        $sql = "insert into t_visual_mail_log (`mail_id`, `send_date`, `start_at`, `end_at`, `send_status`, `send_type`) values (:mail_id, :send_date, :start_at, :end_at, :send_status, :send_type)";
+        $sql    = "insert into t_visual_mail_log (`mail_id`, `send_date`, `start_at`, `end_at`, `send_status`, `send_type`) values (:mail_id, :send_date, :start_at, :end_at, :send_status, :send_type)";
         $params = [
             ':mail_id'     => $row['mail_id'],
             ':send_date'   => $row['send_date'],
@@ -401,8 +373,7 @@ class CommonManager extends Manager
         Yii::app()->db_metric_meta->createCommand($sql)->execute($params);
     }
 
-    function exportHtml($titles, $columns, $rows, $filename = '')
-    {
+    function exportHtml($titles, $columns, $rows, $filename=''){
 
         if (count($rows) > 1000) {
             $this->addUserRequestToLog(array_slice($rows, 0, 1000));
@@ -410,135 +381,70 @@ class CommonManager extends Manager
             $this->addUserRequestToLog($rows);
         }
 
-        if (empty($filename)) $filename = date('Ymd') . '.xls';
-        Header("Content-type:   application/octet-stream ");
-        Header("Accept-Ranges:   bytes ");
-        Header("Content-type:application/vnd.ms-excel;charset=utf-8");
-        Header("Content-Disposition:attachment;filename=" . $filename);
-        header('content-Type:application/vnd.ms-excel;charset=utf-8');
+        if(empty($filename)) $filename = date('Ymd') . '.xls';
+        Header ( "Content-type:   application/octet-stream " );
+        Header ( "Accept-Ranges:   bytes " );
+        Header ( "Content-type:application/vnd.ms-excel;charset=utf-8" );
+        Header ( "Content-Disposition:attachment;filename=" . $filename );
+        header ( 'content-Type:application/vnd.ms-excel;charset=utf-8' );
+        
+        $html  = "";
+        $html .='<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
+        $html .='<table border=1><thead><tr>';
 
-        $html = "";
-        $html .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
-        $html .= '<table border=1><thead><tr>';
-
-        foreach ($titles as $key => $val) {
-            $html .= '<td style="background:cornsilk">' . $val . '</td>';
+        foreach ($titles as $key=>$val){
+            $html .= '<td style="background:cornsilk">'.$val.'</td>';
         }
-        $html .= '</tr></thead>';
-        $html .= '<tbody>';
-        foreach ($rows as $key => $val) {
-            $html .= '<tr>';
+        $html .='</tr></thead>';
+            $html .='<tbody>';
+        foreach ( $rows as $key=>$val){
+            $html .='<tr>';
             //数据字段
-            foreach ($columns as $k => $v) {
-                if (isset($val[$v])) {
+            foreach ($columns as $k=>$v){
+                if(isset($val[$v])){
                     //字符替换
-                    $valStr = $val[$v];
-                    $valStr = str_replace('<', '&lt;', $valStr);
-                    $valStr = str_replace('>', '&gt;', $valStr);
-                    if (is_numeric($valStr)) {
+                    $valStr  = $val[$v];
+                    $valStr  = str_replace('<', '&lt;', $valStr);
+                    $valStr  = str_replace('>', '&gt;', $valStr);
+                    if(is_numeric($valStr) ){
                         // mso-number-format:\@; 为将数字处理为文本
-                        if (strlen($valStr) >= 12) {
-                            $html .= '<td style="mso-number-format:\@;">' . $valStr . '</td>';
-                        } else {
-                            $html .= '<td style="mso-number-format:\@;">' . $valStr . '</td>';
+                        if( strlen($valStr) >=12 ){
+                            $html .='<td style="mso-number-format:\@;">'.$valStr.'</td>';
+                        }else{
+                            $html .='<td style="mso-number-format:\@;">'.$valStr.'</td>';
                             // $html .='<td>'.$valStr.'</td>';
                         }
-                    } else {
-                        $html .= '<td>' . $valStr . '</td>';
-                    }
+                    }else{
+                        $html .='<td>'.$valStr.'</td>';
+                    }          
                 } else {
-                    $html .= '<td></td>';
+                    $html .='<td></td>';
                 }
             }
-            $html .= '</tr>';
+            $html .='</tr>';
         }
-        $html .= '</tbody></table>';
+        $html .='</tbody></table>';
         echo $html;
     }
-
-    function exportAllHtml($data)
-    {
-        $html = "";
-        if (empty($data['filename'])) $data['filename'] = date('Ymd') . '.xls';
-
-        Header("Content-type:   application/octet-stream ");
-        Header("Accept-Ranges:   bytes ");
-        Header("Content-type:application/vnd.ms-excel;charset=utf-8");
-        Header("Content-Disposition:attachment;filename=" . $data['filename']);
-        header('content-Type:application/vnd.ms-excel;charset=utf-8');
-        $html .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
-        foreach ($data as $items) {
-            if (!empty($items['data']) && is_array($items['data'])) {
-                if (count($items['data']) > 1000) {
-                    $this->addUserRequestToLog(array_slice($items['data'], 0, 1000));
-                } else {
-                    $this->addUserRequestToLog($items['data']);
-                }
-
-                if (isset($items['title']) && !empty($items['title'])) {
-                    $html .= '<span>' . $items['title'] . '</span>';
-                }
-                $html .= '<table border=1><thead><tr>';
-
-                foreach ($items['name'] as $key => $val) {
-                    $html .= '<td style="background:cornsilk">' . $val . '</td>';
-                }
-                $html .= '</tr></thead>';
-                $html .= '<tbody>';
-                foreach ($items['data'] as $key => $val) {
-                    $html .= '<tr>';
-                    //数据字段
-                    foreach ($items['key'] as $k => $v) {
-                        if (isset($val[$v])) {
-                            //字符替换
-                            $valStr = $val[$v];
-                            $valStr = str_replace('<', '&lt;', $valStr);
-                            $valStr = str_replace('>', '&gt;', $valStr);
-                            if (is_numeric($valStr)) {
-                                // mso-number-format:\@; 为将数字处理为文本
-                                if (strlen($valStr) >= 12) {
-                                    $html .= '<td style="mso-number-format:\@;">' . $valStr . '</td>';
-                                } else {
-                                    $html .= '<td style="mso-number-format:\@;">' . $valStr . '</td>';
-                                    // $html .='<td>'.$valStr.'</td>';
-                                }
-                            } else {
-                                $html .= '<td>' . $valStr . '</td>';
-                            }
-                        } else {
-                            $html .= '<td></td>';
-                        }
-                    }
-                    $html .= '</tr>';
-                }
-                $html .= '</tbody></table>';
-            }
-        }
-        echo $html;
-    }
-
     // gearmand 发起任务请求
-    public function sendTask($p)
-    {
-        $client = new GearmanClient();
+    public function sendTask($p){
+        $client= new GearmanClient();
         $client->addServer('127.0.0.1', 4730);
         echo $client->doBackground('SendStatDataByEmail', serialize($p)), "\n";
-
+        
     }
 
-    function generate_Str($length)
-    {
+    function generate_Str($length){
         $chars = 'abcdefghijklmnopqrstuvwxyz';
-        $password = '';
-        for ($i = 0; $i < $length; $i++) {
-            $password .= $chars[mt_rand(0, strlen($chars) - 1)];
+        $password ='';
+        for ( $i = 0; $i < $length; $i++ ){
+            $password .= $chars[ mt_rand(0, strlen($chars) - 1) ];
         }
-        $password .= "_key";
-        if (in_array($password, $this->strList)) {
+        $password .="_key";
+        if(in_array($password,$this->strList)){
             $this->generate_Str($length);
-        } else {
+        }else{
             array_push($this->strList, $password);
-
             return $password;
         }
     }
@@ -555,11 +461,10 @@ class CommonManager extends Manager
         $Cc 抄送人
 
     */
-    function sendMail($receiver, $body, $subject = '', $from = 'data-dt@xiaozhu.com', $header = '', $flag = true, $Cc = '')
-    {
+    function sendMail($receiver, $body, $subject = '', $from = 'data-dt@.com', $header = '', $flag = true,$Cc='') {
 
-        require_once(dirname(__FILE__) . '/../../../../framework/extensions/PHPMailer/PHPMailerAutoload.php');
-        $mail = new PHPMailer();
+        require_once(dirname(__FILE__).'/../../../../framework/extensions/PHPMailer/PHPMailerAutoload.php');
+        $mail= new PHPMailer();
         $mail->CharSet = "utf-8";
         $mail->isSMTP();
         $mail->SMTPAuth = true;
@@ -581,7 +486,7 @@ class CommonManager extends Manager
             if ($flag == true) {
                 foreach ($receiver as $strMail) {
                     if (strpos($strMail, '@') === false) {
-                        $strMail = $strMail . '@xiaozhu.com';
+                        $strMail = $strMail . '@.com';
                     }
                     // $strMergeMail.=$strMail . ',';
 
@@ -591,7 +496,7 @@ class CommonManager extends Manager
             } else {
                 foreach ($receiver as $strMail) {
                     if (strpos($strMail, '@') === false) {
-                        $strMail = $strMail . '@xiaozhu.com';
+                        $strMail = $strMail . '@.com';
                     }
                     $mail->addAddress($strMail);
                 }
@@ -599,20 +504,20 @@ class CommonManager extends Manager
         } else {
             $strMail = $receiver;
             if (strpos($strMail, '@') === false) {
-                $strMail = $strMail . '@xiaozhu.com';
+                $strMail = $strMail . '@.com';
             }
             $mail->addAddress($strMail);
         }
 
-        if ($Cc != '') {
+        if($Cc!=''){
             $mail->addCC($Cc);
         }
 
         $mail->isHTML(true);
         $mail->Subject = $subject;
-        $mail->Body = $body;
+        $mail->Body=$body;
 
-        if (!$mail->send()) {
+        if(!$mail->send()) {
             # echo 'Message could not be sent.';
             # echo 'Mailer Error: ' . $mail->ErrorInfo;
             return false;

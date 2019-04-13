@@ -119,7 +119,7 @@ class AuthService
     public static function SsoLogout()
     {
         $url = SSO_LOGOUT;
-        $tarurl = SSO_LOGIN_URL . '?app_key=' . PROJECT_KEY . '&tarurl=' . 'http://' . $_SERVER['HTTP_HOST'];//. $_SERVER['REQUEST_URI'];
+        $tarurl = SSO_LOGIN_URL . '?app_key=' . PROJECT_KEY . '&tarurl=' . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
         $jsonUser = Yii::app()->session['data_analysis_login_user'];
         if (empty($jsonUser)) return false;

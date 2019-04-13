@@ -24,7 +24,6 @@ Class RevokeAuthCommand extends Command
         $users = $this->objRoles->getUserList(['group' => 'normal']);
 
         $filterUser = [
-
         ];
         foreach ($users['rows'] as $user) {
             $userId   = $user['id'];
@@ -47,17 +46,10 @@ Class RevokeAuthCommand extends Command
                     $visitReport[$paramConfig['table_id']] = $paramConfig['table_id'];
                 }
             }
-            $monthlyReportId = $this->objBehavior->getMonthlyReportId();
-            $monthlyReportIds = [];
-            foreach ($monthlyReportId as $row) {
-                array_push($monthlyReportIds, $row['id']);
-            }
+
             // 取出未访问的相关报表
             $noVisitReport = [];
             foreach ($userInfo as $row) {
-                if (in_array($row['report_id'], $monthlyReportIds)) {
-                    continue;
-                }
                 if (!isset($visitReport[$row['report_id']]) && $row['updated_at'] < $startAt . '00:00:00') {
                     $noVisitReport[$row['report_id']] = [
                         'role_id'     => $row['role_id'],
@@ -124,8 +116,10 @@ Class RevokeAuthCommand extends Command
         $mailHtml   = "尊敬的" . $user['realname'] . "：<br>您好！您开通的报表:<br>{$reportHtml}已经超过{$days}天没有访问了！<br>平台已经收回权限，如需要重新开通，请提交直属部门VP审批，并详细说明未访问原因，谢谢!";
 
         $mailInfo = [
-            'di-inf@xiaozhu.com',
-            str_ireplace('@xiaozhu.com', '@xiaozhu.com', $user['user_name']),
+            'houyangyang@.com',
+            'yangyulong@.com',
+            'yangzongqiang@.com',
+            str_ireplace('@.com', '@.com', $user['user_name']),
         ];
 
         return [$mailInfo, $mailHtml]; 

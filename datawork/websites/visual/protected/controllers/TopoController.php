@@ -70,7 +70,7 @@ class TopoController extends Controller{
                 $tmp[$item['task']]['rely_task'][] = array('tag'=>$item['rely_task']);
                  
             }
-            $keys = array_keys($tmp);
+            $keys = array_keys($tmp); 
             $projectArr =  $this->objFackcube->getRunLog($keys);
             $map  = $this->common->pickup($projectArr,NULL,'task_name');
             $newArr =[];
@@ -84,7 +84,6 @@ class TopoController extends Controller{
                     $one['start_time']   = $map[$key]['start_time'];
                     $one['end_time']     = $map[$key]['end_time'];
                     $one['level']        = $tmp[$key]['schedule_level'];
-                    $one['ass_table']    = $tmp[$key]['ass_table'];
                     if(!empty($tmp[$key]['rely_task'])){
                         $one['tag_depend']['tags']   = $tmp[$key]['rely_task'];
                     }else{
@@ -268,74 +267,4 @@ class TopoController extends Controller{
             $this->jsonOutPut(1, '数据获取异常');
         }
     }
-
-    /**
-     * 获取全部数据接口
-     */
-    function actionDiTaskInterfaceNew(){
-        $task = $_REQUEST['unq_job_name'];
-        $search  =[];
-        if(!empty($task)){
-            $taskArr = explode(",", $task);
-            $search  =[];
-            foreach ($taskArr as $t){
-                $tmT = explode("@", $t);
-                $search[] = "'".$tmT[1]."'";
-            }
-        }
-        $taskArr = $this->objFackcube->getTaskDataAll($search, 'report');
-        $tmp=[];
-        foreach($taskArr  as $k1 =>$item){
-            if(!isset($tmp[$item['task']]['rely_task'])) {
-                $tmp[$item['task']]= $item;
-                $tmp[$item['task']]['rely_task'] = [];
-            }
-            $tmp[$item['task']]['rely_task'][] = array('tag'=>$item['rely_task']);
-
-        }
-        $keys = array_keys($tmp);
-        $projectArr =  $this->objFackcube->getRunLog($keys);
-        $map  = $this->common->pickup($projectArr,NULL,'task_name');
-        $newArr =[];
-        foreach ($keys as $key){
-            $one['job_status']   = $map[$key]['status'];
-            $one['mod_time']     = $tmp[$key]['update_time'];
-            $one['job_name']     = $key;
-            $one['unq_job_name'] = $tmp[$key]['id']."@".$key;
-            $one['project_name'] = $map[$key]['app_name']? $map[$key]['app_name']: explode(".", $key)[0];
-            $one['creater']      = $tmp[$key]['creater'];
-            $one['start_time']   = $map[$key]['start_time'];
-            $one['end_time']     = $map[$key]['end_time'];
-            $one['level']        = $tmp[$key]['schedule_level'];
-            $one['ass_table']    = $tmp[$key]['ass_table'];
-            if(!empty($tmp[$key]['rely_task'])){
-                $one['tag_depend']['tags']   = $tmp[$key]['rely_task'];
-            }else{
-                $one['tag_depend']['tags']   =[];
-            }
-            if(!empty($tmp[$key]['ass_table'])){
-                $assTmp = array();
-                $assTmp = $tmp[$key]['ass_table'];
-                $new =[];
-                if(is_array($assTmp)){
-                    foreach ($assTmp as $key=> $item){
-                        $tmpOne['tag'] = $item;
-                        $new[] = $tmpOne;
-                    }
-                    $one['tag_store']['tags']   = $new;
-                }else{
-                    $one['tag_store']['tags']   = [['tag'=>$assTmp]];
-                }
-            }else{
-                $one['tag_store']['tags']   = [['tag'=>$key]];
-                #$one['tag_store']['tags']   =[];
-            }
-            $newArr[] = $one;
-        }
-        $returnArr['code'] =0;
-        $returnArr['data'] = $newArr;
-        $returnArr['msg']  = 'success';
-        echo json_encode($returnArr);exit;
-    }
-
 }   

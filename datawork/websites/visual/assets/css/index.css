@@ -27,7 +27,7 @@ a:hover {
 }
 
 .submenu {
-    /*background: #2E363F*/
+    background: #2E363F
 }
 #sidebar > ul {
     list-style: none;
@@ -315,12 +315,11 @@ a:hover {
     }
 
     .tab-gray {
-        background-color: #F6F6F6;
+        background-color: #F8F8F8;
     }
 
     .tab-blue {
-        /*background-color: #e2edfb;*/
-        color: #BDBDBD;
+        background-color: #e2edfb;
     }
 
     .navbar-nav {
@@ -348,8 +347,8 @@ a:hover {
         padding-bottom: 55px;
     }
     #sidebar > ul > li {
-        border-bottom: 1px solid #1f2d33;
-        background-color: #1f2d33;
+        border-bottom: 1px solid #e4e4e4;
+        background-color: #EDEDED;
         position: relative;
         border-right: 1px solid #e4e4e4;
     }
@@ -361,8 +360,8 @@ a:hover {
         border-bottom: 1px solid #f1f1f1;
     }
     #sidebar > ul li ul li.active a{
-        background-color: #eee;
-        color: #404040;
+        background-color: #cee8ff;
+        color: #6191d4;
     }
 
     div#sidebar::-webkit-scrollbar {
@@ -379,7 +378,7 @@ a:hover {
         height: 55px;
         line-height: 55px;
         text-align: left;
-        color: #93c7d8!important;
+        color: #666;
         text-decoration:none;
         font-size: 14px;
 
@@ -389,12 +388,12 @@ a:hover {
     }
     #sidebar > ul li ul li.active >a{
         color: #fff;
-        background-color: #1f2d33!important;
+        background-color: #5295ED;
     }
     #sidebar li.active a.openurl.ygcp{
-        background-color: #cee8ff;
-        color: #6191d4;
-    }
+         background-color: #cee8ff;
+         color: #6191d4;
+     }
     .three-tab a:last-child {
         border-bottom: 1px solid #f1f1f1!important;
     }
@@ -402,10 +401,9 @@ a:hover {
         background: #fafafa;
     }
     #sidebar > ul li ul li a {
-        background-color:#1f2d33;
-        padding: 17px 0 17px 20px;
+        padding: 17px 0 17px 10px;
         text-align: left;
-        color: #93c7d8;
+        color: #666;
         font-size: 14px;
     }
 
@@ -446,7 +444,7 @@ a:hover {
     }
 
     .filter .btnSearch {
-        background-color: #0081AD;
+        background-color: #5295ED;
         color: #fff;
         display: block;
         width: 8.7rem;
@@ -484,9 +482,8 @@ a:hover {
         display: none !important;
     }
     .webBtn-select{
-        /*background-color: #E6E6E6;*/
-        background-color: #E6E6E6!important;
-        /*color: #6191d4!important;*/
+       background-color: #DCE7F4!important;
+        color: #6191d4!important;
     }
 
     /*下拉框*/
@@ -521,12 +518,12 @@ a:hover {
         top: -2px;
         height: 30px;
         padding: 0;
-        width: 4.9rem;
+        width: 5.9rem;
         white-space: nowrap;
     }
     .error_showmsg .text {
         line-height: 26px;
-        overflow: hidden;
+        overflow: scroll;
     }
     .error_showmsg .error_close{
         height: 26px;
@@ -551,7 +548,7 @@ a:hover {
     }
 
     .my-tab-customkey .btnsavecustomkey {
-        background-color: #0081AD;
+        background-color: #5295ED;
         color: #fff;
         display: block;
         width: 8.7rem;
@@ -566,7 +563,7 @@ a:hover {
         border: 1px solid transparent;
     }
     a.customkey-check.all-select,a.customkey-check.all-unselect{
-        border: 1px #0081AD solid;
+        border: 1px #5797EE solid;
         border-radius: 10px;
         text-decoration:none;
         padding: 2px 5px;
@@ -583,7 +580,7 @@ a:hover {
     }
 
     .datagrid .panel-body, .datagrid .datagrid-view {
-        /* width: 10rem !important;*/
+       /* width: 10rem !important;*/
     }
 
     .tab-panel {
@@ -604,10 +601,9 @@ a:hover {
         width: auto;
     }
     .menu-active{
-        background-color: #cee8ff;
-        color: #6191d4 !important;
+      background-color: #cee8ff;
+      color: #6191d4 !important;
     }
 }
 
 /*bootstrap 样式*/
-

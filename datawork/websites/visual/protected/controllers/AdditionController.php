@@ -14,10 +14,6 @@ class AdditionController extends Controller{
 			$this->jsonOutPut(1);
 			exit();
 		}
-		$is_super = Yii::app()->user->isSuper();
-		if ($is_super) {
-            $parament['is_super'] = 1;
-        }
 		unset($parament['action']);
 		echo json_encode($this->objFackcube->get_fakecube($action,$parament));
 	}
@@ -110,22 +106,6 @@ class AdditionController extends Controller{
 		}
 		
 	}
-
-	function actionChangeStatus(){
-        $action=$_REQUEST['action'];
-        $parament=$_REQUEST;
-
-        if(empty($action)||empty($parament)){
-            $this->jsonOutPut(1);
-            exit();
-        }
-        $is_super = Yii::app()->user->isSuper();
-        if ($is_super) {
-            $parament['is_super'] = 1;
-        }
-        unset($parament['action']);
-        echo json_encode($this->objFackcube->get_fakecube($action,$parament));
-    }
 
 }
 

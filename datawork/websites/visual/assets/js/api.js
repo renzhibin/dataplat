@@ -39,7 +39,6 @@ $(document).ready(function(){
 		   		$('.getapptoken').val(JSON.stringify(result.data));
 		   		$(this).attr('disabled','disabled');
 		   		$('input[name="appname"]').attr('disabled','disabled');
-                $('input[name="appkeyBtn"]').attr('disabled','disabled');
 		   		getAppList(user_name);
 			} else {
 		   		$error_appmsg.text(result.msg).show(); 
@@ -104,6 +103,7 @@ $(document).ready(function(){
         datajson['reportname'] = reportname;
         datajson['reportId'] = reportId;
 	    getUrllist(datajson,'applylisturl','applyreportlistbox');
+
 	});
 
 	//clickInfo 查看项目
@@ -137,67 +137,6 @@ $(document).ready(function(){
 
 	});
 
-    //删除报表
-    $('body').on('click','.deleteReportBtn',function(){
-        var $this =$(this).closest('td'), datastr = $this.attr('data'), datas = JSON.parse(datastr);
-        var tag=[];
-        if(datas['table_list']){
-            for(var p in datas['table_list']){
-                if (datas['table_list'][p].flag != 0) {
-                    tag.push('<option value="'+p+'">'+datas['table_list'][p].report_name+'</option>');
-                }
-            }
-        } else{
-            tag = ['<option value="-1">该项目下暂无报表</option>'];
-        }
-        $('select[name="deletereport"]').html(tag.join('')).select2();
-
-        $('.deletePeportval').val(datastr);
-        $('#deleteModalreport').dialog('open');
-        $('.error_deletetreportmsg').text('').hide();
-    });
-
-	//上线操作
-    $('body').on('click','.onlineBtn',function(){
-        var $this =$(this).closest('td');
-        var app_id = $this.attr('data-id');
-        var status = 1;
-        var url = '/addition/changestatus?action=get_app_token_change&app_id='+app_id+'&status='+status;
-
-        sendAjax(url,{},function(result){
-            if(result.status == 0){
-                $this.find('.onlineBtn').css('display', 'none');
-                $this.find('.offlineBtn').css('display', '');
-            } else {
-                $('.'+errtag).text('错误提示：'+result.msg).show();
-            }
-        },function(){
-            $('.'+errtag).text('上线失败！').show();
-        });
-    });
-
-    //下线操作
-    $('body').on('click','.offlineBtn',function(){
-        var $this =$(this).closest('td');
-        var app_id = $this.attr('data-id');
-        var status = 0;
-        var url = '/addition/changestatus?action=get_app_token_change&app_id='+app_id+'&status='+status;
-
-        if (!confirm('确认下线！')) {
-            return false;
-        }
-
-        sendAjax(url,{},function(result){
-            if(result.status == 0){
-                $this.find('.onlineBtn').css('display', '');
-                $this.find('.offlineBtn').css('display', 'none');
-            } else {
-                $('.'+errtag).text('错误提示：'+result.msg).show();
-            }
-        },function(){
-            $('.'+errtag).text('上线失败！').show();
-        });
-    });
 
 	//弹窗项目 
   $('#myModalpro').show().dialog({
@@ -245,14 +184,14 @@ $(document).ready(function(){
 	    cache: false,
 	    modal: true,
 	    buttons: [{
-	      text:'保存url',
+	      text:'生成url',
 	      handler:function(){    	
 		       var reportId = $('select[name="addreport"]').val();
 		       var reportname =  $('select[name="addreport"] option:selected').text();
 		       var datajson = JSON.parse($('.modalPeportval').val());
+		       /* datajson={"reportname":"", reportId":"","appname":"","appToken":""}*/ 
 		       datajson['reportname'] = reportname;
 		       datajson['reportId'] = reportId;
-              datajson['project'] = datajson['proname'];
 		       if(reportId == '-1'){
 		       		$('.error_modalreportmsg').text('错误提示：请您选择其他项目！').show();
 		       		return false;
@@ -271,43 +210,6 @@ $(document).ready(function(){
 	      }
 	    }]
 	  });
-
-    //删除报表弹窗
-    $('#deleteModalreport').show().dialog({
-        title: '删除报表',
-        width: 450,
-        //height:'',
-        closed: true,
-        cache: false,
-        modal: true,
-        buttons: [{
-            text:'删除报表',
-            handler:function(){
-                var reportId =  $('select[name="deletereport"] option:selected').val();
-                var reportName =  $('select[name="deletereport"] option:selected').text();
-                var datajson = JSON.parse($('.deletePeportval').val());
-                datajson['report_id'] = reportId;
-                datajson['app_name'] = datajson['appname'];
-                datajson['project'] = datajson['proname'];
-                datajson['report_name'] = reportName;
-                if(reportId == '-1'){
-                    $('.error_deletetreportmsg').text('错误提示：请您选择其他项目！').show();
-                    return false;
-                }
-                deleteUrlReport(datajson,function(){
-                    $('#deleteModalreport').dialog('close');
-                })
-
-
-            }
-
-        },{
-            text:'取消',
-            handler:function(){
-                $('#deleteModalreport').dialog('close');
-            }
-        }]
-    });
 	
 });
 
@@ -319,18 +221,9 @@ function getAppList(user_name){
 	sendAjax(url,{},function(result){
 	   	if(result.status == 0){
 	   		$appErrMsgTag.html('').hide();
-            var onlineShow = '';
-            var offlineShow = '';
-	   		var tag = ["<tr><th>应用ID</th><th>应用名称</th><th>申请人</th><th>应用Token</th><th>操作</th></tr>"],datas = result.data.app_list;
+	   		var tag = ["<tr><th>应用ID</th><th>应用名称</th><th>应用Token</th><th>操作</th></tr>"],datas = result.data.app_list;
 	   		for(var p in datas){
-	   			if (datas[p].status == 0) {
-                    onlineShow = "";
-                    offlineShow = "style='display:none'";
-				} else if(datas[p].status == 1) {
-                    onlineShow = "style='display:none'";
-                    offlineShow = "";
-				}
-	   			tag.push("<tr><td>"+datas[p].id+"</td><td>"+datas[p].app_name+"</td><td>"+datas[p].user_name+"</td><td>"+datas[p].token_val+"</td><td data-tag='project' data-id= '"+datas[p].id+"' data-name='"+datas[p].app_name+"' data-token='"+datas[p].token_val+"'><button class='clickInfo btn btn-default btn-xs'>查看项目</button> <button class='addProjectBtn btn btn-default btn-xs'>添加项目</button> <button class='onlineBtn btn btn-default btn-xs' "+onlineShow+">上线</button><button class='offlineBtn btn btn-default btn-xs' "+offlineShow+">下线</button></td></tr>");
+	   			tag.push("<tr><td>"+datas[p].id+"</td><td>"+datas[p].app_name+"</td><td>"+datas[p].token_val+"</td><td data-tag='project' data-name='"+datas[p].app_name+"' data-token='"+datas[p].token_val+"'><button class='clickInfo btn btn-default btn-xs'>查看项目</button> <button class='addProjectBtn btn btn-default btn-xs'>添加项目</button></td></tr>");
 	   		}
 	   		$('.applist').html(tag.join(''));
 
@@ -354,20 +247,10 @@ function getReportlist(datajson){
 	sendAjax(prourl,{},function(result){
 		$('.reportlistcon').hide().find('#listurl').html('');
 		if(result.status == 0){
-			var datas= result.data.project_list, tag = ['<tr><th>序号</th><th>应用名称</th><th>项目名称</th><th>报表名称</th><th>操作</th></tr>'],count= 1;
-			var tables = result.data.table_list;
+			var datas= result.data.project_list, tag = ['<tr><th>序号</th><th>项目名称</th><th>应用名称</th><th>操作</th></tr>'],count= 1;
 			for(var p in datas){
-			    var table_str = '';
-                $.each(tables[datas[p]],function(i,n)
-                {
-                    if (n['flag'] != 0) {
-                        table_str +=  n['report_name'] + ',';
-                    }
-                });
-                table_str=table_str.substring(0,table_str.length-1);
-
-				var tempjson = JSON.stringify({"appname":datajson.appname,"apptoken":datajson.apptoken,"proname":datas[p],"table_list":tables[datas[p]]});
-				tag.push("<tr><td>"+(count++)+"</td><td>"+datajson.appname+"</td><td>"+datas[p]+"</td><td class='tag_"+datas[p]+"'>"+table_str+"</td><td data='"+tempjson+"'><button class='addReportBtn btn btn-default btn-xs'>添加报表</button> <button class='deleteReportBtn btn btn-default btn-xs'>删除报表</button></td></tr>");
+				var tempjson = JSON.stringify({"appname":datajson.appname,"apptoken":datajson.apptoken,"proname":datas[p]});
+				tag.push("<tr><td>"+(count++)+"</td><td>"+datas[p]+"</td><td>"+datajson.appname+"</td><td data='"+tempjson+"'><button class='addReportBtn btn btn-default btn-xs'>添加报表</button></td></tr>");
 			}
    			$('.projectlist').html(tag.join(''));
 		} 
@@ -377,35 +260,6 @@ function getReportlist(datajson){
 
 	});
 
-}
-
-//删除报表
-function deleteUrlReport(datajson) {
-    var url="DeleteReport"
-    sendAjax(url,{"reportId":datajson.report_id,"appName":datajson.app_name,"project":datajson.project},function(result){
-        if(result.status == 0){
-            var str_tag =  $('.tag_'+datajson.project).text();
-            var a = datajson.report_name;
-            str_tag = str_tag.replace(datajson.report_name, "");
-            var d = str_tag.indexOf(",");
-            if (d == 0 ) {
-                str_tag=str_tag.substring(1,str_tag.length);
-            }
-
-            $('.tag_'+datajson.project).html(str_tag);
-            $('#deleteModalreport').dialog('close');
-        } else {
-
-        }
-
-        if(typeof(endfunc) != 'undefined'){
-            endfunc();
-        }
-
-
-    },function(){
-
-    });
 }
 
 // 获取get url
@@ -431,12 +285,7 @@ function getUrllist(datajson,tagId,boxid,endfunc){
    			}
    		}
 
-        var str_tag =  $('.tag_'+datajson.project).text();
-        if (str_tag.indexOf(datajson.reportname) == -1) {
-            str_tag += ','+ datajson.reportname;
-            $('.tag_'+datajson.project).html(str_tag);
-        }
-
+   		
 		$('#'+tagId).html(tag.join(''));
        	clipboard();
        	$('.'+boxid).show().find('.li-panel-head').text("报表名称："+datajson.reportname);

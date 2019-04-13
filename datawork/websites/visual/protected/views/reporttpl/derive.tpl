@@ -213,10 +213,6 @@ $(function(){
   //报表注释
     if(typeof(params)!='undefined' ){
         var explain = (params&&params.basereport.explain) ? params.basereport.explain : '';
-        if (params.basereport.sensitive && params.basereport.sensitive == 1) {
-            explain = '<span style="color: red;">该报表包含敏感数据，请谨慎使用，禁止以任何形式泄露给其他人员</span><br>' + explain
-            params.basereport.explain = explain
-        }
         $('.reportexplaincon').html(explain);
         //报表注释是否显示 2015-06-01
         if(params.basereport && params.basereport.explain){

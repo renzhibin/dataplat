@@ -1,0 +1,20 @@
+.col-md-4{padding:4px}
+.timestyle{ padding: 2px 2px 3px 10px;float: left;text-align: left;}
+.col-md-3{padding: 8px 0px 0px 0px}
+.spanlist{ padding-left: 0px}
+.showspan{padding-left: 2px}
+.inputlist{ width:130px;display: inline-block; height: 25px;}
+
+/*条件样式*/
+.divbox{ margin-bottom:1px;display:inline-block;margin-right:3px; font-size: 12px;}
+.divbox input{width: 120px;}
+.divbox span{line-height: 26px;}
+.inputStyle{
+	text-align:right;
+	display:inline-block;
+	width: 130px
+}
+.btn-special{ 
+	border: 1px solid transparent; 
+	background: none;
+	 line-height: 25px ;color: #0965b8}

@@ -1,0 +1,75 @@
+html,body{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.mod-sales-visit{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.mod-sales-visit .unfold{
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  display: none;
+}
+.mod-sales-visit .operation{
+  right: 10px;
+  top: 30px;
+  width: 160px;
+  height: 260px;
+}
+.mod-sales-visit .operation .container{
+    width:165px;
+    margin: 0 auto;
+    text-align: left;
+}
+.mod-sales-visit .operation .container .opera-item{
+  margin:10px auto;
+}
+.mod-sales-visit .legend{
+  right: 10px;
+  top: 295px;
+  width: 160px;
+  height: 120px;
+}
+.mod-sales-visit .legend .legend-item{
+  width: 140px;
+  height: 32px;
+  padding-left: 30px;
+  margin-left: 20px;
+  margin:5px 20px;
+  text-align: left;
+  line-height: 32px;
+}
+.mod-sales-visit .legend .pack-up{
+  position: absolute;
+  display: inline-block;
+  right: 15px;
+  bottom:5px;
+  cursor: pointer;
+}
+#mapContainer{
+  height: 100%;
+  width: 100%;
+}
+/*点统一样式*/
+.market-icon{
+  background-size: 19px!important;
+  height: 32px;
+  width: 19px;
+}
+.market-text{
+  text-align: center;
+  color: white;
+}
+/*销售拜访点样式*/
+.visit{
+  background:url(/assets/img/markerIcons/mark_visit.png) no-repeat;
+}
+/*超市点样式*/
+.market{
+  background:url(/assets/img/markerIcons/mark_market.png) no-repeat;
+}

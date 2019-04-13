@@ -31,8 +31,9 @@ class ReportController extends Controller
     function actionShowReportCustom()
     {
         $id = $_REQUEST['id'];
+
         // 校验是否有权限访问
-        if (!$this->objAuth->checkAuthFromMenu($id, $this->username)) {
+        if (!$this->checkAuth()) {
             $checkData = $this->objReport->checkReportCustomAuth(is_numeric($id) ? intval($id) : 0, Yii::app()->user->username ?: '');
 
             if (empty($checkData)) {
@@ -219,7 +220,7 @@ class ReportController extends Controller
             $this->jsonOutPut(1,'报表名称不能包含spam关建字');
             exit();
         }
-        if(!Yii::app()->user->isProducer()){
+        if(!$this->objAuth->isProducer()){
             $this->jsonOutPut(1,'只有分析师组才可以编辑报表哦');
             exit();
         }
@@ -333,7 +334,7 @@ class ReportController extends Controller
 
     function actionSaveAuth(){
 
-        $res=Yii::app()->user->isaudit();
+        $res=$this->objAuth->isaudit();
         if(!$res){
             $this->jsonOutPut(1,'只有审核组的人才可以修改~');
             exit();

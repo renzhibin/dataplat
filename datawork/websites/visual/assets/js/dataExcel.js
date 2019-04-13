@@ -365,7 +365,6 @@ dataExcel.prototype = {
     var data = this.option.data;
     //生成表头
     var header = data.header;
-    var tableType = $('input[name="type"]:checked').val();
     var tableHtml = "";
     tableHtml = "<table class='table table-bordered table-condensed' style='margin:0px'>";
     var isCustomChart = false;
@@ -419,12 +418,12 @@ dataExcel.prototype = {
           // 如果为自定义 chart 的处理逻辑
           if(isCustomChart) {
             if(header[s].key === 'xaxis') { // 自定义 x 轴的 chart 单独处理
-              tableHtml += this.setCell(header[s].key, numData[m][header[s].key], numData[m]['type'] === '维度类型' ? 1 : numData[m].isgroup, "m_" + m, tableType);
+              tableHtml += this.setCell(header[s].key, numData[m][header[s].key], numData[m]['type'] === '维度类型' ? 1 : numData[m].isgroup, "m_" + m);
             } else { // 非自定义 x 轴的 chart 的 isgroup 同一为4
-              tableHtml += this.setCell(header[s].key, numData[m][header[s].key], 4, "m_" + m, tableType);
+              tableHtml += this.setCell(header[s].key, numData[m][header[s].key], 4, "m_" + m);
             }
           } else {
-            tableHtml += this.setCell(header[s].key, numData[m][header[s].key], numData[m].isgroup, "m_" + m, tableType);
+            tableHtml += this.setCell(header[s].key, numData[m][header[s].key], numData[m].isgroup, "m_" + m);
           }
         }
         tableHtml += "</tr>";
@@ -433,24 +432,24 @@ dataExcel.prototype = {
     }
     tableHtml += "</table>";
     //if (data.pubdata.reshape != undefined && data.pubdata.reshape != null) {
-      if (((data.contrast == '' || data.contrast == null) && data.pubdata.not_tips == undefined) && tableType != 10) {
+      if ((data.contrast == '' || data.contrast == null) && data.pubdata.not_tips == undefined) {
         tableHtml +=
             '<div class="reshapebox" style="padding:10px;height:42px; margin:10px 0; border:1px solid #ddd"><span>&nbsp;&nbsp;行列转换</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="" name="reshape" class="reshape" />&nbsp;&nbsp;<span class="btn btn-xs btn-primary btn_group_change" data-type=2>时间-指标类型</span> <span class="reshape_box"><span>&nbsp;&nbsp;请选择转换的维度：</span><span class="reshape_row"></span></span> <span class="showinfo_group" data-toggle="tooltip" style="font-size:16px"><i class="icon-question-sign"></i></span><lable style="padding-left:10px;color: #B9B9B9;" class="reshape_tips">（提示：选中行列转换后，报表展示时将隐藏维度（维度必须设置搜索与即使过滤条件），并且列无法排序）</lable></div>';
     }
-    if (((data.contrast == '' || data.contrast == null) && data.pubdata.not_tips == undefined) && tableType != 10) {
+    if ((data.contrast == '' || data.contrast == null) && data.pubdata.not_tips == undefined) {
         tableHtml +=
             '<div class="datanumbox" style="padding:10px;height:42px; margin:10px 0; border:1px solid #ddd">&nbsp;&nbsp;报表数据显示条数&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" value="" name="data_num" style="width:40px" class="data_num" max=499 /><lable style="padding-left:10px;color: #B9B9B9;">（提示：数据不能大于等于500,此限制目前只支持邮件订阅）</lable></div>';
     }
     //生成默认设置页码 普通报表设置翻页
-    if (((data.contrast == '' || data.contrast == null) && data.pubdata.ispagesize != undefined) && tableType != 10) {
+    if ((data.contrast == '' || data.contrast == null) && data.pubdata.ispagesize != undefined) {
       tableHtml +=
         '<div class="ispagesizebox" style="padding:10px;height:42px; margin:10px 0; border:1px solid #ddd"><span>&nbsp;&nbsp;设置默认页码</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="" name="ispagesize" class="ispagesize" /><span class="pagesizebox" style="margin-left:15px;">每页显示条数 <input class="easyui-numberspinner pagesize" name="pagesize" data-options="min:10,increment:5,max:100" style="width:75px;" /></span><lable style="padding-left:10px;color: #B9B9B9;">（提示：不设置默认页码，一次性最多显示3000条）</lable></div>';
     }
 
       // 2017-05-26 时间设置
-      if (((data.contrast == '' || data.contrast == null) && data.pubdata.isdateslice != undefined) && tableType != 10) {
+      if ((data.contrast == '' || data.contrast == null) && data.pubdata.isdateslice != undefined) {
           tableHtml +=
-              '<div class="isdateslicebox" style="padding:10px;height:42px; margin:10px 0; border:1px solid #ddd"><span>&nbsp;&nbsp;设置时间间隔</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="" name="isdateslice" class="isdateslice" /><span class="dateslicebox" style="margin-left:15px;">时间间隔 <input class="easyui-numberspinner dateslice" name="dateslice" data-options="min:1,increment:1,max:10" style="width:75px;" /></span><lable style="padding-left:10px;color: #B9B9B9;">（提示：选中后该表格时间条件范围调整为（全局结束时间 －（n－1）个时间单位）至全局结束时间）</lable></div>';
+              '<div class="isdateslicebox" style="padding:10px;height:42px; margin:10px 0; border:1px solid #ddd"><span>&nbsp;&nbsp;设置时间间隔</span>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" value="" name="isdateslice" class="isdateslice" /><span class="dateslicebox" style="margin-left:15px;">时间间隔 <input class="easyui-numberspinner dateslice" name="dateslice" data-options="min:1,increment:1,max:10" style="width:75px;" /></span><lable style="padding-left:10px;color: #B9B9B9;">（提示：默认使用全局时间间隔）</lable></div>';
       }
     //是否打开表格颜色渐变
     //if(  data.pubdata.gradually != undefined  &&  parseInt( data.pubdata.gradually)  >0 ){
@@ -609,7 +608,7 @@ dataExcel.prototype = {
     return table;
   },
   //生成某一列  设置这列数据
-  setCell: function(key, keyVal, type, item, tableType) {
+  setCell: function(key, keyVal, type, item) {
     var keyVal = keyVal ? keyVal : "";
     var td = "";
     td += "<td class='" + key + "_report'>";
@@ -909,7 +908,7 @@ dataExcel.prototype = {
           }
           break;
       case 'indent_count':
-          if (type == 1 || type == 3 || tableType == 10) {
+          if (type == 1 || type == 3) {
               td += "-";
           } else {
               if (keyVal == '') {
@@ -2162,8 +2161,6 @@ dataExcel.prototype = {
     var udcLine = [];
     var commonLine = [];
     var is_reshape = $("input[name='reshape']").is(':checked');
-    dim_count = 0;
-    metric_count = 0;
     for (var i = 0; i < data.length; i++) {
       if (data[i].key == '' && data[i].isgroup == 3) {
         $.messager.alert("提示", '列key必须填写完整', 'warning');
@@ -2194,58 +2191,6 @@ dataExcel.prototype = {
           udcLine.push([data[i].name, data[i].expression]);
       } else {
           commonLine.push(data[i].key);
-      }
-      var type = $('input[name="type"]:checked').val();
-      if (type == 10) {
-          if (data[i].key == 'date') {
-              if (data[i].hide == 1) {
-                  if( parseInt(window.params.timereport.date_type) != 1){
-                      $.messager.alert('提示', '不展示默认时间维度时间区类型只支持单天', 'info');
-                      return false;
-                  }
-              }
-              if (data[i].hide != 1) {
-                  dim_count = dim_count + 1;
-              }
-          }
-          else if (data[i].type == '维度' && data[i].key != 'date') {
-              var is_search = data[i].issearch;
-              if (is_search instanceof Object) {
-                  if (is_search.is_accurate != '1') {
-                      $.messager.alert("提示", '搜索匹配类型必须为精确匹配', 'warning');
-                      return false;
-                  }
-                  var search = data[i].search;
-                  if (search.defaultsearch == undefined || search.defaultsearch == '') {
-                      $.messager.alert("提示", '即使过滤信息必须配置', 'warning');
-                      return false;
-                  }
-                  if (data[i].hide != 1) {
-                      $.messager.alert("提示", '只能展示两个维度，多余维度必需隐藏', 'warning');
-                      return false;
-                  }
-                  continue;
-              }
-              dim_count = dim_count + 1;
-              if (dim_count > 2) {
-                  $.messager.alert("提示", '只能展示两个维度，多余维度必需设置搜索，如不需要展示系统默认时间维度请隐藏', 'warning');
-                  return false;
-              }
-          } else {
-              if (data[i].hide != 1) {
-                  metric_count = metric_count + 1;
-              } else {
-                  console.log(window.params.timereport.date_type);
-                  if( parseInt(window.params.timereport.date_type) != 1){
-                      $.messager.alert('提示', '不展示默认时间维度时时间区类型只支持单天', 'info');
-                      return false;
-                  }
-              }
-              if (metric_count > 1) {
-                  $.messager.alert("提示", '只能展示一个指标，多余指标必需隐藏', 'warning');
-                  return false;
-              }
-          }
       }
       if (is_reshape) {
         if (data[i].key == 'date') {

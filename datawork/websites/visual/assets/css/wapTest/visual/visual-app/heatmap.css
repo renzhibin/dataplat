@@ -1,0 +1,170 @@
+body,html,#container{
+    height: 100%;
+    margin: 0px;
+    font:12px Arial;
+}
+.panel-right{
+    max-height: 100%;
+    overflow-y: auto;
+    right: 10px;
+    top: 10px;
+    width: 150px;
+    min-height:405px;
+}
+.info-market{
+    top: 10px;
+    left: 50%;
+    margin-left: -340px;
+    min-width: 680px;
+    line-height: 40px;
+}
+.info-market>span{
+    min-width: 125px;
+    display: inline-block;
+    text-align: left;
+}
+.info-market .title{
+    margin-right: 20px;
+}
+.panel-right .btn{
+    display: inline-block;
+    height: 25px;
+    width: 100px;
+    margin:5px auto;
+    line-height: 25px;
+}
+.panel-right .btn label{
+    cursor: pointer;
+}
+.panel-right .can-check{
+    background-color: #66E968;
+}
+.panel-right .detail-numbers div{
+    margin:0 5px 5px;
+}
+.panel-right select{
+    width: 65px;
+}
+.panel-right .slide-up{
+    text-align: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.panel-right .slide-up:hover{
+    color:#4B9DED;
+}
+.panel-right .menu-title{
+    margin:5px 5px;
+    font-weight: bold;
+}
+.slide-down{
+    position: fixed;
+    right: 20px;
+    top: 10px;
+}
+.btn-get-data{
+  margin:10px auto;
+}
+.search-panel label{
+  display: inline-block;
+  margin: 10px 15px 0;
+}
+.detail-numbers{
+  margin-top: 20px;
+  padding-left: 10px;
+}
+.legend{
+  margin:10px 0 30px;
+}
+.legend .legend-layer{
+  margin-left: 75px;
+  margin-top: 10px;
+}
+.legend .legend-layer div{
+  width: 60px;
+  height: 20px;
+  line-height: 20px;
+  color:white;
+  text-align: center;
+}
+.legend-heat,.legend-level{
+  display: none;
+}
+
+.level-4{
+  background-color: red;
+}
+.level-3{
+  background-color: #ffea00;
+}
+.level-2{
+  background-color: rgb(0, 255, 0);
+}
+.level-1{
+  background-color: rgb(117,211,248);
+}
+.level-0{
+  background-color: blue;
+}
+/*
+ * 分级设色图legend样式
+*/
+.mass-4{
+  background-color: #ff2226;
+}
+.mass-3{
+  background-color: #7f30ff;
+}
+.mass-2{
+  background-color: #fff22d;
+}
+.mass-1{
+  background-color: #2bff82;
+}
+.mass-0{
+  background-color: #5fc0ff;
+}
+.mass-legend{
+  width: 60px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+}
+.level-info{
+  margin:10px 0 0 75px;
+}
+
+.drop-para{
+  width: 20px;
+}
+.minimum{
+  width: 30px;
+}
+.maximum{
+  width: 30px;
+}
+.level-menu{
+  display: none;
+}
+.level-menu span{
+  display: inline-block;
+  margin:10px 0;
+}
+.panel-right .drop-round-button{
+  width: 80px;
+}
+
+.sales-name{
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+}
+.market-name{
+  width: 50px;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 20px;
+  background-color: rgba(252, 255, 255, 0.8);;
+}

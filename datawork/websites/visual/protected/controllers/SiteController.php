@@ -13,11 +13,9 @@ class SiteController extends Controller
      */
     public function actionIndex($id = '')
     {
-
         $request = $_REQUEST;
 
         $useInnerLogin = env('INNER_LOGIN_INTERFACE', false);
-
 
         $useInnerLogin ?
             $this->render('site/login.tpl')
@@ -40,7 +38,6 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-
         $useInnerLogin = env('INNER_LOGIN_INTERFACE', false);
         if ($useInnerLogin) {
             $model = new LoginForm;
@@ -119,7 +116,7 @@ class SiteController extends Controller
                     AuthService::logout();
                     exit;
             }
-            $entry = env('PROJECT_KEY');
+            $entry = 'data_analysis_platform';
             header ('p3p:CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"');
             echo $callback."('" . $entry . "')";
         }
@@ -133,10 +130,7 @@ class SiteController extends Controller
     {
         //清除登录cookie
         setcookie('username_token','',0,'/');
-        $logOutUrl = AuthService::SsoLogout();
-//        $this->redirect('/site/index');
-        $this->redirect($logOutUrl);
-
+        $this->redirect('/site/index');
     }
 
     /**

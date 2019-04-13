@@ -1,0 +1,599 @@
+/* Sidebar Navigation */
+#sidebar {
+    display: block;
+    position: relative;
+    width: 190px;
+    float: left;
+    z-index: 16;
+    background-color: #1e242b;
+}
+
+body {
+    background: url('/assets/img/index_bg.jpg') repeat-y;
+    background-position: -19px 0px;
+    /*background-size: 191px 1px;*/
+    /*background-color:#F9FCFF;*/
+    font-size: 12px;
+    font-family: 'Microsoft Yahei', Arial;
+}
+.max-hide {
+    display: block !important;
+}
+.max-inline {
+    display: inline-block !important;
+}
+
+.submenu {
+    background: #2E363F
+}
+#sidebar > ul {
+    list-style: none;
+    margin: 0px 0 0;
+    padding: 0;
+    position: absolute;
+    width: 190px;
+}
+#sidebar > ul > li {
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+#sidebar > ul > li > a {
+    padding: 7px 0 7px 15px;
+    display: block;
+    color: #0965b8;
+    font-weight: normal;
+    text-decoration: none;
+    cursor: pointer;
+}
+#sidebar > ul > li > a > i {
+    margin-right: 10px;
+}
+#sidebar > ul > li.active > a {
+    background: url("../img/menu-active.png") no-repeat scroll right center transparent !important;
+    text-decoration: none;
+}
+#sidebar > ul > li > a > .label {
+    margin: 0 20px 0 0;
+    float: right;
+    padding: 3px 5px 2px;
+}
+#sidebar > ul li ul {
+    display: none;
+    margin: 0;
+    padding: 0;
+    background: #F9FCFF;
+}
+#sidebar > ul li.open ul {
+    display: block;
+}
+#sidebar > ul li ul li a {
+    /*background-color: #1f2d33!important;*/
+    padding: 7px 0 7px 25px;
+    display: block;
+    color: #777777;
+    text-decoration: none;
+    cursor: pointer;
+}
+#sidebar > ul li ul li:first-child a {
+    border-top: 0;
+}
+#sidebar > ul li ul li:last-child a {
+    border-bottom: 0;
+}
+
+#sidebar > ul > li {
+    /*border-top: 1px solid #37414b;*/
+    /*border-bottom: 1px solid #fff;*/
+    background-color: #1f2d33!important;
+    border-bottom-width: 0!important;
+}
+#sidebar > ul > li.active {
+    background-color: #ea764f;
+}
+
+#sidebar > ul > li > a > .label {
+    background-color: #F66;
+}
+#sidebar > ul > li > a:hover {
+    text-decoration: underline;
+    /*background-color: #27a9e3; color:#fff;*/
+}
+#sidebar > ul li ul {
+    /*background-color: #1e242b;  #e2edfb*/
+}
+#sidebar > ul li ul li a {
+    color: #6191d4
+}
+#sidebar > ul li ul li.active a {
+    color: #404040;
+    background-color: #eee;
+}
+#sidebar > ul li ul li a:hover {
+    /*color: #fff;*/
+    /*background-color: #27a9e3;*/
+    text-decoration: underline;
+}
+/* Content */
+#content {
+    /*background: none repeat scroll 0 0 #eeeeee;*/
+    margin-left: 199px;
+    margin-right: 0;
+    padding-bottom: 25px;
+    position: relative;
+    min-height: 100%;
+    width: auto;
+    /*border-left:1px solid #b8cefe;*/
+}
+#all-content {
+    background-color: #ffffff;
+    margin-right: 0;
+    padding-bottom: 25px;
+    position: relative;
+    min-height: 100%;
+    width: auto;
+    background-image: none
+    /*border-left:1px solid #b8cefe;*/
+}
+#content-header {
+    position: abslute;
+    width: 100%;
+    margin-top: -38px;
+    z-index: 20;
+}
+#content-header h1 {
+    color: #555555;
+    font-size: 28px;
+    font-weight: normal;
+    float: none;
+    text-shadow: 0 1px 0 #ffffff;
+    margin-left: 20px;
+    position: relative;
+}
+#content-header .btn-group {
+    float: right;
+    right: 20px;
+    position: absolute;
+}
+#content-header h1, #content-header .btn-group {
+    margin-top: 20px;
+}
+#content-header .btn-group .btn {
+    padding: 11px 14px 9px;
+}
+#content-header .btn-group .btn .label {
+    position: absolute;
+    top: -7px;
+}
+2.container-fluid .row-fluid:first-child {
+    margin-top: 20px;
+}
+
+.topBox {
+    height: 40px;
+    position: absolute;
+    top: 51px;
+    right: 5px;
+}
+
+/*特别样式*/
+.showrow {
+    margin: 0px 0px 10px 0px;
+    padding: 5px;
+    background-color: #eee
+}
+
+.h4show {
+    height: 600px;
+    text-align: center;
+    min-height: 600px;
+    margin: 0px;
+    padding: 0px;
+    background: url(/assets/img/Marketing-Analysis.png);
+    background-size: 50% 50%;
+    background-position: right bottom;
+    background-repeat: no-repeat;
+
+    background-size: 50% 50%\9;
+    -ms-behavior: url(/assets/img/backgroundsize.min.htc);
+    position:relative;
+    z-index: 1;
+
+}
+
+.h4show h4 {
+    padding-top: 20%;
+    margin: 0px;
+    font-size: 30px;
+}
+/*浮框可收缩，shadow影响效果，所以去掉*/
+.window-shadow{
+    display: none!important;
+}
+/*对比框收缩样式变化*/
+.panel.contrast-flod{
+    width: 26px!important;
+    height: 100px;
+    opacity: 1;
+}
+
+.contrast-hide{
+    opacity: 0;
+}
+.contrast-show{
+    width: auto!important;
+}
+.contrast-show .panel-title{
+    display: inline-block;
+    margin-left: 3px;
+}
+.contrast-show .panel-body{
+    height: auto!important;
+}
+
+.contrast-flod .panel-title{
+    margin-left: 2px;
+}
+.window-header.contrast-flod{
+    width: 22px!important;
+    height: 100px;
+    right: 2px;
+    border: 0;
+}
+.window-header.contrast-flod .panel-tool{
+    top: 85%;
+    right: 5px;
+}
+
+/*首页菜单右侧小按钮样式*/
+.menu_plus {
+    background: url('/assets/img/bg_index.png');
+    background-position: 43px -777px;
+    background-repeat: no-repeat;
+}
+.menu_minus {
+    background: url('/assets/img/bg_index.png');
+    background-position: 43px -737px;
+    background-repeat: no-repeat;
+}
+.web-filter {
+    display: none !important;
+}
+.max-show{
+    display: none;
+}
+.icon-shousuojianhao,.icon-shousuojiahao {
+    display: block;
+    color: #666;
+    font-size: 12px;
+}
+.icon-shousuojiahao:before,.icon-shousuojianhao:before{
+    float: right;
+    margin-right: 10px;
+}
+
+/*移动端适配*/
+@media screen and (max-width: 768px) {
+    body {
+        background: #fff;
+        height: 19rem;
+    }
+    /*对比框*/
+    .contrast-show,.contrast-flod{
+        display: none!important;
+    }
+    i.iconfont.muneIcon.icon-chahao-copy {
+        font-size: 24px;
+        top: 4px;
+        left: 17px;
+
+    }
+    .max-show{
+        display: inline-block;
+    }
+
+    .max-hide, .max-inline {
+        display: none !important;
+    }
+
+    .web-hide {
+        display: none;
+        visibility: visible;
+    }
+
+    .tab-gray {
+        background-color: #F6F6F6;
+    }
+
+    .tab-blue {
+        /*background-color: #e2edfb;*/
+        color: #BDBDBD;
+    }
+
+    .navbar-nav {
+        margin: 0;
+    }
+
+    .h4show{
+        margin-top: 10px;
+    }
+    .h4show h4{
+        font-size: 24px;
+    }
+    #sidebar {
+        position: fixed;
+        top: 31px;
+        margin: 10px 0;
+        height: 100%;
+        z-index: 1111;
+        width: 10rem;
+        max-width: 100%;
+        overflow: scroll;
+        background-color: #fff;
+    }
+    #sidebar > ul {
+        padding-bottom: 55px;
+    }
+    #sidebar > ul > li {
+        border-bottom: 1px solid #e4e4e4;
+        background-color: #EDEDED;
+        position: relative;
+        border-right: 1px solid #e4e4e4;
+    }
+    .three-tab a{
+        padding: 12px 12px!important;
+        width: 6.4rem;
+        text-align: left!important;
+        background-image: none;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    #sidebar > ul li ul li.active a{
+        background-color: #eee;
+        color: #404040;
+    }
+
+    div#sidebar::-webkit-scrollbar {
+        display: none;
+    }
+
+    #sidebar > ul {
+        width: 4.1rem;
+    }
+
+    #sidebar > ul > li > a {
+        padding: 0;
+        padding-left: 10px;
+        height: 55px;
+        line-height: 55px;
+        text-align: left;
+        color: #93c7d8!important;
+        text-decoration:none;
+        font-size: 14px;
+
+    }
+    #sidebar > ul li ul li a:hover {
+        text-decoration:none;
+    }
+    #sidebar > ul li ul li.active >a{
+        color: #fff;
+        background-color: #1f2d33!important;
+    }
+    #sidebar li.active a.openurl.ygcp{
+         background-color: #cee8ff;
+         color: #6191d4;
+     }
+    .three-tab a:last-child {
+        border-bottom: 1px solid #f1f1f1!important;
+    }
+    #sidebar > ul li ul{
+        background: #fafafa;
+    }
+    #sidebar > ul li ul li a {
+        background-color:#1f2d33;
+        padding: 17px 0 17px 20px;
+        text-align: left;
+        color: #93c7d8;
+        font-size: 14px;
+    }
+
+    .web-breadcrumbs{
+        position: relative;
+        top: 0;
+        height: 30px;
+        line-height: 30px;
+        margin-left: 5px;
+    }
+    .web-breadcrumbs a{
+        text-decoration: none;
+    }
+    /*side 背景图位置*/
+    .icon-shousuojiahao:before,.icon-shousuojianhao:before{
+        margin-right: 5px;
+    }
+
+    #content {
+        margin-left: 6px;
+        position: relative;
+    }
+
+    /*按时间查询隐藏*/
+    .chartHeader {
+        display: none;
+    }
+
+    /*?表头样式去掉+tab的问号*/
+    /*.reportexplainbox*/
+    .glyphicon-question-sign, .reportexplainbox {
+        display: none !important;
+    }
+
+    /*filter*/
+    .tablelist .filter {
+        display: none;
+    }
+
+    .filter .btnSearch {
+        background-color: #0081AD;
+        color: #fff;
+        display: block;
+        width: 8.7rem;
+        height: 38px;
+        font-size: 16px;
+        margin: 0 auto;
+
+    }
+
+    .filter .divbox {
+        width: 9.5rem;
+        margin: 5px 0;
+    }
+
+    .filter .divbox span {
+        width: 2.2rem;
+        display: inline-block;
+        font-size: 12px;
+        text-align: left!important;
+
+    }
+
+    .filter .divbox input {
+        width: 7.2rem;
+        margin-bottom: 5px;
+        height: 35px;
+    }
+
+    .filter .divbox .selectChange {
+        width: 7.2rem !important;
+        border: 1px #5295ED solid;
+    }
+
+    .select2-container {
+        display: none !important;
+    }
+    .webBtn-select{
+        /*background-color: #E6E6E6;*/
+       background-color: #E6E6E6!important;
+        /*color: #6191d4!important;*/
+    }
+
+    /*下拉框*/
+    select.selectChange, select.pagination-page-list {
+        display: inline-block !important;
+    }
+
+    select.selectChange {
+        height: 35px;
+        border-radius:0;
+    }
+
+    .filter button {
+        width: 9.5rem;
+        height: 35px;
+        line-height: 35px;
+    }
+
+    .web-filter {
+        display: inline-block !important;
+    }
+    .configBox{
+        position: relative;
+    }
+
+    .filter-hide {
+        display: none !important;
+    }
+    /*未生成报表*/
+    .error_showmsg{
+        position: absolute;
+        top: -2px;
+        height: 30px;
+        padding: 0;
+        width: 5.9rem;
+        white-space: nowrap;
+    }
+    .error_showmsg .text {
+        line-height: 26px;
+        overflow: hidden;
+    }
+    .error_showmsg .error_close{
+        height: 26px;
+        line-height: 26px;
+        width: 26px;
+        right: -8px;
+        top: 7px;
+    }
+
+    /*筛选五角星.my-nav-customkey>li>a.customtitle{
+        background: none;
+    }*/
+    /*自定义显示*/
+    .my-tab-customkey, .my-tab-gradually {
+        font-size: 12px;
+        margin-top: 2px;
+
+    }
+
+    .my-tab-customkey .col-sm-2, .my-tab-gradually .col-sm-2 {
+        display: inline-block;
+    }
+
+    .my-tab-customkey .btnsavecustomkey {
+        background-color: #0081AD;
+        color: #fff;
+        display: block;
+        width: 8.7rem;
+        height: 38px;
+        font-size: 16px;
+        margin: 4px auto;
+        margin-bottom: -3px;
+    }
+
+    input.btn.btn-default.btnsavecustomkey:hover {
+        color: #000;
+        border: 1px solid transparent;
+    }
+    a.customkey-check.all-select,a.customkey-check.all-unselect{
+        border: 1px #0081AD solid;
+        border-radius: 10px;
+        text-decoration:none;
+        padding: 2px 5px;
+        display: inline-block;
+        margin: 5px 5px 5px 0;
+    }
+    .my-nav-customkey > li.my-nav-customtitle {
+        top: -25px;
+    }
+
+    /*table趋势*/
+    .datagrid-cell-rownumber, .datagrid-header-rownumber {
+        display: none;
+    }
+
+    .datagrid .panel-body, .datagrid .datagrid-view {
+       /* width: 10rem !important;*/
+    }
+
+    .tab-panel {
+        display: block;
+        height: 1px;
+        overflow: hidden;
+    }
+
+    .web-fold {
+        display: none !important;
+    }
+
+    .showbox.btn-group.btn-group-xs {
+        display: none !important;
+    }
+
+    .datagrid-cell-c2-code {
+        width: auto;
+    }
+    .menu-active{
+      background-color: #cee8ff;
+      color: #6191d4 !important;
+    }
+}
+
+/*bootstrap 样式*/

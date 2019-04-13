@@ -8,7 +8,7 @@
 <link href="/assets/css/compat-ie.css" rel="stylesheet">
 <!-- 禁止删除：以下inject的注释 -->
 <!-- inject:css -->
-{/if !$isMobile /}<link rel="stylesheet" href="/assets/css/theme/d_theme_main.css?v={/$version/}">{//if/}
+<link rel="stylesheet" href="/assets/css/theme/d_theme_main.css?v=c05fdcb7e6">
 <!-- endinject -->
 <link href="/assets/css/font-awesome.css" rel="stylesheet"/>
 <script src="/assets/lib/jquery-1.11.1.min.js"></script>

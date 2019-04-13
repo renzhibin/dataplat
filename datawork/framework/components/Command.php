@@ -38,9 +38,4 @@ class Command extends CConsoleCommand {
             return Creator::getInstance() -> spawn($name);
         }
     }
-
-    function to_log($status, $content)
-    {
-        echo '[' . $status . '] ' . date("Y-m-d H:i:s") . $content . "\r\n";
-    }
 }

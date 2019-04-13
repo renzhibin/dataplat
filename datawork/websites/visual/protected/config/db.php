@@ -22,16 +22,9 @@ function parse(&$configs, $lines, $merge=true, $direct=false){
             'charset' => 'utf8'
         );
 
-        $connectionString = "db_{$dbname}{$suffix}";
-        $slaveConnectionString = "sdb_{$dbname}{$suffix}";
-        if (isset($line['connectin_alias'])) {
-            $alias = $line['connectin_alias'];
-            $connectionString = "db_{$alias}{$suffix}";
-            $slaveConnectionString = "sdb_{$alias}{$suffix}";
-        }
         if($ismaster) {
-            $configs[$connectionString] = $config;
-            $configs[$connectionString]["class"] = "CDbConnection";
+            $configs["db_{$dbname}{$suffix}"] = $config;
+            $configs["db_{$dbname}{$suffix}"]["class"] = "CDbConnection";
         } else {
             $config['port'] = $port;
             $config['host'] = $hostname;
@@ -39,12 +32,12 @@ function parse(&$configs, $lines, $merge=true, $direct=false){
             $config['database'] = "sdb_{$dbname}{$suffix}";
             $config['direct'] = $direct;
             
-            $configs[$slaveConnectionString]["class"] = "DbConnection";
+            $configs["sdb_{$dbname}{$suffix}"]["class"] = "DbConnection";
             
             if ($merge) {
-                $configs[$slaveConnectionString]["dbs"][] = $config;
+                $configs["sdb_{$dbname}{$suffix}"]["dbs"][] = $config;
             } else {
-                $configs[$slaveConnectionString]["dbs"] = array($config);
+                $configs["sdb_{$dbname}{$suffix}"]["dbs"] = array($config);
             }
         }
     }

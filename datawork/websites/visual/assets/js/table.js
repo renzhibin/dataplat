@@ -108,8 +108,7 @@ Table.prototype = {
 				}
 			}
 		} else {
-            this.tableHeaderPin();
-			/*if (len === 1) {
+			if (len === 1) {
 				if (function() {
 						try {
 							return allcontent, true;
@@ -129,43 +128,8 @@ Table.prototype = {
 						});
 					}
 				}
-			}*/
-		}
-	},
-	tableHeaderPin:function() {
-        var _this = this;
-        var navHeight = $(".navbar").height();
-		$(window).on('scroll', function () {
-			var tableArr = [];
-            var tableTop = $(_this.boxtag).offset().top;
-            var tableEnd = tableTop + $(_this.boxtag).height();
-            var htables = $(".datagrid-htable");
-            var htableHeight = 0;
-            htables.each(function(){
-                if (($(this).offset().top >= tableTop) && ($(this).offset().top <= tableEnd)) {
-                    tableArr.push($(this));
-                    htableHeight = $(this).height();
-                }
-            });
-            for ( var i = 0; i <tableArr.length; i++){
-                if (tableArr[i].width() > 1500) {
-                	return;
-				};
-            }
-            var p = $(window).scrollTop();
-            tableEnd = tableEnd - 2*htableHeight;
-			if ((p > tableTop) && (p < tableEnd)) {
-                for ( var i = 0; i <tableArr.length; i++){
-                    tableArr[i].css({'position': 'fixed', 'top': navHeight, 'z-index': 8900});
-                }
-			} else {
-                for ( var i = 0; i <tableArr.length; i++){
-                    tableArr[i].css('position', '');
-                    tableArr[i].css('top', '');
-                    tableArr[i].css('z-index', '');
-                }
 			}
-        });
+		}
 	},
 	// 2016/9/27 下午8:59:33 增加移动端表头顶端固定方法
 	pinHeader: function(params) {
@@ -924,7 +888,6 @@ Table.prototype = {
 			$k_obj.group = fakecube.group;
 			$k_obj.metric = fakecube.metric;
 			$k_obj.udc = fakecube.udc;
-			$k_obj.date_type = fakecube.date_type;
 			$k_obj.udcconf = fakecube.udcconf;
 			$k_obj.sql = fakecube.sql;
 			$k_obj.search = fakecube.search;
@@ -1450,16 +1413,13 @@ Table.prototype = {
 
 	//生成datagrad表头
 	getDatagrad: function(obj, data, fakecube, url) {
-        var _this = this;
-        _this.getSearchVal(data, fakecube);
 		if (fakecube.grade.pubdata.reshape == 1) {
 			data = getReshapeTableHeaderDate(fakecube, data);
 		}
-		if (fakecube.type == 10) {
-			data = getCrossTableHeaderData(fakecube, data, url);
-		}
+		var _this = this;
 		var pagesize;
 		var columnArr = this.getcolumn(data);
+		_this.getSearchVal(data, fakecube);
 		var title = fakecube.title + '<span style="color:#c0c0c0">(主表)</span>';
 		if (fakecube.master != undefined && fakecube.master > 0) {
 			title = fakecube.title + '<span style="color:#c0c0c0">(副表)</span>';
@@ -1522,79 +1482,12 @@ Table.prototype = {
             onLoadSuccess: function (result) {
                 _this.loadSuccess(obj, result, fakecube);
                 var deviceType = false; // 手机不去掉序号browserRedirect();
-                if (result.hide_dates) {
-                    for (index in result.hide_dates) {
-                        obj.datagrid("hideColumn", result.hide_dates[index]);
-                    }
+				if (result.hide_dates) {
+					for (index in result.hide_dates) {
+						obj.datagrid("hideColumn", result.hide_dates[index]);
+					}
 
-                }
-                //手机模式下去掉id
-                if (deviceType) {
-                    //获取frozen列id宽度
-                    $id_this = $('.datagrid-header-row td').eq(0);
-                    $id_width = $id_this.width(); //id宽度
-                    $frozen_width = $('.datagrid-view1 .datagrid-header').width(); //frozen宽度
-                    $('.datagrid-view1').width($frozen_width - $id_width);
-                    $('.datagrid-view1 .datagrid-header').width($frozen_width - $id_width);
-                    $('.datagrid-view1 .datagrid-body').width($frozen_width - $id_width);
-                    $('.datagrid-view1 .datagrid-footer').width($frozen_width - $id_width);
-                    //frozen列宽度低了,还要增大活动列
-                    $move_width = $('.datagrid-view2 .datagrid-header').width(); //活动列宽度
-                    $('.datagrid-view2').width($move_width + $id_width);
-                    $('.datagrid-view2 .datagrid-header').width($move_width + $id_width);
-                    $('.datagrid-view2 .datagrid-body').width($move_width + $id_width);
-                    $('.datagrid-view2 .datagrid-footer').width($move_width + $id_width);
-
-                    //datagrid-view1
-                    $id_this.remove();
-                    $('.datagrid-td-rownumber').remove();
-                }
-
-
-            }
-        };
-        var cross_option = {
-            url: url,
-            rownumbers: false,
-            singleSelect: true,
-            collapsible: false,
-            multiSort: false,
-            loadMsg: "数据正在加载。。。",
-            autoRowHeight: true,
-            //pagination: ispagesize,
-            //pageSize: pagesize, //每页显示的记录条数，默认为10
-            //pageList: pageList, //可以设置每页记录条数的列表
-            method: 'post',
-            remoteSort: false,
-            frozenColumns: [columnArr.frozenColumns],
-            columns: [columnArr.columns],
-            //remoteSort:true,
-            queryParams: queryjson,
-            loadFilter: function (result) {
-                return _this.formatMetric(fakecube, result, data);
-            },
-            // toolbar:[{
-            // 		id:'btnadd',
-            // 		text:'数据聚合',
-            // 		iconCls:'icon-add',
-            // 		handler:function(){
-            // 			//$('#btnsave').linkbutton('enable');
-            // 			var data = obj.datagrid('getData');
-            // 			console.log(data);
-            // 			//获取中文名称
-            // 			//生成下拉框
-            // 			//重新加载数据
-            // 		}
-            // }],
-            onLoadSuccess: function (result) {
-                _this.loadSuccess(obj, result, fakecube);
-                var deviceType = false; // 手机不去掉序号browserRedirect();
-                if (result.hide_dates) {
-                    for (index in result.hide_dates) {
-                        obj.datagrid("hideColumn", result.hide_dates[index]);
-                    }
-
-                }
+				}
                 //手机模式下去掉id
                 if (deviceType) {
                     //获取frozen列id宽度
@@ -1718,9 +1611,7 @@ Table.prototype = {
 		if (ispagesize && !iswap) {
             if (fakecube.grade.pubdata.reshape == 1) {
                 obj.datagrid(reshape_option);
-            } else if (fakecube.type == 10) {
-                obj.datagrid(cross_option);
-			} else {
+            } else {
                 obj.datagrid(pagesize_option);
             }
 
@@ -1764,8 +1655,6 @@ Table.prototype = {
 			}*/
             if (fakecube.grade.pubdata.reshape == 1) {
                 obj.datagrid(reshape_option);
-            } else if (fakecube.type == 10) {
-                obj.datagrid(cross_option);
             } else {
                 obj.datagrid(buffer_option);
             }
@@ -2650,24 +2539,6 @@ Table.prototype = {
 	}
 
 };
-
-function getCrossTableHeaderData(fakecube, data, url) {
-	newData = [];
-    $.ajax({
-        url : url,
-        data:{
-            datas:JSON.stringify(fakecube)
-        },
-        cache : false,
-        async : false,
-        type : "POST",
-        dataType : 'json',
-        success : function (result){
-            newData = result['tableHeader'];
-        }
-    });
-    return newData;
-}
 
 function getReshapeTableHeaderDate(fakecube, data) {
 	var newData = [];

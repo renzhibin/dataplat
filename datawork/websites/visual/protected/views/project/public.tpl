@@ -117,40 +117,16 @@
                 <option value="{/$value.key/}">{/$value.value/}</option>
             {//foreach/}
         </select>
-        <h5>业务线</h5>
-        <select class="hive_queue" name="hive_queue" style="width:200px;border-color:#ccc; height:24px;">
-            {/foreach $hive_queue as $key => $value/}
-            <option value="{/$value.key/}">{/$value.value/}</option>
-            {//foreach/}
-        </select>
         <h5>数据运行时间(即函数替换基准时间)和调度时间偏移量:</h5>
         <input type='text' style="width:100px;height:28px"  name="schedule_interval_offset" /><b style='color:red'>*</b>
-        <h5>最迟报警时间:</h5>
-        <input type='text' style="width:100px;height:28px"  name="latest_end_time" placeholder="03:30" /><b style='color:red'>
-            最迟报警时间格式说明：1.02:30，   2.day(02:30)，   3.day(n)、hour(n)，n：调度开始时间的分钟间隔数</b>
-        <h5>报警类型:</h5>
-        <input type="radio" name="alarm_type" value="1"><lable for="alarm_type1">短信+邮件</lable>
-        <input type="radio" name="alarm_type" value="0"><lable for="alarm_type">邮件</lable>
-        <b style='color:red'></b>
-        <h5>报警接收人:</h5>
-        <input type='text' style="width:100px;height:28px"  name="alarm_users" placeholder="zhangsan,lisi" /><b style='color:red'>填写姓名全拼，多人可使用英文逗号分割</b>
         <h5>回溯次数(如无必要，请勿更改):</h5>
         <input type='number' min =0  style="width:100px;height:28px"  name="run_times" /><b style='color:#5bc0de'> 填写数字</b>
         <div class="custom_cdatebox">
             <h5><input type="checkbox" name="custom_cdate" value="" class="custom_cdate" /><lable for="custom_cdate">自定义数据展现时间(选中此项，必须要重新解析hql)</lable></h5>
-            <h5></h5>
-            <select class="custome_cdate_type" name="custome_cdate_type" id="custome_cdate_type" style="width:200px;border-color:#ccc;height:24px;display:none;">
-                <option value="range">范围</option>
-                <option value="single">单个</option>
-            </select>
-            <div class="custom_cdatecon" name="custom_cdatecon" id="custom_cdatecon" style="display:none">
+            <div class="custom_cdatecon" style="display:none">
                 数据展现时间<b style='color:red'>*</b><br/>
                 起始时间:<input type="input" value="$DATE(0)" placeholder="$DATE(0)" class="custom_start" />
                 终止时间:<input type="input" value="$DATE(0)" placeholder="$DATE(0)" class="custom_end" />
-            </div>
-            <div class="custom_cdatecon" name="custom_cdatecon2" id="custom_cdatecon2" style="display:none">
-                数据展现时间<b style='color:red'>*</b><br/>
-                时间:<input type="input" value="$DATE(0)" placeholder="$DATE(0)" class="custom_single" /><b style='color:red;display:none'>多个时间用逗号分隔</b>
             </div>
         </div>
         <h5>参数配置</h5>

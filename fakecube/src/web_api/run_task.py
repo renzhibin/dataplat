@@ -40,7 +40,7 @@ class RunTask(action.Action):
                     app_module_dict[app_name] = [run_module]
 
         # 计算出插入全部的
-        url = 'http://scheduler.qudian.com/job/run_job'
+        url = 'http://scheduler./job/run_job'
         cube_id = ''
         pos = user_name.index('@')
         name = user_name[0:pos]

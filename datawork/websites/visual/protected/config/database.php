@@ -13,7 +13,6 @@ return [
             'pass'   => env('DB_MASTER_METRIC_META_PASSWORD'),
             'master' => 1,
             'suffix' => '',
-            'connectin_alias' => 'metric_meta'
         ],
         # metric_meta 从
         [
@@ -25,7 +24,6 @@ return [
             'pass'   => env('DB_SLAVE_METRIC_META_PASSWORD'),
             'master' => 0,
             'suffix' => '',
-            'connectin_alias' => 'metric_meta'
         ],
         ###############----------------------------###############
 

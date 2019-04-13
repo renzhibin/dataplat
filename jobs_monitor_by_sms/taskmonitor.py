@@ -49,7 +49,7 @@ def ConnDB(db_info):
 def sendMsg(contact_list,message):
     url='http://10.161.138.17/alarm/sms'
     to_str=','.join(contact_list)
-    header={"Host":"bi.service.qufenqi.com"}
+    header={"Host":"bi.service..com"}
     data={}
     data['mobile']=to_str
     data['content']=message

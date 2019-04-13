@@ -1,6 +1,6 @@
 #coding=utf-8
 '''
- USERNAME = 'mailman@qudian.com'
+ USERNAME = 'mailman@'
  PASSWD = '5be0d56f'
  SERVER = 'mail.meilishuo.com'
 

@@ -20,7 +20,7 @@ class ToolManager extends Manager {
         $sql .="('{$name}','{$url}','{$refers}','{$username}','{$username}','{$cdate}','{$cdate}') ";
 //        $sql .="ON DUPLICATE KEY UPDATE `name`='{$name}',url='{$url}',updater='{$username}',update_time='{$cdate}'";
 
-        $result=Yii::app()->db_metric_meta->createCommand($sql)->execute();
+        $result=Yii::app()->sdb_metric_meta->createCommand($sql)->execute();
         return $result;
     }
 
@@ -31,7 +31,7 @@ class ToolManager extends Manager {
 
             $sql ="update t_white_interface set `name`='{$name}',url='{$url}',refers='{$refers}',updater='{$username}',update_time='{$cdate}' where id='{$id}'";
 
-            Yii::app()->db_metric_meta->createCommand($sql)->execute();
+            Yii::app()->sdb_metric_meta->createCommand($sql)->execute();
             return true;
         }catch(Exception $e){
             return false;
@@ -105,7 +105,7 @@ class ToolManager extends Manager {
 
         $sql ="insert into t_visual_table(cn_name,`explain`,params,`type`,creater,modify_user,create_date) values ";
         $sql .=" (" . implode(",", $dataArr) . ")";
-        $result=Yii::app()->db_metric_meta->createCommand($sql)->execute();
+        $result=Yii::app()->sdb_metric_meta->createCommand($sql)->execute();
         return $result;
     }
 
@@ -117,7 +117,7 @@ class ToolManager extends Manager {
             $params=json_encode($params);
 
             $sql ="update t_visual_table set cn_name='{$name}',`explain`='{$desc}',params='{$params}',modify_user='{$username}' where id='{$id}' and type=9 ";
-            Yii::app()->db_metric_meta->createCommand($sql)->execute();
+            Yii::app()->sdb_metric_meta->createCommand($sql)->execute();
             return true;
         }catch(Exception $e){
             return false;
@@ -159,7 +159,7 @@ class ToolManager extends Manager {
     }
     public function loadEnvironment(){
         //$path ='source /Users/raosong/.bash_profile;';
-        $path ='export PATH=/usr/lib/sqoop-current/bin:/usr/lib/spark-current/bin:/usr/lib/pig-current/bin:/usr/lib/hive-current/hcatalog/bin:/usr/lib/hive-current/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/usr/lib/hadoop-current/bin:/usr/lib/hadoop-current/sbin:/usr/lib/hadoop-current/bin:/usr/lib/hadoop-current/sbin:/home/apple//.local/bin:/home/apple//bin;export JAVA_HOME=/usr/lib/jvm/java-1.8.0;export HADOOP_CONF_DIR=/etc/ecm/hadoop-conf;export HADOOP_HOME=/usr/lib/hadoop-current;';
+        $path ='export JAVA_HOME=/usr/lib/jdk1.7.0;export JRE_HOME=${JAVA_HOME}/jre;export HADOOP_HOME=/di_software/hadoop-2.5.2;export HIVE_HOME=/di_software/hive;export SQOOP_HOME=/di_software/sqoop-1.4.6;export PATH=${JAVA_HOME}/bin:${JRE_HOME}/lib:${HADOOP_HOME}/bin:${HIVE_HOME}/bin:${SQOOP_HOME}/bin:$PATH;';
         return $path;
     }
     /**
@@ -191,7 +191,7 @@ class ToolManager extends Manager {
             $tmpArr[] = $item." string";
         }
         $path = $this->loadEnvironment();
-        $createStr = 'source /etc/profile;hive -e " create table tmp.'.$table.'('.  implode(",", $tmpArr).') ROW FORMAT DELIMITED FIELDS TERMINATED BY \',\' " 2>&1 ';
+        $createStr = $path.'hive -e " create table tmp.'.$table.'('.  implode(",", $tmpArr).') ROW FORMAT DELIMITED FIELDS TERMINATED BY \',\' " 2>&1 ';
         exec($createStr,$output,$returnVal);
         echo "建表执行结果：";
         if(!$returnVal){
@@ -207,7 +207,7 @@ class ToolManager extends Manager {
     public function loadData($file,$table){
         exec("sed -i '1d' ".$file);
         $path = $this->loadEnvironment();
-        $commodStr = 'source /etc/profile;hive -e "load data local inpath \''.$file.'\' into table tmp.'.$table.' " 2>&1 ';
+        $commodStr = $path.'hive -e "load data local inpath \''.$file.'\' into table tmp.'.$table.' " 2>&1 ';
         exec($commodStr,$output,$returnVal);
         echo "<br>数据导入执行结果：";
         if(!$returnVal){

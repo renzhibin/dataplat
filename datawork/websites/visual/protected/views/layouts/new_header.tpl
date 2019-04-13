@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>{/env('TITLE')/}</title>
+<title>小猪数据分析平台</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
   {/include file="layouts/new_lib.tpl"/}
@@ -182,7 +182,7 @@
                 <li class="divider"></li>
                 -->
                   <!-- <li><a  href="/site/PwdPage">修改密码</a></li> -->
-                <li><a  href="/site/logout">退出登录</a></li>
+                <li><a  href="{/AuthService::SsoLogout()/}">退出登录</a></li>
               </ul>
           </li>
         </ul>

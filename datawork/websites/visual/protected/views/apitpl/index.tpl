@@ -125,7 +125,7 @@
 							</select>
 						</div>
 						<div class="col-sm-4">
-							<input type="button" class="btn btn-primary applygeturl" value="保存并获取url链接" />
+							<input type="button" class="btn btn-primary applygeturl" value="获取url链接" />
 							<label class="error_msg err_reportmsg"></label>
 						</div>
 					</div>
@@ -150,7 +150,7 @@
 		    	<!-- 应用列表 -->
 		    	<div class="li-panel-box applistbox">
 			    	<table class="table table-bordered applist">
-			    		<tr><th>应用ID</th><th>应用名称</th><th>申请人</th><th>应用token</th><th>操作</th></tr>
+			    		<tr><th>应用ID</th><th>应用名称</th><th>应用token</th><th>操作</th></tr>
 					</table>
 				</div>
 			</div>
@@ -159,7 +159,7 @@
 		    <div role="tabpanel" class="tab-pane tab-con" id="projectlistbox">
 				<div class="li-panel-box prolistbox">
 					<table class="table table-bordered projectlist">
-						<tr><th>序号</th><th>应用名称</th><th>项目名称</th><th>报表名称</th></th><th>操作</th></tr>
+						<tr><th>序号</th><th>项目名称</th><th>应用名称</th><th>操作</th></tr>
 					</table>
 				<!--  报表列表 -->
 				<div class="reportlistbox reportlistcon">
@@ -207,28 +207,14 @@
 	<label class="col-sm-3 control-label">报表名称：</label>
 	<div class="col-sm-9">
 		<select name="addreport" class="addreport" style="height:24px" errortag='error_modalreportmsg'>
-
-		</select>
+				
+		</select> 
 	</div>
 	<div class="col-sm-12 error_msg error_modalreportmsg" style="padding-top:10px"></div>
 	<input type="hidden" class="modalPeportval" value="" />
-	</div>
+	</div>   
+	 
 </div>
-
-<!-- Modal 删除报表-->
-<div id="deleteModalreport" style="padding: 20 10px; overflow:hidden;">
-	<div class="form-group">
-	<label class="col-sm-3 control-label">报表名称：</label>
-	<div class="col-sm-9">
-		<select name="deletereport" class="deletereport" style="height:24px;" errortag='error_deletetreportmsg'>
-
-		</select>
-	</div>
-	<div class="col-sm-12 error_msg error_deletetreportmsg" style="padding-top:10px"></div>
-	<input type="hidden" class="deletePeportval" value="" />
-	</div>
-</div>
-
 <script type="text/javascript">
 	var user_name = '{/Yii::app()->user->username/}';
 </script>

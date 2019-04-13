@@ -1,29 +1,5 @@
 <?php
  class ProjectManager extends Manager{
-     private $diUrl = 'http://scheduler.xiaozhu.com/';
-     private $diStatus2DtStatus = [
-         1 => '阻塞',
-         2 => '就绪',
-         3 => '运行中',
-         5 => '成功',
-         6 => '失败',
-         9 => '检测中',
-         10 => '手动杀死',
-         11 => '等待超时',
-         12 => '运行超时'
-     ];
-     private $dtStatus2DiStatus = [
-         '阻塞' => 1,
-         '就绪' => 2,
-         '运行' => 3,
-         'hive结束' => 3,
-         '成功' => 5,
-         '失败' => 6,
-         '警告' => 5,
-         '超时' => 12,
-         '检查' => 9,
-         '杀死' => 10
-     ];
      function __construct(){
          $this->menuTable='t_visual_menu';
          $this->reportTable='t_visual_table';
@@ -37,119 +13,6 @@
 
      }
 
-     function actionGetRunListByDi($project, $filter, $jobStatus, $page, $pageSize) {
-         $allAppConf = $this->getAppConfByAppName($project);
-         $url = $this->diUrl . 'job/dt_job_run_list';
-         $unqJobNames = '';
-         foreach ($allAppConf as $appConf) {
-             $unqJobNames = $unqJobNames . 'cube_' . $appConf['id'] . ',';
-         }
-         $unqJobNames = trim($unqJobNames, ',');
-         $params['unq_job_names'] = $unqJobNames;
-         $params['search'] = $filter;
-         $params['job_status'] = $jobStatus;
-         $params['page'] = $page;
-         $params['page_size'] = $pageSize;
-         if ($filter) {
-             if (isset($this->dtStatus2DiStatus[$filter])) {
-                 $params['job_status'] = $this->dtStatus2DiStatus[$filter];
-             } else {
-                 $params['search'] = $filter;
-             }
-         }
-         $strparams = http_build_query($params);
-         $projectData = $this->curl->post($url,$strparams,'', 60);
-         if ($projectData['http_code'] != 200) {
-             $this->jsonOutPut(1, 'di接口请求失败', []);
-             return;
-         }
-         $body = json_decode($projectData['body'], true);
-         if ($body['status'] != 0) {
-             $this->jsonOutPut(1, $body['msg'], []);
-             return;
-         }
-         $data['cn_name'] = $this->user->name;
-         $data['super']   = Yii::app()->user->isSuper();
-         $data['currentPage']      = $page;
-         $data['currentPageCount'] = count($body['data']);
-         $data['pageSize']         = $pageSize;
-         $data['totalPages']       = ceil($body['total_size'] / $pageSize);
-         $data['totalCount']       = $body['total_size'];
-         $data['list']             = [];
-         foreach ($body['data'] as $row) {
-             $step = $row['ext_json'];
-             $one = [
-                 'id' => $row['job_run_id'],
-                 'app_name' => substr($row['job_name'], 0, strpos($row['job_name'], '.')),
-                 'run_module' => substr($row['job_name'], strpos($row['job_name'], '.') + 1),
-                 'stat_date' => $row['job_time_str'],
-                 'status' => $this->diStatus2DtStatus[$row['job_status']],
-                 'ori_status' => $row['job_status'],
-                 'step' => $step ? $step['step'] : 'all',
-                 'start_time' => $row['start_time'],
-                 'end_time' => $row['end_time'],
-                 'create_time' => $row['disp_start_time'],
-                 'priority' => $row['priority'],
-                 'data_size' => '--',
-                 'creater' => in_array($row['state'], [0,1,2,6]) ? null : $row['creater'],
-                 'submitter' => $row['creater'],
-                 'load_time_spend' => '--',
-                 'log' => $this->diUrl . "job/render_log?id={$row['job_run_id']}&unq_job_name={$row['unq_job_name']}",
-                 'killtask' => '',
-                 'download' => '',
-             ];
-             $one['download'] = WEB_API."/data/".$one['app_name'].'/'.$one['stat_date'].'.'.$one['app_name'].'.'.$one['run_module'];
-             if (strpos($one['stat_date'], ' ')) {
-                 $statDate = str_replace(" ",".",$one['stat_date']) . '.0';
-                 $one['download'] = WEB_API."/data/".$one['app_name'].'/'.$statDate.'.'.$one['app_name'].'.'.$one['run_module'];
-             }
-             $one['real_log'] = "http://116.62.213.137:8001/get_run_detail_real?serial=" . $one['id'] . "&app_name=" . $one['app_name'] . "&stat_date=" . date('Y-m-d', strtotime($one['stat_date'])) . "&stat_time=" . urlencode($one['stat_date']) . "&module_name=" . $one['run_module'];
-             $one['killtask'] = "serial=".$one['id']."&app_name=".$one['app_name']."&status=".$one['ori_status']."&stat_date=".$one['stat_date']."&module_name=".$one['run_module']."&username=".str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
-             array_push($data['list'], $one);
-         }
-         $returnData = ['totalCount' => $data['totalCount'], 'data' => []];
-         foreach ($data['list'] as $key => $value) {
-             $one = [];
-             array_push($one, $value['id']);
-             array_push($one, $value['app_name']);
-             array_push($one, $value['run_module']);
-             array_push($one, $value['stat_date']);
-             array_push($one, $value['status']);
-             array_push($one, $value['start_time']);
-             array_push($one, $value['end_time']);
-             array_push($one, $value['create_time']);
-             $step = '';
-             if ($value['step'] == 'all') {
-                 $step = '全部';
-             } else if ($value['step'] == 'hive') {
-                 $step = 'hql任务';
-             } else if ($value['step'] == 'mysql') {
-                 $step = '导入数据';
-             } else if ($value['step'] == 'delete') {
-                 $step = '删除数据';
-             }
-
-             array_push($one, $step);
-             array_push($one, $value['data_size']);
-             array_push($one, $value['load_time_spend']);
-             array_push($one, $value['priority']);
-             array_push($one, $value['submitter']);
-             $creater = '';
-             if ($value['creater'] == null) {
-                 $creater = '例行';
-             } else {
-                 $creater = '手动';
-             }
-             array_push($one, $creater);
-             array_push($one, "<a target='_blank' href='{$value['log']}'>日志</a>");
-             array_push($one, "<button class=\"btn btn-primary btn-xs btn-kill\" data='{$value['killtask']}'>杀死</button>
-                      <button class=\"btn btn-primary btn-xs btn-reday\" data='{$value['killtask']}'>置为就绪</button>");
-             array_push($one, "<a target=\"_blank\" href={$value['download']}>下载</a>");
-             array_push($returnData['data'], $one);
-         }
-         return $returnData;
-     }
-
      function  __handleRunlist($data){
          if(empty($data)){
              return array();
@@ -159,10 +22,10 @@
              //"get_run_detail?serial=$i[0]&app_name=$i[1]&stat_date=$i[3]&module_name=$i[2]
              $v['status']=$statusMap[$v['status']];
              $v['log']=WEB_API."/get_run_detail?serial=".$v['id']."&app_name=".$v['app_name']."&stat_date=".$v['stat_date']."&module_name=".$v['run_module'];
-             $v['killtask']="serial=".$v['id']."&app_name=".$v['app_name']."&stat_date=".$v['stat_date']."&module_name=".$v['run_module']."&username=".str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', Yii::app()->user->username);
+             $v['killtask']="serial=".$v['id']."&app_name=".$v['app_name']."&stat_date=".$v['stat_date']."&module_name=".$v['run_module']."&username=".str_ireplace(['@.com', '@.com'], '', Yii::app()->user->username);
              $v['download']=WEB_API."/data/".$v['app_name'].'/'.$v['stat_date'].'.'.$v['app_name'].'.'.$v['run_module'];
 
-             $v['real_log'] = "http://116.62.213.137:8001/get_run_detail_real?serial=" . $v['id'] . "&app_name=" . $v['app_name'] . "&stat_date=" . date('Y-m-d', strtotime($v['stat_date'])) . "&stat_time=" . urlencode($v['stat_date']) . "&module_name=" . $v['run_module'];
+             $v['real_log'] = "http://118.31.236.5:8001/get_run_detail_real?serial=" . $v['id'] . "&app_name=" . $v['app_name'] . "&stat_date=" . date('Y-m-d', strtotime($v['stat_date'])) . "&stat_time=" . urlencode($v['stat_date']) . "&module_name=" . $v['run_module'];
              $data[$k]=$v;
          }
         // echo '<pre/>';print_r($data);exit();
@@ -591,103 +454,12 @@
 
      }
 
-     function updateRunLogStatus($ids, $status) {
-         $sql = "update " . $this->runlist . " set status={$status} where id in ({$ids})";
-         $res=Yii::app()->db_metric_meta->createCommand($sql)->execute();
-         return true;
-     }
-
      # 更新创建者 负责人
      function updateCreateUser($id, $user)
      {
          return Yii::app()->db_metric_meta->createCommand()->update($this->project_conf, [
              'creater' => $user,
          ], ['in', 'id', $id]);
-     }
-
-     function getAppConfByAppNameAndCategorynameAndHqlname($appname, $categoryname, $hqlname) {
-         $sql = "select * from mms_app_conf where app_name='{$appname}' and category_name='{$categoryname}' and hql_name='{$hqlname}' limit 1";
-         $result = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $result;
-     }
-
-     function getAppConfByAppName($appname) {
-         $sql = "select * from mms_app_conf where app_name='{$appname}'";
-         $result = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $result;
-     }
-
-     function getMmsConfByAppName($appname) {
-         $sql = "select conf from {$this->project_conf} where appname='{$appname}' limit 1";
-         $result = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         if (!isset($result[0])) {
-             return [];
-         }
-         return $result[0]['conf'];
-     }
-
-     function getMmsConfAllByAppName($appname) {
-         $sql = "select * from {$this->project_conf} where appname='{$appname}' limit 1";
-         $result = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         if (!isset($result[0])) {
-             return [];
-         }
-         return $result;
-     }
-
-     function updateMmsConfByAppName($appname, $conf) {
-         $sql = "select * from {$this->project_conf} where appname='{$appname}' limit 1";
-         $result = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         $result = $result[0];
-         $sql = "insert into mms_conf_log(date_s,date_e,date_n,creater,appname,create_time,priority,`explain`,cn_name,storetype,editor,authtype,authuser,mysql_weight,update_weight_time,
-conf,weight_update_log,store_db) values('{$result['date_s']}','{$result['date_e']}','{$result['date_n']}','{$result['creater']}','{$result['appname']}','{$result['create_time']}','{$result['priority']}','{$result['explain']}','{$result['cn_name']}','{$result['storetype']}','di@xiaozhu.com','{$result['authtype']}','{$result['authuser']}','{$result['mysql_weight']}','{$result['update_weight_time']}','$conf','{$result['weight_update_log']}','{$result['store_db']}')";
-         $res=Yii::app()->db_metric_meta->createCommand($sql)->execute();
-         return Yii::app()->db_metric_meta->createCommand()->update($this->project_conf, [
-             'conf' => $conf,
-         ], ['in', 'appname', $appname]);
-     }
-
-     function getDetailByConfs($confs) {
-         $inConfs = implode("','", $confs);
-         $inConfs = "'" . $inConfs . "'";
-         $sql = "select mms_app_conf.id as job_id ,mms_app_conf.data_table_name as data_table_name,concat(app_name, '.', category_name, '.', hql_name) as job_name,mms_conf.cn_name as project_name,mms_app_conf.creater,mms_app_conf.editor,mms_app_conf.updated_at as mod_time,other_params as conf,mms_app_conf.created_at as create_time from mms_app_conf left join mms_conf on mms_app_conf.app_name=mms_conf.appname where concat(app_name, '.', category_name, '.', hql_name) in ($inConfs)";
-         $res = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $res;
-     }
-
-     function getAllIncrementModifyOnlineAppConfByStartTimeAndEndTime($startTime, $endTime) {
-         $sql = "select concat(app_name, '.', category_name, '.', hql_name) as app_name, 
-              concat(category_name, '.', hql_name) as app_name_conf, 
-              mms_conf.conf 
-          from mms_app_conf_log
-          join mms_conf on mms_conf.appname = mms_app_conf_log.app_name
-          where mms_app_conf_log.id in (select max(id) from mms_app_conf_log where  created_at >= '$startTime' and created_at < '$endTime' group by app_name, category_name,hql_name)";
-         $res = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $res;
-     }
-
-     function getAllIncrementOnlineAppConfByStartTimeAndEndTime($startTime, $endTime) {
-         $sql = "select appname,date_s,date_e,conf from mms_conf_log where id in (select max(id) from mms_conf_log where  created_at >= '$startTime' and created_at < '$endTime' group by appname)";
-         $res = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $res;
-     }
-
-     function getAllIncrementOnlineAppConfByEndTime($endTime) {
-         $sql = "select appname,date_s,date_e,conf from mms_conf_log where id in (select max(id) from mms_conf_log where  created_at < '$endTime' group by appname)";
-         $res = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $res;
-     }
-
-     function getAllOnlineAppConfByEndTime($endTime) {
-         $sql = "select appname,conf from mms_conf_log where id in (select max(id) from mms_conf_log  group by appname) and date_s < '$endTime' and (date_e > '$endTime' or date_e = '0000-00-00 00:00:00') and created_at <= '$endTime'";
-         $res = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $res;
-     }
-
-     function getAllAppConf() {
-         $sql = "select * from mms_app_conf";
-         $res = Yii::app()->db_metric_meta->createCommand($sql)->queryAll();
-         return $res;
      }
 
      # 获取当前人运行的项目数量

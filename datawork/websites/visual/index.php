@@ -7,7 +7,6 @@
 error_reporting(E_ALL ^ (E_NOTICE|E_WARNING));
 date_default_timezone_set('PRC');
 
-
 // 除非必要否则禁止更改
 define('FRAMEWORK', '../../framework');
 define('HOMEPAHT', dirname(__FILE__));

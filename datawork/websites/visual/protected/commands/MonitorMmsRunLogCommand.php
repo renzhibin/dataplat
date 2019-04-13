@@ -9,7 +9,7 @@ class MonitorMmsRunLogCommand extends Command
         # 需要检测 mms_run_log status 状态
         $status = "1, 9";
         $day    = date('Y-m-d', time() - 86400);
-        $to     = 'yangzongqiang@xiaozhu.com;yangyulong@xiaozhu.com;';
+        $to     = 'yangzongqiang@.com;yangyulong@.com;houyangyang@.com';
         $title  = "【监控】例行任务异常概况报告 {$day}";
 
         $sql = "SELECT
@@ -237,8 +237,8 @@ EOF;
             style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, '宋体', sans-serif; margin: 0; padding: 20px 0px;">
             <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, '宋体', sans-serif; margin: 0; padding: 0; font-size: 12px; font-weight: normal; margin-bottom: 10px;">
                 感谢您的订阅！任何问题，欢迎联系 数据团队 
-                <a href="mailto:di@xiaozhu.com" target="_blank">
-                    di@xiaozhu.com
+                <a href="mailto:di@.com" target="_blank">
+                    di@.com
                 </a>
             </p>
         </td>

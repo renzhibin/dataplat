@@ -16,7 +16,7 @@
          </div>
          <div class="col-xs-10">
            <div class="col-xs-9">
-              <a href="/wap/index" style='font-size:18px;font-weight:bolder;height:45px;line-height:50px'>小猪数据分析平台</a>
+              <a href="/wap/index" style='font-size:18px;font-weight:bolder;height:45px;line-height:50px'>美丽说数据分析平台</a>
            </div>
            <div >
               <ul class="nav navbar-nav navbar-right" style="line-height:40px;height:40px">

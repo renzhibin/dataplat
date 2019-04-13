@@ -31,19 +31,6 @@
             </td>
         </tr>
         <tr>
-            <td class='table_left'>是否包含敏感信息<b class='tip'>*</b></td>
-            <td>
-                <div class="dateview radio" style="margin:0">
-                    <label class="radio-inline">
-                        <input type="radio" name="sensitive" value="0"/>否
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="sensitive" value="1"/>是
-                    </label>
-                </div>
-            </td>
-        </tr>
-        <tr>
             <td class='table_left'>刷新间隔</td>
             <td>
                 <input type="checkbox" value="" name="refresh_set"/>&nbsp;每&nbsp;

@@ -129,8 +129,6 @@
       $basreport.find('input[name=cn_name]').val(basereport.cn_name);
       $basreport.find('tr.auth_hide').hide();
       $basreport.find('textarea[name=explain]').val(basereport.explain);
-      var sensitive = basereport.sensitive?basereport.sensitive:''; //默认为天
-      $basreport.find('input[name="sensitive"][value="'+sensitive+'"]').prop('checked',true);
       $basreport.find('input[name=wiki]').val(basereport.wiki);
 
       $basreport.find('input[name=refresh_set]').attr("checked", basereport.refresh_set == 1 ? true : false);

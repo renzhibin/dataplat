@@ -2,70 +2,6 @@
 
 class AuthManager extends Manager
 {
-    //核心报表权限
-    public $coreReportWhiteList = [
-
-        '1260' => [//数据外发工具
-
-        ]
-    ];
-
-    //普通白名单
-    public $whiteUrl = array(
-        'notAuth' => array(
-            '/site/index',
-            '/site/logout',
-            '/site/login',
-            '/site/PwdPage',
-            '/site/ResetPwd',
-            '/service/getmenu',
-            '/visual/getcontrast',
-            '/visual/gettable',
-            '/visual/getdata',
-            '/visual/getchart',
-            '/chart/showchart',
-            '/timemail/urllibmail',
-            '/realtime/fetchygorder',
-            '/realtime/fetchorder',
-            '/heatmap/showmap',
-            '/heatmap/MarketLayout',
-            '/heatmap/GYzoneRate',
-            '/salesvisit',
-            '/wap/speed',
-            // '/tool/fileup',
-            '/tool/getFileUp',
-            '/tool/CreateHiveData',
-            '/tool/BehaviorLog'
-        ),
-        'userMenu' => array(
-            '/fetch/addDemand',
-            '/fetch/download',
-            '/fetch/demand',
-            '/fetch/uploadFile',
-            '/fetch/saveDemand',
-            '/fetch/downloadFile',
-            '/tool/fileup',
-            '/apphomefocus',
-            //白名单
-            '/visual',
-            '/addition',
-            '/chart',
-            '/report/addcollect',
-            '/report/deletecollect',
-            '/tool/GetDataReport',
-            '/report/savereportcustom',
-            '/gps',
-            '/heatmap',
-            '/realtime',
-            '/wap',
-            //otherUrl
-            '/project/comments',
-            '/project/getall',
-            '/project/savecomments',
-            '/project/getcomments',
-        ),
-    );
-
     function __construct()
     {
         $this->menuTable = 't_visual_menu';
@@ -83,68 +19,18 @@ class AuthManager extends Manager
         $this->confSuperProject = [
             'ares'
         ];
+
     }
 
-    function checkAuthFromMenu($menu, $userName)
+
+    function isSuper()
     {
-        $menuMan = new MenuManager();
-        $res = false;
-        if (is_numeric($menu)) {
-            if (isset($this->coreReportWhiteList[$menu]) && in_array($userName, $this->coreReportWhiteList[$menu])) {
-                //如果在白名单不用验证数据库内的报表权限
-                return true;
-            }
-            if (isset($this->coreReportWhiteList[$menu]) && !in_array($userName, $this->coreReportWhiteList[$menu])) {
-                //如果菜单在白名单,用户不在白名单，没有权限
-                return false;
-            }
-            if (Yii::app()->user->isSuper())
-                return true;
-
-            if (Yii::app()->user->isProducer()) {
-                return true;
-            }
-
-            if (Yii::app()->user->isCore()) {
-                return true;
-            }
-
-            $res = $this->checkReportPoint($menu);
-            /*if(!(!empty($_REQUEST['id']) && $_REQUEST['id']<508)){
-                return false;
-            }*/
-        } elseif (is_array($menu)) {
-
-        } else {
-            if (Yii::app()->user->isSuper()) {
-                return true;
-            }
-
-            if ((Yii::app()->user->isProducer() || Yii::app()->user->isAdmin()) && !in_array(strtolower($menu), $menuMan->superList)) {
-                return true;
-            }
-
-            //白名单url,不需要验证用户
-            foreach($this->whiteUrl['notAuth'] as $url){
-                if(strpos(strtolower($_SERVER['REQUEST_URI']),strtolower($url)) ===0)
-                    return true;
-            }
-            //需要验证用户
-            foreach($this->whiteUrl['userMenu'] as $url){
-                if(strpos(strtolower($_SERVER['REQUEST_URI']),strtolower($url)) ===0)
-                    return true;
-            }
-
-            //白名单配置
-            $objTool=new ToolManager();
-            if($objTool->checkRefer()){
-                return true;
-            }
+        $user_name = explode('@', Yii::app()->user->username)[0];
+        if (in_array($user_name, $this->getSuperName())) {
+            return true;
         }
-
-        return $res;
+        return false;
     }
-
 
     function getSuperName()
     {
@@ -385,6 +271,7 @@ class AuthManager extends Manager
         $sql = 'select username from t_eel_admin_user';
         $result = Yii::app()->sdb_eel->createCommand($sql)->queryAll();
         return $result;
+
     }
 
     function getGroup()
@@ -591,6 +478,51 @@ class AuthManager extends Manager
         return false;
 
 
+    }
+
+
+    function isAdmin()
+    {
+        $res = $this->selectUserGroup('', true);
+        if (in_array($this->adminGroupId, $res)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    function isaudit()
+    {
+        $res = $this->selectUserGroup('', true);
+        if (in_array($this->audit, $res)) {
+            return true;
+        }
+        return false;
+
+    }
+
+    function isProducer()
+    {
+        /*
+         * 如果group为2 则为分析师
+         */
+        $res = $this->selectUserGroup('', true);
+        if (in_array($this->producerGroupId, $res) || $this->isSuper()) {
+            return true;
+        }
+        return false;
+    }
+
+    function isCore()
+    {
+        /*
+         * 如果group为3 则为core
+         */
+        $res = $this->selectUserGroup('', true);
+        if (in_array($this->coreGroupId, $res)) {
+            return true;
+        }
+        return false;
     }
 
     function addUserBehavior()

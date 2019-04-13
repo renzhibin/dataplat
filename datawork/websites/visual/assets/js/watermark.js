@@ -9,7 +9,7 @@
  *
  * @example
  *   window.watermark({
- *       txt: 'xiongweilie@xiaozhu.com',   // 水印文案，默认为“机密数据，请勿外传”
+ *       txt: 'xiongweilie@.com',   // 水印文案，默认为“机密数据，请勿外传”
  *       selector: 'tbody',               // 需要添加水印的选择器，默认为“.page-content”
  *       isForce: true                    // 是否强制添加，删除tr元素的背景等操作
  *   })

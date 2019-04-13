@@ -1,0 +1,52 @@
+#breadcrumbs-one span:last-child a{
+    color:#000;
+}
+.container-filter{
+    margin-left:199px;
+    padding:15px;
+    padding-top:0;
+}
+.details-panel{
+    padding-top:15px;
+}
+.return-back {
+    margin: 15px;
+    margin-left: 2px;
+    background-color: #428bca;
+    color:#fff;
+}
+.confirm {
+    height:34px;
+    line-height: 16px;
+    background-color: #428bca;
+    color:#fff;
+}
+ .confirm:hover , .return-back:hover{
+   background-color:#3071A9 ;
+  }
+.details-panel .required-filed{
+    color:red;
+    line-height: 34px;
+    height:34px;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.details-panel #filter-data-view{
+    display: none;
+}
+
+.alert-win{
+    display: none;
+}
+
+.sql{
+  resize:vertical;
+}
+
+.sql-result{
+  resize: none;
+}
+.area-hide{
+  display: none;
+}

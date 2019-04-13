@@ -138,7 +138,7 @@ def error_exit(err_code, err_msg):
             html_a="<a href='%s'>查看日志</a>"%(href)
 
             from mms_email import MmsEmail
-            email_to=['data_alarm@qudian.com']
+            email_to=['data_alarm@']
             mms_obj=MmsConf()
             res=mms_obj.select(app_name)
             mms_obj.connRead.close()

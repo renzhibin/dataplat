@@ -429,8 +429,7 @@ class WapController extends Controller
 	}
 
     public function actionIndex(){
-	    $menuObj =  new MenuManager();
-	    $menuInfo = $menuObj->getMenu();
+	  $menuInfo = $this->getMenu();
 		Yii::app()->smarty->assign('menuTitle', $menuInfo['menuTitle']);
 		Yii::app()->smarty->assign('urlMenu', $menuInfo['urlMenu']);
 		/*$tplArr['collect']=$menuInfo['collect'];//收藏报表
@@ -451,8 +450,7 @@ class WapController extends Controller
       $this->render('wap/index.tpl');
 	}
 	function actionCollect(){
-        $menuObj =  new MenuManager();
-		$menuInfo = $menuObj->getMenu();
+		$menuInfo = $this->getMenu();
         $tplArr['collect']=$menuInfo['collect'];//收藏报表
         $indexStr[] = array('href'=>"/wap/index",'content'=>'首页');
         $indexStr[] = array('href'=>"#",'content'=>'收藏');
@@ -530,9 +528,8 @@ class WapController extends Controller
 	public function  actionReport(){
 		$id = $_GET['id'];
 		$status = $this->common->checkDevice();
-		$objAuth = new AuthManager();
 		//去掉头部
-		$reportauth = $objAuth->checkAuthFromMenu($id, Yii::app()->user->username);
+		$reportauth=$this->__checkAuth($id);
 		if($reportauth){
 	    $newArr = $this->report->showReport($id);
 	    $newArr['params'] = json_decode($newArr['params'],true);

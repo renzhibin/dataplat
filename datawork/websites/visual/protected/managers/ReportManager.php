@@ -284,7 +284,7 @@
         if(!$openurl){
             $whereStr .= " and type!=9 ";
         }
-         if(!$getSuperProject && !empty($superProject) && ! Yii::app()->user->isSuper() ){
+         if(!$getSuperProject && !empty($superProject) && ! $objauth->isSuper() ){
              $objComm=new CommonManager();
              $superProject=$objComm->addSinglequote($superProject);
 

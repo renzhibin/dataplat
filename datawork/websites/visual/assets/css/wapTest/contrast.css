@@ -1,0 +1,13 @@
+/*对比相关JS*/
+.showbox{ display: none;width: 160px}
+/*内容框*/
+.contBox { width: 99%; height:auto; border-bottom:1px solid #ccc; position:relative; padding-top:23px;}
+.contBox .contBoxCont {width: 98px; overflow: hidden; height:auto; line-height:20px; text-align:center; padding-bottom:10px; }
+.contBox .closeBt{ position:absolute; right:0px; top:0px; width:20px; height:20px; text-align:center; line-height:20px;  cursor:pointer; display:none;}
+#centBoxTemplate{ display:none};
+#chartCont .contBox .closeBt:hover{
+	background-color:#000;
+}
+.compresCont{ height: 327px; overflow: auto;}
+.tablbox h4{ cursor: pointer;}
+.lifeClick{ color: blue}

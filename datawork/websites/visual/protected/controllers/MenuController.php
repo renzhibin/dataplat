@@ -18,7 +18,7 @@ class MenuController extends Controller
         $indexStr[] = array('href'=>"#",'content'=>'菜单管理');
         $tplArr['guider'] = $indexStr;
 
-        $tplArr['isSuper'] = Yii::app()->user->isSuper();
+        $tplArr['isSuper'] = $this->objAuth->isSuper();
         //获取当前菜单列表
         $menuList =$this->objMenu->selectMenu();
         $tplArr['list'] = $menuList;
@@ -115,7 +115,7 @@ class MenuController extends Controller
 
     public function actionAddSave()
     {
-        if(!Yii::app()->user->isProducer()){
+        if(!$this->objAuth->isProducer()){
             $this->jsonOutPut(1,'只有分析师才能新建菜单哦~');
             exit();
         }
@@ -234,7 +234,7 @@ class MenuController extends Controller
 
     public function actionDeleteMenu()
     {
-        if(!Yii::app()->user->isProducer()){
+        if(!$this->objAuth->isProducer()){
             $this->jsonOutPut(1,'只有分析师才能删除菜单');
             exit();
         }

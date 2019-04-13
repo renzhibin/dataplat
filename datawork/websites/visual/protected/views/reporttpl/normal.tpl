@@ -141,7 +141,7 @@
     if( params.basereport.cn_name  !=undefined){
        // $('title').text(params.basereport.cn_name +"-小猪数据分析平台") ;
        // 兼容ie8 设置title
-        document.title=params.basereport.cn_name +"-{/env('TITLE')/}";
+        document.title=params.basereport.cn_name +"-小猪数据分析平台";
     }
     {//if/}
 
@@ -150,14 +150,10 @@
         if(typeof(params)!= "undefined"){
             //报表注释
             var explain = (params&&params.basereport.explain) ? params.basereport.explain : '';
-            if (params.basereport.sensitive && params.basereport.sensitive == 1 ) {
-                explain = '<span style="color: red;">该报表包含敏感数据，请谨慎使用，禁止以任何形式泄露给其他人员</span><br>' + explain
-                params.basereport.explain = explain
-            }
             $('.reportexplaincon').html(explain);
 
             //报表注释是否显示 2015-06-01
-            if(params.basereport && (params.basereport.explain || (params.basereport.sensitive &&params.basereport.sensitive == 1))){
+            if(params.basereport && params.basereport.explain){
                 $('.navtab-reportexplain').show();
             }
 
@@ -240,15 +236,12 @@
             toolbar.bindEvent(window.tables);
 
             //tab 报表注释
-            if(typeof(params)!= 'undefined' && ((params.basereport.isexplainshow && params.basereport.isexplainshow==1) || (params.basereport.sensitive && params.basereport.sensitive==1))){
-                if($('.nav.nav-tabs .active .navtab-reportexplain').length>0 && (explain!='' || (params.basereport.sensitive && params.basereport.sensitive==1))){
+            if(typeof(params)!= 'undefined' && params.basereport.isexplainshow && params.basereport.isexplainshow==1){
+                if($('.nav.nav-tabs .active .navtab-reportexplain').length>0 && explain!=''){
                     var left = $('.nav.nav-tabs .active .navtab-reportexplain').offset().left-210;
                     $('.reportexplainbox').slideToggle(400).find('.arrow_box').css({'left':left+'px'});
                 }
 
-            }
-            if (params.basereport.sensitive && params.basereport.sensitive==1) {
-                $('.reportexplainbox').show();
             }
 
             $('body').on('click','.nav-tabs span.navtab-reportexplain',function(event){
@@ -281,8 +274,8 @@
 
         $('input[type=checkbox][name^=tablename]').click(function () {
             if ($(this).get(0).checked) {
-                //$(this).siblings().attr("checked", false);
-                //$(this).attr("checked", true);
+                $(this).siblings().attr("checked", false);
+                $(this).attr("checked", true);
             }
         });
 

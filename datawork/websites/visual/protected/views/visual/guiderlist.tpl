@@ -29,7 +29,6 @@
         </a>
         <a style='padding:5px 10px;' href='/visual/toolsort' class='btn btn-primary btn-sm sortMenu'>工具排序</a>
         <span style='color: red; padding-left: 5px; font-size: 13px;'>
-
         </span>
         <div style='position:relative;padding-top:35px'>
           <table class="table table-bordered data-table">

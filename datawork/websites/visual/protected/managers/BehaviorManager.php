@@ -17,14 +17,10 @@ class BehaviorManager extends Manager
             $param_json = stripslashes($param_json);
             $param_json = str_replace('`','"',$param_json);
             $param_json = str_replace('\'','"',$param_json);
-            $app_user_name = '';
-            if (isset($param_array['app_user_name']) && !empty($param_array['app_user_name'])) {
-                $app_user_name= $param_array['app_user_name'];
-            }
 
             $sql = "insert into  $this->behaviorLogTable (`cdate`,`user_name`,`user_action`,`param`) values (:cdate,:username,:action_url,
             :param_id)";
-            $username = !empty($app_user_name) ? $app_user_name : Yii::app()->user->username;
+            $username = Yii::app()->user->username;
             $cdate=date('Y-m-d H:i:s',time());
             if(!isset($username)){
                 $username = 'datasystem';
@@ -75,12 +71,6 @@ class BehaviorManager extends Manager
                     AND user_action like '/visual/index/menu_id/%'
                     AND user_name = '{$userName}'";
 
-        $data = Yii::app()->sdb_metric_meta->createCommand($sql)->queryAll();
-        return $data;
-    }
-
-    function getMonthlyReportId() {
-        $sql = 'select id from t_visual_table where params like \'%s:13:"dateview_type";s:1:"3"%\' and flag=1';
         $data = Yii::app()->sdb_metric_meta->createCommand($sql)->queryAll();
         return $data;
     }

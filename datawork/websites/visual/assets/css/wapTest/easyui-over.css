@@ -1,0 +1,109 @@
+ .datagrid-cell,
+.datagrid-cell-group,
+.datagrid-header-rownumber,
+.datagrid-cell-rownumber {
+  margin: 0;
+  padding: 0 6px;
+  white-space: nowrap;
+  word-wrap: normal;
+  overflow:hidden;
+  height: auto;
+  line-height: 20px;
+  font-size: 12px;
+}
+/* 表格序号的宽度 */
+.datagrid-header-rownumber,.datagrid-cell-rownumber{
+  width: 50px;
+}
+
+.datagrid-header-row .datagrid-cell{
+   padding: 0 10px;
+}
+.layout-split-proxy-h {
+  width: 1px;
+  cursor: e-resize;
+}
+.layout-split-proxy-v {
+  height:1px;
+  cursor: n-resize;
+}
+.datagrid-resize-proxy {
+  position: absolute;
+  width: 1px;
+  height: 10000px;
+  top: 0;
+  cursor: e-resize;
+  display: none;
+}
+
+.datagrid-header-row{
+   /*background-image: -webkit-gradient(linear, left top, left bottom, from(#979797), color-stop(0.5, #909090), to(#959595));*/
+   height: 30px;
+   background: #DCD9CE;
+}
+.datagrid-row {
+  height: 30px;
+}
+.datagrid-header-row a{
+  color: #fff;
+}
+.datagrid-htable{
+  /*color: #fff;*/
+  border-collapse: separate;
+}
+
+.datagrid-header, .datagrid-td-rownumber{
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#979797), color-stop(0.5, #909090), to(#959595));*/
+  background-color: #DCD9CE;
+  height: 28px;
+  color: #fff;
+}
+/*.datagrid-row-over,
+.datagrid-header td.datagrid-header-over {
+  background: #e9f3ff;
+  color: #000;
+  cursor: default;
+}*/
+/*.window{
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#737373), color-stop(0.5, #6a6a6a), to(#626262));
+  color: #fff;
+}*/
+.datagrid-header:hover,.datagrid-header-row:hover,.datagrid-header-row td:hover{
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#979797), color-stop(0.5, #909090), to(#959595));
+  color: #fff;
+}
+.datagrid-row-over,.datagrid-row:hover,.datagrid-body-inner td:hover{
+  background: #e9f3ff;
+  color: #000;
+}
+.datagrid .datagrid-pager{
+  background: #fff;
+}
+.datagrid-row-selected{ background: #e9f3ff; color: #333}
+/*.datagrid .panel-body{ overflow: auto;}*/
+.table>tbody+tbody{border:1px solid #ddd }
+/*.datagrid-header{ background: #e2edfb}*/
+.datagrid-td-rownumber{ background: none}
+.panel{ overflow: visible}
+.panel-body{overflow: visible;}
+.panel-header, .panel-body{
+    border-left:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+    border-right:1px solid #ddd;
+   // background: #fff;
+}
+/* modal css 弹窗样式 */
+
+/*.window { min-width: 200px; background: #fff; border: 1px solid #e5e5e5; border-radius: 5px }
+.window-shadow { border-radius: 5px; box-shadow: 0 5px 15px rgba(0,0,0,.5); }
+.window .window-header {border-bottom: 1px solid #e5e5e5; padding-left: 15px; }
+.panel-header,.panel-title { height: 36px; line-height: 36px; font-size: 16px; font-weight: bold; }
+.window .window-body{ padding: 15px; background: #fff; border:none;  border-bottom: 1px solid #e5e5e5;}
+.window-mask{background: #000;}
+.dialog-button { padding: 15px; text-algin:right; border: none; background: none; }
+.l-btn { height:28px; background: none; border: 1px solid #e5e5e5; border-radius: 4px; color:#000 }
+.l-btn-left { padding: 0px 12px; }
+.l-btn-text { line-height: 28px; }
+.dialog-button .l-btn:first-child{background-color: #337ab7; color: #fff; };
+.dialog-button .l-btn .l-btn-icon-left .l-btn-text { margin: 0;}
+.contBox { font-size: 12px; text-align: left; }*/

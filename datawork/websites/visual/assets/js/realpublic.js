@@ -1409,6 +1409,7 @@ $(function(){
                 configObj.project = [];
                 configObj.project.push(config);
                 configObj.run = gerOperate();
+
                 var sendOJb  = {};
                 if( id != undefined){
                     sendOJb.config = configObj;

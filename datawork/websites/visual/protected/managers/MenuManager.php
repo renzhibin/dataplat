@@ -1,32 +1,5 @@
 <?php
  class MenuManager extends Manager{
-
-     //开发者工具
-     public $producerMenu=array(
-         '报表管理'=>'/report/reportlist',
-         '项目管理'=>'/project/index/',
-         '实时管理'=>'/project/real',
-         '菜单管理'=>'/menu/index',
-         '邮件订阅'=>'/timemail/index',
-         '开发者中心'=>'/api/index',
-         '站点地图'=>'/privilege/all',
-         '数据拓扑'=>'/topo/index'
-     );
-     //超级管理员菜单
-     public $superList = [
-         '开发者中心' => '/api/index',
-         '站点地图'  => '/privilege/all',
-         '权限管理'  => '/privilege/index',
-         '老版权限'  => '/privilege/userroles',
-         '分组管理'  => '/privilege/reportroles',
-//         '实时管理'  => '/project/real',
-     ];
-     public $powerUrl =array(
-         '权限管理'=>'/privilege/index',
-         //'老版权限'=>'/privilege/userroles',
-         '分组管理'=>'/privilege/reportroles',
-     );
-
      function __construct(){
          $this->menuTable='t_visual_menu';
          $this->reportTable='t_visual_table';
@@ -41,241 +14,18 @@
          $this->allmenutable=array();
      }
 
-     function getMenu() {
-         $menuInfo = array();
-         $menuConf=array();
-         $menuCommon = array();
-
-         //配置管理类菜单 在checkMenu进行处理
-         if(Yii::app()->user->isSuper() || Yii::app()->user->isAdmin() || Yii::app()->user->isProducer()){
-             $menuConf = $this->getProduceMenu();
-             $powerConf = $this->getPowerMenu();
-         }
-         if (Yii::app()->user->isSuper() || Yii::app()->user->isCore() || Yii::app()->user->isProducer()) {
-             $this->admin = true;
-         } else {
-             $this->admin = false;
-         }
-
-         //这两个菜单所有人都 可见
-         //hue,todo
-         //$menuCommon[]=array('name'=>'HUE','url'=>'http://10.6.3.21:50070/','index'=>'HUE');
-         $menuCommon[]=array('name'=>'报表注释','url'=>'/project/comments','index'=>'explain');
-         $menuCommon[]=array('name'=>'项目时间线','url'=>'/addition/showtimeline','index'=>'addition');
-
-         //获取菜单信息
-         $menuResult=$this->selectMenu();//从菜单表取出菜单列表
-         $URLMenu=$this->getOtherMenu();
-         $objAuth=new AuthManager();
-         //获取报表信息
-         $objVisual=new VisualManager();
-         $objVisual->InitTableConf($this->allmenutable);
-         //展示各级菜单
-         $menuRes=$objVisual->getShowMenu($this->admin,$menuResult,$this->allmenutable, null,$objAuth->coreReportWhiteList, Yii::app()->user->username);
-         //收藏的报表信息
-         $menuInfo['collect'] = $this->getUserCollect($menuRes);
-         //管理工具的信息
-         $menuInfo['specialMenu'] = $menuConf;
-         //权限工具信息
-         $menuInfo['powerMenu'] = $powerConf;
-         //常用工具
-         $menuInfo['commonMenu'] = $menuCommon;
-         //设置默认菜单格式
-         foreach ($menuRes as $one => $oneVal) {
-             foreach ($oneVal as $two => $twoVal) {
-                 $menuRes[$one][$two]['default_id'] = $twoVal['table'][0]['id'];
-             }
-         }
-         //菜单信息
-         $menuInfo['menuTitle'] = $menuRes;
-         $menuInfo['urlMenu']=$URLMenu;
-
-         // 获取用户自定义收藏
-         $userCollectCustom = $objVisual->getCustomCollect(Yii::app()->user->username);
-         foreach ($userCollectCustom as $k => $v) {
-             $currentID                             = $v['id'];
-             $menuInfo['collectCustom'][$currentID] = [
-                 'name'        => $v['cn_name'],
-                 'id'          => $currentID,
-                 'first_menu'  => '',
-                 'second_menu' => '',
-             ];
-         }
-
-         return $menuInfo;
-     }
-     //获取菜单
-     function  getMenu_admin(){
-         $menuInfo = array();
-         $menuConf=array();
-         $menuCommon = array();
-         //配置管理类菜单
-         if(Yii::app()->user->isSuper() || Yii::app()->user->isAdmin() || Yii::app()->user->isProducer()){
-             $menuConf = $this->getProduceMenu();
-         }
-
-         if (Yii::app()->user->isSuper() || Yii::app()->user->isCore() || Yii::app()->user->isProducer()) {
-             $this->admin = true;
-         } else {
-             $this->admin = false;
-         }
-
-         //这两个菜单所有人都 可见
-         //hue,todo
-         //$menuCommon[]=array('name'=>'HUE','url'=>'http://10.6.3.21:50070/','index'=>'HUE');
-         $menuCommon[]=array('name'=>'报表注释','url'=>'/project/comments','index'=>'explain');
-         $menuCommon[]=array('name'=>'项目时间线','url'=>'/addition/showtimeline','index'=>'addition');
-
-         //获取菜单信息
-         $objMenu=new MenuManager();
-         $menuResult=$objMenu->selectMenu();
-         $URLMenu=$this->getOtherMenu();
-         //$userCollect=array();
-         //获取报表信息
-         $objVisual=new VisualManager();
-         $objVisual->InitSensitiveTableConf($objMenu->allmenutable);
-
-         //展示各级菜单
-         $menuRes=$objVisual->getShowMenu(true,$menuResult,$objMenu->allmenutable, null, [], Yii::app()->user->username);
-         //收藏的报表信息
-         $menuInfo['collect'] = $this->getUserCollect($menuRes);
-         //管理工具的信息
-         $menuInfo['specialMenu'] = $menuConf;
-         $menuInfo['powerMenu'] = $menuConf;
-         //常用工具
-         $menuInfo['commonMenu'] = $menuCommon;
-
-         //设置默认菜单格式
-         foreach ($menuRes as $one => $oneVal) {
-             foreach ($oneVal as $two => $twoVal) {
-                 $menuRes[$one][$two]['default_id'] = $twoVal['table'][0]['id'];
-             }
-         }
-         //菜单信息
-         $menuInfo['menuTitle'] = $menuRes;
-         $menuInfo['urlMenu']=$URLMenu;
-         return $menuInfo;
-     }
-
-     //获取收藏报表
-     function getUserCollect($menuRes){
-         $resUserCollect = array();
-         $objVisual=new VisualManager();
-         $userCollect=$objVisual->getFavorites(Yii::app()->user->username);
-         if(is_array($userCollect)){
-             foreach($menuRes as $first_menu=>$secondmenuinfo){
-                 foreach($secondmenuinfo as $second_menu_id =>$menuinfo){
-                     $menuInfoList = [];
-                     foreach($menuinfo['table'] as $val) {
-                         array_push($menuInfoList, $val['id']);
-                     }
-                     foreach($userCollect as $uk=>$uv){
-                         if(in_array($uk,$menuInfoList)){
-                             $uv['first_menu']=$first_menu;
-                             $uv['second_menu']=$menuinfo['name'];
-                             $resUserCollect[$uk]=$uv;
-                             unset($userCollect[$uk]);
-                         }
-                     }
-                 }
-             }
-             /*foreach($userCollect as $uk=>$uv){
-                 $uv['first_menu']='';
-                 $uv['second_menu']='';
-                 if (! Yii::app()->user->isSuper() && isset($objAuth->coreReportWhiteList[$uv['id']]) && !in_array(Yii::app()->user->username, $objAuth->coreReportWhiteList[$uv['id']])) {
-                     continue;
-                 }
-                 $checkRes = $objAuth->checkPoint(array($uv['id']));
-                 if(isset($uv['id']) && ! empty($uv['id']) && empty($checkRes) && ! Yii::app()->user->isSuper() && ! Yii::app()->user->isProducer() && ! Yii::app()->user->isCore()){
-                     continue;
-                 }
-                 $resUserCollect[$uk]=$uv;
-             }*/
-         }
-
-         return $resUserCollect;
-     }
-
-     //获取类型为3的菜单
-     function getOtherMenu(){
-         $URLMenu = array();
-         if (Yii::app()->user->isSuper() || Yii::app()->user->isCore() || Yii::app()->user->isProducer()) {
-             $this->admin = true;
-         } else {
-             $this->admin = false;
-         }
-         $URLMenuRes=$this->selectURLMenu();//获取特殊类型的菜单 菜单类型为3 没有二级菜单的菜单
-         $objAuth = new AuthManager();
-         if (is_array($URLMenuRes)) {
-             //此处添加log记录
-             foreach($URLMenuRes as $key=>$value){
-                 $value['table_id']=json_decode($value['table_id'],true);
-                 $table_value=$value;
-                 $table_value['table_id']=array();
-                 foreach($value['table_id'] as $v_table_id) {
-                     if ($this->admin) {
-                         $table_value['table_id'][] = $v_table_id;
-                     } else {
-                         $checkRes = $objAuth->checkPoint(array($v_table_id['id']));
-                         if (!empty($checkRes)) {
-                             $table_value['table_id'][] = $v_table_id;
-                         }
-                     }
-                 }
-                 $URLMenu[]=$table_value;
-             }
-         }
-
-         return $URLMenu;
-     }
-
-     //开发者工具菜单
-     function getProduceMenu(){
-         $menuConf = [];
-         foreach($this->producerMenu as $name=>$url){
-             if(! Yii::app()->user->isSuper() && in_array($name, array_keys($this->superList))) {
-                 continue;
-             }
-             $index = explode("/", $url);
-             $menuConf[$name]=array(
-                 'name'=>$name,
-                 'url'=>$url,
-                 'index'=>$index[1]
-             );
-         }
-         return $menuConf;
-     }
-
-     //权限管理菜单
-     function getPowerMenu(){
-         $powerConf = [];
-         foreach($this->powerUrl as $name=>$url){
-             if(! Yii::app()->user->isSuper() && in_array($name, array_keys($this->superList))) {
-                 continue;
-             }
-             $index = explode("/", $url);
-             $powerConf[$name]=array(
-                 'name'=>$name,
-                 'url'=>$url,
-                 'index'=>$index[2]
-             );
-         }
-
-         return $powerConf;
-     }
-
 
      //兼容menu表中json格式的tableid
      function  removeAllmenuReportbyTableid($table_id){
          $username = Yii::app()->user->username;
-         $username = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', $username);
+         $username = str_ireplace(['@.com', '@.com'], '', $username);
          $objReport = new ReportManager();
          $reprotInfo = $objReport->getReoport($table_id);
          $reportName = $reprotInfo["cn_name"];
          $reportCreater = $reprotInfo["creater"];
-         $reportCreater = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', $reportCreater);
+         $reportCreater = str_ireplace(['@.com', '@.com'], '', $reportCreater);
          $reportModifyer = $reprotInfo["modify_user"];
-         $reportModifyer = str_ireplace(['@xiaozhu.com', '@xiaozhu.com'], '', $reportModifyer);
+         $reportModifyer = str_ireplace(['@.com', '@.com'], '', $reportModifyer);
          unset($objReport);
          $menuInfoList = $this->selectMenu();
          $flag = 1; //标识变量，表示是否找到了要更改的menu记录
@@ -336,15 +86,15 @@
          $mailBody = '<div>监控内容：您创建或编辑的报表<b> '.$reportName.'(ID:'.$table_id.') </b>已做下线处理。</div>
                     <div>触发原因：'.$reason.'</div>
                     <div>所属菜单：'.$removeMenuStr.'</div>
-                    <div>恢复方法：请进入<a href="http://dt.xiaozhu.com/report/reportlist">报表管理页面</a>，在"search"查询框输入 报表id（'.$table_id.'）或者报表名（'.$reportName.'） 进行查询，点击上线按钮即可完成报表上线。
-                    如需将该报表挂到菜单下，请在<a href="http://dt.xiaozhu.com/menu/index">菜单管理页面</a>添加该报表。</div>';
+                    <div>恢复方法：请进入<a href="http://dt..com/report/reportlist">报表管理页面</a>，在"search"查询框输入 报表id（'.$table_id.'）或者报表名（'.$reportName.'） 进行查询，点击上线按钮即可完成报表上线。
+                    如需将该报表挂到菜单下，请在<a href="http://dt..com/menu/index">菜单管理页面</a>添加该报表。</div>';
 
-         $mailAddress = 'bi-service@xiaozhu.com';
+         $mailAddress = 'bi-service@.com';
          if(!empty($reportCreater)){
-             $mailAddress = $mailAddress.";".$reportCreater."@xiaozhu.com";
+             $mailAddress = $mailAddress.";".$reportCreater."@.com";
          }
          if(!empty($reportModifyer)){
-             $mailAddress = $mailAddress.";".$reportModifyer."@xiaozhu.com";
+             $mailAddress = $mailAddress.";".$reportModifyer."@.com";
          }
          $this->objComm->sendMail($mailAddress,$mailBody,'【监控】data平台报表下线通知');
 
@@ -461,6 +211,10 @@
 
          return False;*/
          return True;
+
+
+
+
      }
 
      function  deleteMenu($menu_id){
@@ -472,6 +226,9 @@
          }
 
          return False;
+
+
+
      }
      /*
       * type=3特殊菜单没有二级菜单,直接访问
@@ -484,7 +241,9 @@
 
          return $result;
      }
-     function selectJsonMenu($menu_id=NULL){
+     function  selectJsonMenu($menu_id=NULL){
+
+
          $sql='select * from '.$this->menuTable.' where flag=1 and  second_menu is not null and second_menu!=\'\' and id!=1';
          $suffix='';
          if(!empty($menu_id)){
@@ -652,7 +411,7 @@
      {
          // 删除后挂载在另一菜单位置规则
          $updateMoveList = [];
-         $updateMoveData = Yii::app()->db_metric_meta->createCommand()
+         $updateMoveData = Yii::app()->sdb_metric_meta->createCommand()
              ->from($this->reportRolesTable)
              ->where(array('in', 'report_id', $newList))
              ->queryAll();
@@ -668,7 +427,7 @@
          // 从【删除后挂载在另一菜单位置规则】剔除
          $updateResetList = [];
          $allRoleName     = array_keys($updateMoveList);
-         $result          = Yii::app()->db_metric_meta->createCommand()
+         $result          = Yii::app()->sdb_metric_meta->createCommand()
              ->from($this->rolesTable)
              ->where(array('in', 'role_name', $allRoleName))
              ->queryAll();
@@ -717,11 +476,11 @@
              $transaction = Yii::app()->db_metric_meta->beginTransaction();
              try {
                  foreach ($insertList as $k => $v) {
-                     Yii::app()->db_metric_meta->createCommand()
+                     Yii::app()->sdb_metric_meta->createCommand()
                          ->insert($this->rolesTable, array('role_name' => $k));
-                     $id = Yii::app()->db_metric_meta->getLastInsertID();
+                     $id = Yii::app()->sdb_metric_meta->getLastInsertID();
 
-                     Yii::app()->db_metric_meta->createCommand()
+                     Yii::app()->sdb_metric_meta->createCommand()
                          ->insert($this->reportRolesTable, array('report_id' => $v['table_id'], 'role_id' => $id, 'level_id' => 0));
                  }
                  $transaction->commit();
@@ -745,7 +504,7 @@
              $transaction = Yii::app()->db_metric_meta->beginTransaction();
              try {
                  foreach ($removeList as $removeItem => $removeItemDetail) {
-                     Yii::app()->db_metric_meta->createCommand()
+                     Yii::app()->sdb_metric_meta->createCommand()
                          ->insert($this->deleteRoleTable, [
                              'role_name'   => $removeItem,
                              'status'      => 1,
@@ -767,7 +526,7 @@
 
          if (!empty($html)) {
              ob_start();
-             $this->objComm->sendMail('bi-service@xiaozhu.com', $html, '【重要】小伙子们，菜单添加规则出错了！！');
+             $this->objComm->sendMail('bi-service@.com', $html, '【重要】小伙子们，菜单添加规则出错了！！');
              ob_get_clean();
              ob_end_flush();
          }
@@ -779,7 +538,7 @@
              $transaction = Yii::app()->db_metric_meta->beginTransaction();
              try {
                  foreach ($insertMoveList as $moveItem => $moveItemDetail) {
-                     Yii::app()->db_metric_meta->createCommand()
+                     Yii::app()->sdb_metric_meta->createCommand()
                          ->update($this->rolesTable, array('role_name' => $moveItem), 'role_id=:role_id', array(':role_id' => $moveItemDetail['role_id']));
                  }
                  $transaction->commit();
@@ -802,7 +561,7 @@
          if (!empty($updateResetList)) {
              $transaction = Yii::app()->db_metric_meta->beginTransaction();
              try {
-                 Yii::app()->db_metric_meta->createCommand()
+                 Yii::app()->sdb_metric_meta->createCommand()
                      ->update($this->deleteRoleTable, array('status' => 0, 'modify_user' => $user,), array('and', 'status = 1', array('in', 'role_name', $updateResetList)));
 
                  $transaction->commit();

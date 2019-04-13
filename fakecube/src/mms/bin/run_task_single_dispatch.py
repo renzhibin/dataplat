@@ -190,7 +190,7 @@ def error_exit(err_code, err_msg):
             mmsSMs.sendSMS([str(phoneNum)], alarm_content)
             logger.info('sms send')'''
 
-            email_to = ['yangyulong@qudian.com', 'pengbangzhong@qudian.com', 'zhouguifeng@qudian.com']
+            email_to = ['yangyulong@', 'pengbangzhong@', 'zhouguifeng@']
             '''email_to.append(str(res[0]['creater']))'''
             email_obj = MmsEmail()
             content = 'app_name:%s\nmodule:%s </br> stat_date:%s </br> err_msg:%s </br>' % (app_name, module_name, stat_date, err_msg)

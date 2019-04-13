@@ -441,13 +441,7 @@ $(function() {
 
         baseConfig.refresh_set = $basebox.find('input[name=refresh_set]').is(':checked') ? "1" : "0";
         baseConfig.refresh_time = $basebox.find('.refresh_time_box').numberspinner('getValue');
-        baseConfig.sensitive = $basebox.find('input[name=sensitive]:checked').val();
 
-
-        if (!baseConfig.sensitive) {
-            $.messager.alert('提示', '必须选择是否包含敏感信息', 'info');
-            return false;
-        }
         if (baseConfig.project == 'filter_not') {
           $.messager.alert('提示', '请选择项目', 'info');
           return false;
@@ -1272,9 +1266,8 @@ $(function() {
         sortIndex();
         if(params.tablelist[0]) {
             params.tablelist[0].grade.pubdata['ispagesize'] = 1;
-            if (!params.tablelist[0].grade.pubdata['pagesize']) {
-                params.tablelist[0].grade.pubdata['pagesize'] = 10;
-            }
+            params.tablelist[0].grade.pubdata['pagesize'] = 10;
+
             params.tablelist[0].grade.pubdata['isdateslice'] = 1;
             params.tablelist[0].grade.pubdata['dateslice'] = 10;
         }
@@ -1384,14 +1377,12 @@ $(function() {
     */
     if (params.tablelist[0]) {
         params.tablelist[0].grade.pubdata['ispagesize'] = 1;
-        //修改每页显示条数
-        if(!params.tablelist[0].grade.pubdata['pagesize']) {
-            params.tablelist[0].grade.pubdata['pagesize'] = 10;
-        }
+        params.tablelist[0].grade.pubdata['pagesize'] = 10;
     };
     /**
      * 获取最新的index 顺序
      */
+
     getIndex();
     
     sorttablelist();
@@ -1406,10 +1397,6 @@ $(function() {
       'id': id,
       'type': type
     }
-      if (!basereport.sensitive) {
-          $.messager.alert('提示', '基本信息设置中是否包含敏感信息必须选择', 'info');
-          return false;
-      }
     $.post(url, {
       'params': JSON.stringify(allconf)
     }, function(data) {

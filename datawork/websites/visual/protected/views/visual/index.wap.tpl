@@ -85,7 +85,7 @@
               <!-- 首页移动端需要rightreport节点,填充外链页面-->
               <div  class="rightreport" style="margin-left:-10px">
           <div class='h4show'>
-            <h4 >小猪数据分析平台</h4>
+            <h4 >趣店数据分析平台</h4>
             <p>集数据报表配置、多维分析、数据调度管理、自动邮件管理等<br>多种功能于一体的通用数据分析平台</p>
             <p style='padding-left:30%;text-align:left'></p>
           </div>
@@ -209,9 +209,9 @@
           //点击tab，设置title，外链等页面需要设置，所以统一设置了
            titleObj.each(function(){
               if($(this).children('li').hasClass('active')){
-                  document.title= $.trim($(this).children('.active').text())+ "-小猪数据分析平台";
+                  document.title= $.trim($(this).children('.active').text())+ "-趣店数据分析平台";
               }else{
-                  document.title=$.trim($(this).children().eq(0).text())+"-小猪数据分析平台";
+                  document.title=$.trim($(this).children().eq(0).text())+"-趣店数据分析平台";
               }
           });
       }

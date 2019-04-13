@@ -31,7 +31,7 @@ class ProjectController extends Controller{
         $indexStr[] = array('href'=>"../visual/index",'content'=>'首页');
         $indexStr[] = array('href'=>"index",'content'=>'管理工具');
         $indexStr[] = array('href'=>"#",'content'=>'项目管理');
-        $data['super'] = Yii::app()->user->isSuper();
+        $data['super'] = $this->objAuth->isSuper();
         $data['guider'] = $indexStr;
 		$this->render('project/projectlist.tpl',$data);
 	}
@@ -48,7 +48,7 @@ class ProjectController extends Controller{
         $indexStr[]     = array('href' => "../visual/index", 'content' => '首页');
         $indexStr[]     = array('href' => "index", 'content' => '管理工具');
         $indexStr[]     = array('href' => "#", 'content' => '实时管理');
-        $data['super']  = Yii::app()->user->isSuper();
+        $data['super']  = $this->objAuth->isSuper();
         $data['guider'] = $indexStr;
         $this->render('project/reallist.tpl', $data);
     }
@@ -151,7 +151,7 @@ class ProjectController extends Controller{
 	function actionRunlist(){
 		$project=$_REQUEST['project'];
 		$data['project'] = $project;
-		#$data['list']=$this->objProject->getRunlist($project);
+		$data['list']=$this->objProject->getRunlist($project);
 		if(!empty($project))
 			$data['module']=$this->objFackcube->get_hql(array('project'=>$project));
 
@@ -164,24 +164,6 @@ class ProjectController extends Controller{
         $data['guider'] = $indexStr;
 		$this->render('project/start.tpl',$data);
 	}
-
-    function actionRunlistBack(){
-        $project=$_REQUEST['project'];
-        $data['project'] = $project;
-        $data['list']=$this->objProject->getRunlist($project);
-        if(!empty($project))
-            $data['module']=$this->objFackcube->get_hql(array('project'=>$project));
-
-        //面包屑效果
-        $indexStr[] = array('href'=>"../visual/index",'content'=>'首页');
-        $indexStr[] = array('href'=>"index",'content'=>'管理工具');
-        $indexStr[] = array('href'=>"index",'content'=>'项目管理');
-        $indexStr[] = array('href'=>"#",'content'=>'运行详情');
-
-        $data['guider'] = $indexStr;
-        $this->render('project/start.tpl',$data);
-    }
-
 	public  function actionGetall(){
 		$project=$_REQUEST['project'];
 		$res=$this->objProject->getMetricandGroup($project);
@@ -256,7 +238,7 @@ class ProjectController extends Controller{
     function actionRealMain()
     {
         $obj = new AuthManager();
-        if (!Yii::app()->user->isProducer()) {
+        if (!$obj->isProducer()) {
             $this->jsonOutPut(1, '只有分析师才可以新建项目哦~');
             exit();
         }
@@ -285,17 +267,16 @@ class ProjectController extends Controller{
 
 	function actionMain(){
 		$obj=new AuthManager();
-		if(!Yii::app()->user->isProducer()){
+		if(!$obj->isProducer()){
 			$this->jsonOutPut(1,'只有分析师才可以新建项目哦~');
 			exit();
 		}
 		$schedule_interval=$this->objFackcube->get_fakecube('get_schedule_interval',array());
-        $hiveQueue = $this->objFackcube->get_hive_queue();
+
 		$field_type=$this->objFackcube->get_fakecube('get_field_type',array());
 		$tplArr['field_type'] = json_encode($field_type['data']);
 		$tplArr['schedule_interval_offset'] =  json_encode($schedule_interval['data']);
 		$tplArr['schedule_interval']=$schedule_interval['data'];
-        $tplArr['hive_queue']=$hiveQueue['data'];
 
         //面包屑效果
         $indexStr[] = array('href'=>"../visual/index",'content'=>'首页');
@@ -311,7 +292,7 @@ class ProjectController extends Controller{
 
     function actionRealCubeeidtor()
     {
-        if (!Yii::app()->user->isProducer()) {
+        if (!$this->objAuth->isProducer()) {
             $this->jsonOutPut(1, '只有分析师才能查看项目');
             exit();
         }
@@ -354,7 +335,7 @@ class ProjectController extends Controller{
     }
 
 	function actionCubeeidtor(){
-		if(!Yii::app()->user->isProducer()){
+		if(!$this->objAuth->isProducer()){
 			$this->jsonOutPut(1,'只有分析师才能查看项目');
 			exit();
 		}
@@ -378,10 +359,9 @@ class ProjectController extends Controller{
 		$tplArr['config'] = json_encode($res['data']);
 		$tplArr['msg'] = json_encode($res['msg']);
 		$schedule_interval=$this->objFackcube->get_fakecube('get_schedule_interval',array());
-        $hiveQueue = $this->objFackcube->get_hive_queue();
+
 		$field_type=$this->objFackcube->get_fakecube('get_field_type',array());
 		$tplArr['field_type'] = json_encode($field_type['data']);
-        $tplArr['hive_queue']=$hiveQueue['data'];
 		$tplArr['schedule_interval']=$schedule_interval['data'];
 		$tplArr['schedule_interval_offset'] =  json_encode($schedule_interval['data']);
         $referUrl = $_SERVER['HTTP_REFERER'];
@@ -468,7 +448,7 @@ class ProjectController extends Controller{
 
     function actionSaveRealProject()
     {
-        if (!Yii::app()->user->isProducer()) {
+        if (!$this->objAuth->isProducer()) {
             $this->jsonOutPut(1, '只有分析师才能保存项目');
             exit();
         }
@@ -504,7 +484,7 @@ class ProjectController extends Controller{
 
 	function actionSaveProject(){
 
-		if(!Yii::app()->user->isProducer()){
+		if(!$this->objAuth->isProducer()){
 			$this->jsonOutPut(1,'只有分析师才能保存项目');
 			exit();
 		}
