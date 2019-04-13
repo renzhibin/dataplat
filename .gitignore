@@ -12,8 +12,11 @@ fakecube/logs/*
 nbproject/*
 logs/*
 datawork.peng/*
+fakecube.peng/*
 datawork/websites/visual/assets/vue
 datawork/websites/visual/assets/vue_build
+fakecube/src.peng/*
+fakecube/data/*
 fakecube/src/mms/conf/env.py
 fakecube/src/mms/conf/mms_mysql_conf.py
 fakecube/src/mms/conf/mysql.ini
