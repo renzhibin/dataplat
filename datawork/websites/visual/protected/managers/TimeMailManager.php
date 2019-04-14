@@ -472,8 +472,7 @@ HTML;
             $title = "【报警】订阅邮件未发出_".$val['title'];
         }
         $address = explode(",",$val['warning_address']);
-        $address[] = 'houyangyang@.com';
-        $address[] = 'yangyulong@.com';
+        $address[] = 'renzhibin@.xiaozhu.com';
         $this->objComm->sendMail(implode(';',$address),$html,$title);
         if(!$istest){
             //$setSql = "update  t_visual_mail set status =1  where  mail_id= ".$val['mail_id'];
@@ -561,7 +560,7 @@ HTML;
 
         $html .=<<<HTML
                     <tr style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0;">
-                        <td class="content-wrap" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 20px 0px;"> <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0px 32px 0px 32px; font-size: 12px; font-weight: normal; margin-bottom: 10px;"> 感谢您的订阅！任何问题，欢迎联系 数据团队 <a href="mailto:di@xiaozhu.com" target="_blank"> di@xiao<wbr />zhu.com </a> </p> </td> 
+                        <td class="content-wrap" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 20px 0px;"> <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0px 32px 0px 32px; font-size: 12px; font-weight: normal; margin-bottom: 10px;"> 感谢您的订阅！任何问题，欢迎联系 数据团队 <a href="mailto:data_analysis@xiaozhu.com" target="_blank"> data_analysis@xiao<wbr />zhu.com </a> </p> </td> 
                     </tr> 
                     <tr style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0;"> 
                         <td class="alert alert-warning alert-footer" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica,  sans-serif; margin: 0; padding: 20px; font-size: 14px; color: #fff; font-weight: bold; text-align: left; border-radius: 0 0 3px 3px; background: #ff9f00; line-height: 33px;"> <p class="footer" style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; padding: 0; font-weight: normal; margin-bottom: 10px; margin: 0; text-align: left; color: #fff; font-size: 16px; line-height: 33px;"> <span>祝您工作愉快</span> </p> </td> 
