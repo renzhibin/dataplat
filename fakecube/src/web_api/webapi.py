@@ -4,6 +4,9 @@
 import web
 import os
 import sys
+import time
+os.environ['TZ'] = 'Asia/Shanghai'
+time.tzset()
 sys.path.append('..')
 import  mms.conf.env  as conf
 

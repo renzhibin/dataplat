@@ -5,8 +5,10 @@
     @time: 2017/1/19 下午2:15 
 """
 
-import sys,os
+import sys,os,time
 reload(sys)
+os.environ['TZ'] = 'Asia/Shanghai'
+time.tzset()
 sys.setdefaultencoding('utf8')
 cur_abs_dir = os.path.dirname(os.path.abspath(__file__))
 HOME_PATH = os.path.dirname(cur_abs_dir)

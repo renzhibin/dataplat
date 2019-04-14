@@ -3,6 +3,8 @@
 import argparse
 import time
 import os
+os.environ['TZ'] = 'Asia/Shanghai'
+time.tzset()
 cur_abs_dir = os.path.dirname(os.path.abspath(__file__))
 HOME_PATH = os.path.dirname(cur_abs_dir)
 os.sys.path.insert(0,'%s/%s' %(HOME_PATH,'conf'))

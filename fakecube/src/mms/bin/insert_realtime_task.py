@@ -7,6 +7,8 @@ import os
 import json
 import sys
 reload(sys)
+os.environ['TZ'] = 'Asia/Shanghai'
+time.tzset()
 sys.setdefaultencoding('utf8')
 cur_abs_dir = os.path.dirname(os.path.abspath(__file__))
 HOME_PATH = os.path.dirname(cur_abs_dir)
