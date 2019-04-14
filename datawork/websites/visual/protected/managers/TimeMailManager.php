@@ -406,15 +406,15 @@ HTML;
     function  getUrlLink($str){
         $arr = $this->menu->getMenuByReoprt($str);
         if($str==4694 or $str==4977){
-            return 'http://dt..com/visual/index/'.$str;
+            return 'http://dt.xiaozhu.com/visual/index/'.$str;
         }
         if(!empty($arr)){
-            $url = "http://dt..com/visual/index/menu_id/".$arr[0]['id']."/id/".$str;
+            $url = "http://dt.xiaozhu.com/visual/index/menu_id/".$arr[0]['id']."/id/".$str;
         }else{
             if($str==4694 or $str==4977){
-                $url='http://dt..com/visual/index/'.$str;
+                $url='http://dt.xiaozhu.com/visual/index/'.$str;
             }else{
-                $url = "http://dt..com/report/showreport/{$str}";
+                $url = "http://dt.xiaozhu.com/report/showreport/{$str}";
             }
         }
         return $url;
@@ -551,7 +551,7 @@ HTML;
         $url = $this->getUrlLink($str);
         $html ="";
 
-        if (strpos($url, 'http://dt..com/visual/index/menu_id/') !== false) {
+        if (strpos($url, 'http://dt.xiaozhu.com/visual/index/menu_id/') !== false) {
             $html .= <<<HTML
                     <tr style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0;">
                         <td class="content-wrap" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 20px 0px 0px 0px;"> <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0px 32px 0px 32px; font-size: 12px; font-weight: normal; margin-bottom: 10px;"> 报表原链接：<a href="$url">$url</a> </p> </td>
@@ -561,7 +561,7 @@ HTML;
 
         $html .=<<<HTML
                     <tr style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0;">
-                        <td class="content-wrap" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 20px 0px;"> <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0px 32px 0px 32px; font-size: 12px; font-weight: normal; margin-bottom: 10px;"> 感谢您的订阅！任何问题，欢迎联系 数据团队 <a href="mailto:di@.com" target="_blank"> di@qud<wbr />ian.com </a> </p> </td> 
+                        <td class="content-wrap" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 20px 0px;"> <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0px 32px 0px 32px; font-size: 12px; font-weight: normal; margin-bottom: 10px;"> 感谢您的订阅！任何问题，欢迎联系 数据团队 <a href="mailto:di@xiaozhu.com" target="_blank"> di@xiao<wbr />zhu.com </a> </p> </td> 
                     </tr> 
                     <tr style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0;"> 
                         <td class="alert alert-warning alert-footer" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica,  sans-serif; margin: 0; padding: 20px; font-size: 14px; color: #fff; font-weight: bold; text-align: left; border-radius: 0 0 3px 3px; background: #ff9f00; line-height: 33px;"> <p class="footer" style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; padding: 0; font-weight: normal; margin-bottom: 10px; margin: 0; text-align: left; color: #fff; font-size: 16px; line-height: 33px;"> <span>祝您工作愉快</span> </p> </td> 
