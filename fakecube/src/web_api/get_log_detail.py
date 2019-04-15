@@ -26,7 +26,7 @@ class GetLogDetail:
         module_name = user_data.module_name
 
 
-        web.header('Content-type','text/html')
+        web.header('Content-type','text/html;charset=utf-8')
         web.header('Transfer-Encoding','chunked')
 
         if  not file_id:
