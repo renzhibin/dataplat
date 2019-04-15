@@ -406,15 +406,15 @@ HTML;
     function  getUrlLink($str){
         $arr = $this->menu->getMenuByReoprt($str);
         if($str==4694 or $str==4977){
-            return 'http://dt.xiaozhu.com/visual/index/'.$str;
+            return 'http://10.8.11.96/visual/index/'.$str;
         }
         if(!empty($arr)){
-            $url = "http://dt.xiaozhu.com/visual/index/menu_id/".$arr[0]['id']."/id/".$str;
+            $url = "http://10.8.11.96/visual/index/menu_id/".$arr[0]['id']."/id/".$str;
         }else{
             if($str==4694 or $str==4977){
-                $url='http://dt.xiaozhu.com/visual/index/'.$str;
+                $url='http://10.8.11.96/visual/index/'.$str;
             }else{
-                $url = "http://dt.xiaozhu.com/report/showreport/{$str}";
+                $url = "http://10.8.11.96/report/showreport/{$str}";
             }
         }
         return $url;
@@ -472,7 +472,7 @@ HTML;
             $title = "【报警】订阅邮件未发出_".$val['title'];
         }
         $address = explode(",",$val['warning_address']);
-        $address[] = 'renzhibin@.xiaozhu.com';
+        $address[] = 'data_analysis@xiaozhu.com';
         $this->objComm->sendMail(implode(';',$address),$html,$title);
         if(!$istest){
             //$setSql = "update  t_visual_mail set status =1  where  mail_id= ".$val['mail_id'];
@@ -492,8 +492,7 @@ HTML;
         $tableInfo  = Yii::app()->sdb_metric_meta->createCommand($reportInfo)->queryAll();
 
         $address   = explode(",", $val['warning_address']);
-        $address[] = 'houyangyang@.com';
-        $address[] = 'yangyulong@.com';
+        $address[] = 'data_analysis@xiaozhu.com';
 
         $html  = <<<HTML
         <div class="row">
@@ -550,7 +549,7 @@ HTML;
         $url = $this->getUrlLink($str);
         $html ="";
 
-        if (strpos($url, 'http://dt.xiaozhu.com/visual/index/menu_id/') !== false) {
+        if (strpos($url, 'http://10.8.11.96/visual/index/menu_id/') !== false) {
             $html .= <<<HTML
                     <tr style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0;">
                         <td class="content-wrap" style="white-space:nowrap;font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 20px 0px 0px 0px;"> <p style="font-family: 'Microsoft YaHei', Arial, Helvetica, sans-serif; margin: 0; padding: 0px 32px 0px 32px; font-size: 12px; font-weight: normal; margin-bottom: 10px;"> 报表原链接：<a href="$url">$url</a> </p> </td>
