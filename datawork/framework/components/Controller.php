@@ -298,8 +298,7 @@ class Controller extends CController
             '/tool/CreateHiveData',
 //          '/tool/ListMapData',
 //          '/tool/MapData',
-            '/tool/BehaviorLog',
-            '/tool/fileup'
+            '/tool/BehaviorLog'
         );
         foreach($whiteUrl as $url){
             if(strpos(strtolower($_SERVER['REQUEST_URI']),strtolower($url)) ===0)
