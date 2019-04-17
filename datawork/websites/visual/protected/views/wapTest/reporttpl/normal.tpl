@@ -141,9 +141,9 @@
     }
     //设置标题
     if( params.basereport.cn_name  !=undefined){
-       // $('title').text(params.basereport.cn_name +"-小猪数据分析平台") ;
+       // $('title').text(params.basereport.cn_name +"-小猪BI平台") ;
        // 兼容ie8 设置title
-        document.title=params.basereport.cn_name +"-小猪数据分析平台";
+        document.title=params.basereport.cn_name +"-小猪BI平台";
     }
 
     {//if/}

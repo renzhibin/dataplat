@@ -66,7 +66,7 @@
     var reportconfig = '{/$confArr.params.config/}';
     //设置标题
     if( params.basereport.cn_name  !=undefined){
-        $('title').text(params.basereport.cn_name +"-小猪数据分析平台") ;
+        $('title').text(params.basereport.cn_name +"-小猪BI平台") ;
     }
 
     //加载search页面

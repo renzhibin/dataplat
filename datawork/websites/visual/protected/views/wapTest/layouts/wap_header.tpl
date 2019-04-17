@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, user-scalable=no">
 {/include file="layouts/lib.tpl"/}
-<title>小猪数据分析平台</title>
+<title>小猪BI平台</title>
 <meta charset="UTF-8" />
 </head>
 <body>
@@ -16,7 +16,7 @@
          </div>
          <div class="col-xs-10">
            <div class="col-xs-9">
-              <a href="/wap/index" style='font-size:18px;font-weight:bolder;height:45px;line-height:50px'>美丽说数据分析平台</a>
+              <a href="/wap/index" style='font-size:18px;font-weight:bolder;height:45px;line-height:50px'>美丽说BI平台</a>
            </div>
            <div >
               <ul class="nav navbar-nav navbar-right" style="line-height:40px;height:40px">

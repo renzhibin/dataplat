@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>小猪数据分析平台</title><meta charset="UTF-8" />
+        <title>小猪BI平台</title><meta charset="UTF-8" />
         <link href="/assets/lib/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/assets/css/bootstrap-over.css" rel="stylesheet" />
         <link href="/assets/css/login.css" rel="stylesheet" />

@@ -997,7 +997,7 @@ class VisualController extends Controller
             array_unshift($titleArr,'时间');
             $rowArr = array_keys($headerName);
             array_unshift($rowArr,'dt');
-            $filename = "data数据分析平台_"
+            $filename = "BI平台_"
                 . date("Ymd", strtotime($data['startTime'])) . "_"
                 . date("Ymd", strtotime($data['endTime'])) . ".xls";
             $this->common->exportHtml($titleArr, $rowArr, $easyData, $filename);

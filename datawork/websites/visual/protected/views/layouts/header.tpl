@@ -188,7 +188,7 @@
             <li class="change-Lileft">
                <a class="change-h1" href="/visual/index" style="background:url(/assets/img/d_visual-png/{/env('LOGO')/}) no-repeat center;background-size:cover;"></a>
               <!--  <a class="change-split" href="/visual/index">|</a>
-               <a class="change-h2" href="/visual/index">数据分析平台</a> -->
+               <a class="change-h2" href="/visual/index">BI平台</a> -->
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right change-nav-right" style="line-height:40px;height:40px; float:right;">

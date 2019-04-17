@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>小猪数据分析平台</title><meta charset="UTF-8" />
+        <title>小猪BI平台</title><meta charset="UTF-8" />
         <link href="/assets/lib/bootstrap-3.3/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/assets/css/bootstrap-over.css" rel="stylesheet" />
         <link href="/assets/css/login.css" rel="stylesheet" />
@@ -11,7 +11,7 @@
 
         <div id="loginbox">
             <form id="loginform" method="post" class="form-vertical" action="/site/login">
-                <div class="control-group normal_text"> <h1>小猪数据分析平台</h1></div>
+                <div class="control-group normal_text"> <h1>小猪BI平台</h1></div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>小猪数据分析平台</title>
+<title>小猪BI平台</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
   {/include file="layouts/new_lib.tpl"/}
@@ -148,7 +148,7 @@
             <li class="change-Lileft">
                <a class="change-h1" href="/visual/index"></a>
               <!--  <a class="change-split" href="/visual/index">|</a>
-               <a class="change-h2" href="/visual/index">数据分析平台</a> -->
+               <a class="change-h2" href="/visual/index">BI平台</a> -->
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right change-nav-right" style="line-height:40px;height:40px; float:right;">

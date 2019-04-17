@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>小猪数据分析平台</title>
+<title>小猪BI平台</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
   {/include file="wapTest/layouts/lib.tpl"/}
@@ -144,7 +144,7 @@
         <i class='iconfont icon-guanlianniu muneIcon' data-toggle="tooltip" data-placement="bottom" title="菜单"></i>
       <div class="navbar-collapse" style="margin-right: 0\9 ">
         <ul class="nav navbar-nav navbar-left" style="width:150px; float:left;left:3.1rem;z-index: 999;">
-            <li><a class="web-title" href="/visual/index">小猪数据分析平台</a></li>
+            <li><a class="web-title" href="/visual/index">小猪BI平台</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" style="line-height:40px;height:40px; float:right;">
             <!--<li  data-placement="bottom" data-toggle="popover"

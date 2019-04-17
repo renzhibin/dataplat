@@ -207,9 +207,9 @@
           //点击tab，设置title，外链等页面需要设置，所以统一设置了
            titleObj.each(function(){
               if($(this).children('li').hasClass('active')){
-                  document.title= $.trim($(this).children('.active').text())+ "-小猪数据分析平台";
+                  document.title= $.trim($(this).children('.active').text())+ "-小猪BI平台";
               }else{
-                  document.title=$.trim($(this).children().eq(0).text())+"-小猪数据分析平台";
+                  document.title=$.trim($(this).children().eq(0).text())+"-小猪BI平台";
               }
           });
       }

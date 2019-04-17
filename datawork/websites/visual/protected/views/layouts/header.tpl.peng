@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>凹凸曼数据分析平台</title>
+        <title>凹凸曼BI平台</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1,user-scalable=no">
         {/include file="layouts/lib.tpl"/}
