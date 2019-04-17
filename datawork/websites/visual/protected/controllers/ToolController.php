@@ -385,7 +385,7 @@ class ToolController extends Controller{
         
         function actionFileUp(){
             //$fileUp = new CUploadedFile($name, $tempName, $type, $size, $error);
-            $res=$this->objAuth->checkReportPoint(814);
+            $res=$this->objAuth->checkReportPoint(1534);
             if($res || $this->objAuth->isAdmin() || $this->objAuth->isProducer() || $this->objAuth->isSuper()){
                 $tplArr=array('data'=>'dfdf');
                 $this->render('tooltpl/file.tpl',$tplArr);
