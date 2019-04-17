@@ -64,6 +64,7 @@ class UserIdentity extends CUserIdentity
     {
         $db = Yii::app()->sdb_metric_meta;
         $str_report_ids = implode(',', $points);
+        $$str_report_ids=$str_report_ids?$str_report_ids:'-1';
         $sql = "
             select t_r.report_id
             from t_eel_admin_relation_user t_u
