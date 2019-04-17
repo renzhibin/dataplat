@@ -307,6 +307,10 @@ class VisualController extends Controller
                 }
             }
         }
+        if ($id=='0'){
+            $reportauth=true;
+
+        }
         $tplArr['user_name']=$userName;
         $tplArr['reportauth']=$reportauth;
         $tplArr['url']=$url;
