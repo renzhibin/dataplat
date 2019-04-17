@@ -74,7 +74,7 @@
     {/if $general neq ''/}
         var general = {/$general/};
     {/else/}
-        var general = 0;
+        var general = 0; 
     {//if/}
 
     var isWhiteTable = {/$isWhiteTable/};
@@ -100,7 +100,7 @@
     refreshSet ? refresh(reload,refreshTime * 1000 * 60) : '';
 </script>
 {/assign var=paramsValue value=$params|@json_decode:1/}
-<div style="{/if $isMobile /}position: relative;{/else /}position: absolute;top: 50px{//if/};bottom: 0;right: 0;left: 0">
+<div style="position: absolute;top: 50px;bottom: 0;right: 0;left: 0">
     <!-- 修正面包屑丢失 -->
     <!-- <div style='width:100%; height:50px;'></div> -->
     <div id ='right'>
@@ -110,7 +110,7 @@
             {/include file='layouts/menu.tpl'/}
             <div id="content" class="content" >
         {//if/}
-
+      
         {/if $reportauth eq 'true' /}
             {/if $menu_id eq 0  /}
                 {/if $collect|@count eq 0  && $id eq 0  /}
@@ -121,7 +121,7 @@
                         <p>问：怎么收藏？&nbsp;&nbsp;答：点击报表页右上角&nbsp;
                             <span class='glyphicon glyphicon-star-empty'></span>
                             <span>收藏</span>
-                        </p>
+                        </p> 
                         -->
                         <p style='padding-left:30%;text-align:left'></p>
                     </div>
@@ -133,9 +133,9 @@
                             {/if $isWhiteTable === 1 && !empty($urlMenu[0].table_id) /}
                                 <ul class="nav nav-tabs three-mnue d_nav_tabs">
                                     {/foreach from = $urlMenu[0].table_id item= tMenu key=tkey/}
-                                        <li style='margin-top:5px;cursor:pointer'
-                                            {/if $id eq $tMenu.id /}
-                                                class="active"
+                                        <li style='margin-top:5px;cursor:pointer' 
+                                            {/if $id eq $tMenu.id /} 
+                                                class="active" 
                                             {//if/}
                                         >
                                             <a href="/visual/index/{/$tMenu.id/}">{/$tMenu.cn_name/}
@@ -151,7 +151,7 @@
                             {/if $isWhiteTable !== 1/}
                                 {/foreach from = $collect item= coll key=key/}
                                     {/if $coll.id eq $id /}
-                                        <li class='active nav-tabs'>
+                                        <li class='active'>
                                             <!-- 收藏页面和概要页面显示的tab在移动端隐藏-->
                                             <a class="max-hide" href="/visual/index/{/$coll.id/}">{/$coll.name/} &nbsp;
                                                 <span class='glyphicon glyphicon-question-sign navtab-reportexplain'></span>
@@ -171,18 +171,18 @@
                                         </li>
                                     {//if/}
                                 {//foreach/}
-
-                                <!--{/foreach from = $collect item= coll key=key/}
+                                
+                                {/foreach from = $collect item= coll key=key/}
                                     {/if $coll.id eq $id /}
                                         <div>
                                             {/if $coll.first_menu neq '' &&  $coll.second_menu neq '' /}
                                                <span style='padding:3px 0px 3px 10px'>
-                                                    来源菜单：{/$coll.first_menu/}  >> {/$coll.second_menu/} >> {/$coll.name/}
+                                                    来源菜单：{/$coll.first_menu/}  >> {/$coll.second_menu/} >> {/$coll.name/} 
                                                 </span>
                                             {//if/}
                                         </div>
                                     {//if/}
-                                {//foreach/}-->
+                                {//foreach/}
                             {//if/}
                             <div class="framebefore"></div>
                             <div  class="rightreport" style="margin-left:-10px">
@@ -200,7 +200,6 @@
                 {/if  $allcontent neq 2 /}
                     {/if !empty($showTable.table) /}
                         <!--面包屑效果-->
-                        {/if !$isMobile /}
                         <div id="breadcrumbs-one">
                             {/foreach from = $guider item= place key=key/}
                                 {/if $guider[0] eq $place /}
@@ -220,7 +219,6 @@
                                 {//if/}
                             {//foreach/}
                         </div>
-                        {//if/}
                         <div class="nav nav-tabs" style="width: 5000px" id="menuContainer">
                             <span id="three_menu_left" title="向右移动菜单" style="display: none; margin-left: 5px; background: url(/assets/img/arrow.gif)  no-repeat 0 -48px; float: left; width: 20px; height: 50px;" onmouseover="this.style.background='url(/assets/img/arrow.gif)  no-repeat 0 -103px';" onmouseout="this.style.background='url(/assets/img/arrow.gif)  no-repeat 0 -48px';">
                             </span>
@@ -284,9 +282,9 @@
             //点击tab，设置title，外链等页面需要设置，所以统一设置了
             titleObj.each(function(){
                 if($(this).children('li').hasClass('active')){
-                    document.title= $.trim($(this).children('.active').text())+ "-{/env('TITLE')/}";
+                    document.title= $.trim($(this).children('.active').text())+ "-小猪BI平台";
                 }else{
-                    document.title=$.trim($(this).children().eq(0).text())+"-{/env('TITLE')/}";
+                    document.title=$.trim($(this).children().eq(0).text())+"-小猪BI平台";
                 }
             });
         }
