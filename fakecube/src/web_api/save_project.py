@@ -62,6 +62,7 @@ class SaveProject(action.Action):
             try:
                 project_name = yaml_content['project'][0]['name']
             except:
+                import traceback
                 print traceback.format_exc()
                 return base.retu(2, 'project is wrong')
 
