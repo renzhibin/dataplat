@@ -1274,7 +1274,7 @@ class Smarty_Internal_Templatelexer
         $yy_global_pattern = "/\G(" . $this->ldel . "\\s*strip\\s*" . $this->rdel . ")|\G(" . $this->ldel . "\\s*\/strip\\s*" . $this->rdel . ")|\G(" . $this->ldel . "\\s*block)|\G([\S\s])/iS";
 
         do {
-            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter, 2000000000, 'latin1'), $yymatches) : preg_match($yy_global_pattern, $this->data, $yymatches, null, $this->counter)) {
+            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter, 2000000000, 'latin1'), $yymatches) : preg_match($yy_global_pattern, $this->data, $yymatches, 0, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (! count($yymatches)) {
@@ -1386,7 +1386,7 @@ class Smarty_Internal_Templatelexer
         $yy_global_pattern = "/\G(" . $this->ldel . "\\s*block)|\G(" . $this->ldel . "\\s*\/block)|\G(" . $this->ldel . "\\s*[$]smarty\\.block\\.(child|parent))|\G([\S\s])/iS";
 
         do {
-            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter, 2000000000, 'latin1'), $yymatches) : preg_match($yy_global_pattern, $this->data, $yymatches, null, $this->counter)) {
+            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter, 2000000000, 'latin1'), $yymatches) : preg_match($yy_global_pattern, $this->data, $yymatches, 0, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (! count($yymatches)) {
