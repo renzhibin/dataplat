@@ -25,7 +25,8 @@ class AuthManager extends Manager
 
     function isSuper()
     {
-        $user_name = explode('@', Yii::app()->user->username)[0];
+        $username = Yii::app()->user->username ?? '';
+        $user_name = explode('@', $username)[0];
         if (in_array($user_name, $this->getSuperName())) {
             return true;
         }
@@ -51,7 +52,7 @@ class AuthManager extends Manager
 
     function __createNewStr($orgStr, $addStr, $deleteFlag = false)
     {
-        $tmpArr = explode(',', $orgStr);
+        $tmpArr = explode(',', $orgStr ?? '');
 
 
         if ($deleteFlag == false) {
@@ -459,7 +460,7 @@ class AuthManager extends Manager
             ->queryRow();
 
         if ($retuArr == true) {
-            return explode(',', $result['group']);
+            return explode(',', $result['group'] ?? '');
         }
         return $result['group'];
 
@@ -472,7 +473,7 @@ class AuthManager extends Manager
             ->select('table_id')->from($this->favoriteTable)
             ->where('user_name=:user_name', array(':user_name' => $this->username))
             ->queryRow();
-        if (in_array($table_id, explode(',', $result['table_id']))) {
+        if (in_array($table_id, explode(',', $result['table_id'] ?? ''))) {
             return true;
         }
         return false;
@@ -557,7 +558,7 @@ class AuthManager extends Manager
             return true;
         }
 
-        $tableGroup = explode(',', $auth);
+        $tableGroup = explode(',', $auth ?? '');
         if (empty($authStr)) {
             return false;
         }

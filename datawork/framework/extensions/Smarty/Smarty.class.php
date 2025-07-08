@@ -1537,15 +1537,11 @@ class SmartyException extends Exception
  */
 class SmartyCompilerException extends SmartyException
 {
-    public function __toString()
-    {
-        return ' --> Smarty Compiler: ' . $this->message . ' <-- ';
-    }
     /**
      * The line number of the template error
-     * @type int|null
+     * @var int
      */
-    public $line = null;
+    public int $line = 0;
     /**
      * The template source snippet relating to the error
      * @type string|null
@@ -1561,6 +1557,10 @@ class SmartyCompilerException extends SmartyException
      * @type string|null
      */
     public $template = null;
+    public function __toString()
+    {
+        return ' --> Smarty Compiler: ' . $this->message . ' <-- ';
+    }
 }
 
 /**

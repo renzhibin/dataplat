@@ -110,7 +110,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 		if($value===false || $this->serializer===false)
 			return $value;
 		if($this->serializer===null)
-			$value=unserialize($value);
+			$value = $value !== null ? unserialize($value) : false;
 		else
 			$value=call_user_func($this->serializer[1], $value);
 		if(is_array($value) && (!$value[1] instanceof ICacheDependency || !$value[1]->getHasChanged()))
@@ -152,7 +152,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 				$results[$id] = false;
 				if(isset($values[$uid]))
 				{
-					$value = $this->serializer === null ? unserialize($values[$uid]) : call_user_func($this->serializer[1], $values[$uid]);
+					$value = $this->serializer === null ? ($values[$uid] !== null ? unserialize($values[$uid]) : false) : call_user_func($this->serializer[1], $values[$uid]);
 					if(is_array($value) && (!$value[1] instanceof ICacheDependency || !$value[1]->getHasChanged()))
 					{
 						Yii::trace('Serving "'.$id.'" from cache','system.caching.'.get_class($this));
@@ -339,6 +339,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 	 * @param string $id a key identifying the cached value
 	 * @return boolean
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetExists($id)
 	{
 		return $this->get($id)!==false;
@@ -350,6 +351,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 	 * @param string $id a key identifying the cached value
 	 * @return mixed the value stored in cache, false if the value is not in the cache or expired.
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetGet($id)
 	{
 		return $this->get($id);
@@ -363,6 +365,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 	 * @param string $id the key identifying the value to be cached
 	 * @param mixed $value the value to be cached
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetSet($id, $value)
 	{
 		$this->set($id, $value);
@@ -374,6 +377,7 @@ abstract class CCache extends CApplicationComponent implements ICache, ArrayAcce
 	 * @param string $id the key of the value to be deleted
 	 * @return boolean if no error happens during deletion
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetUnset($id)
 	{
 		$this->delete($id);
