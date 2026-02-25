@@ -21,3 +21,4 @@ fakecube/src/mms/conf/env.py
 fakecube/src/mms/conf/mms_mysql_conf.py
 fakecube/src/mms/conf/mysql.ini
 fakecube/src/mms/conf/schedule.conf
+dump.rdb
