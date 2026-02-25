@@ -135,7 +135,7 @@ class Fackcube
 
 	function list_app(){
 
-		$retu=$this->get('list_app','');
+		$retu=$this->get('list_app',array());
 		if($retu==false){
 			return false;
 		}

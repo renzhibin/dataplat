@@ -17,19 +17,19 @@ TUNNEL_SWITCH=2#1open 2close
 #存储meta DB
 
 MMS_DB_META={
-    'host':'10.3.0.159',
-    'port':4307,
-    'user':'metric_meta_w',
-    'passwd':'9edb35c8f48901d051aaf3a5820a3398',
+    'host':'127.0.0.1',
+    'port':3306,
+    'user':'root',
+    'passwd':'root',
     'database':'metric_meta'
 }
 
 
 MMS_DB_META_SLAVE={
-    'host':'10.3.0.160',
-    'port':4307,
-    'user':'metric_meta_r',
-    'passwd':'3a394ad560ab74fc51c9a58327be9edb',
+    'host':'127.0.0.1',
+    'port':3306,
+    'user':'root',
+    'passwd':'root',
     'database':'metric_meta'
 
 
@@ -38,9 +38,9 @@ MMS_DB_META_SLAVE={
 
 MMS_DB_LOCAL={
     'host':'127.0.0.1',
-    'port':3332,
+    'port':3306,
     'user':'root',
-    'passwd':'',
+    'passwd':'root',
     'database':'metric'
 }
 
@@ -56,43 +56,43 @@ MMS_DB_DATA={
 
 '''
 MMS_DB_DATA={
-    'host':'10.3.0.159',
-    'port':4307,
-    'user':'metric_meta_w',
-    'passwd':'9edb35c8f48901d051aaf3a5820a3398',
+    'host':'127.0.0.1',
+    'port':3306,
+    'user':'root',
+    'passwd':'root',
     'database':'metric'
 }
 
 MMS_DB_DANDELION={
-    'host':'172.16.12.199',
-    'port':3332,
-    'user':'mlswriter',
-    'passwd':'mLsW#1^iPo16QPsd',
+    'host':'127.0.0.1',
+    'port':3306,
+    'user':'root',
+    'passwd':'root',
     'database':'dandelion'
 }
 
 MMS_DB_DATA_SLAVE={
-    'host': '10.3.0.160',
-    'port': 4307,
-    'user': 'metric_meta_r',
-    'passwd': '3a394ad560ab74fc51c9a58327be9edb',
+    'host': '127.0.0.1',
+    'port': 3306,
+    'user': 'root',
+    'passwd': 'root',
     'database': 'metric'
 }
 
 MMS_DB_DATA_SLAVE_SECONDARY={
-    'host': '10.3.0.160',
-    'port': 4307,
-    'user': 'metric_meta_r',
-    'passwd': '3a394ad560ab74fc51c9a58327be9edb',
+    'host': '127.0.0.1',
+    'port': 3306,
+    'user': 'root',
+    'passwd': 'root',
     'database': 'metric'
 }
 
 MMS_DB_TUNNEL={
 
     'host':'127.0.0.1',
-    'user':'mlswriter',#mlsreader
-    'passwd':'mLsW#1^iPo16QPsd',#RMlSxs&^c6OpIAQ1
-    'username':'bangzhongpeng'
+    'user':'root',
+    'passwd':'root',
+    'username':'dev'
 
 }
 
