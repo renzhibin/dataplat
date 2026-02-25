@@ -4,7 +4,7 @@
  *
  * @last    2018-04-09
  */
-error_reporting(E_ALL ^ (E_NOTICE|E_WARNING));
+error_reporting(E_ALL ^ (E_NOTICE|E_WARNING|E_DEPRECATED));
 date_default_timezone_set('PRC');
 
 // 除非必要否则禁止更改
