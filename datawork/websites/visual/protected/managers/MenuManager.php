@@ -310,12 +310,12 @@
          return $result;
 
      }
-     function  selectFirstMenu(){
-         $sql="select DISTINCT  first_menu,id from ".$this->menuTable."  where flag=1 and second_menu='' order by sort asc, id asc";//概览型报表
-         $result=Yii::app()->sdb_metric_meta->createCommand($sql)->queryAll();
-         return $result;
+    function  selectFirstMenu(){
+        $sql="select DISTINCT first_menu,id,sort from ".$this->menuTable."  where flag=1 and second_menu='' order by sort asc, id asc";//概览型报表
+        $result=Yii::app()->sdb_metric_meta->createCommand($sql)->queryAll();
+        return $result;
 
-     }
+    }
 
      function  saveSortMenu($sortinfo){
          $transaction=Yii::app()->db_metric_meta->beginTransaction();
